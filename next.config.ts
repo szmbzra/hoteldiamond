@@ -5,7 +5,8 @@ import type { NextConfig } from "next";
 // http://localhost/hoteldiamond/backend/images/subpackage/room.jpg when the
 // API is http://localhost/hoteldiamond/api/v1. Derive that images path from
 // the API URL so next/image can optimise it without hardcoding a hostname.
-const CMS_API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost/hoteldiamond/api/v1/";
+// const CMS_API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost/hoteldiamond/api/v1/";
+const CMS_API_URL = process.env.NEXT_PUBLIC_API_URL || "https://mayurstay.com/hoteldiamond/api/v1/";
 const cmsBasePath = new URL(CMS_API_URL).pathname.replace(/\/api\/v1\/?$/, "");
 const cmsImagesPattern = new URL(`${cmsBasePath}/backend/images/**`, CMS_API_URL);
 // Next 16 blocks image optimization from private/loopback IPs by default (SSRF
