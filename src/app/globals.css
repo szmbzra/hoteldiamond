@@ -1,0 +1,703 @@
+@import "tailwindcss";
+
+/* ============================================================
+   LUXURY DESIGN SYSTEM — Hotel Diamond Pvt. Ltd
+   5-star hotel aesthetic: deep tones, gold accents, big type
+   ============================================================ */
+
+:root {
+  /* ---- Brand Color Palette ---- */
+  /* Black: PANTONE P Process Black C */
+  /* Was #231f20 (old black theme). Now aliased to the navy brand color
+     (--color-blue) that the navbar and CTAs already migrated to, so every
+     "dark section" sitewide (Rooms, About, Restaurant, Service, etc.) picks
+     up the current brand color instead of resolving to nothing. */
+  --color-yellow: #f3d08c;
+  --color-blue: #032f4c;
+  --luxury-dark: var(--color-blue);
+  --luxury-dark-alt: #2a2526;
+  --luxury-cream: #f5f0e8;
+  --luxury-cream-alt: #ece5d8;
+  --luxury-ivory: #faf8f4;
+  /* Gold: PANTONE 15-9 C */
+  --luxury-gold: #e3c9a1;
+  --luxury-gold-light: #ede0c4;
+  --luxury-gold-dim: #d4b27e;
+  /* Accessible gold for TEXT on light backgrounds. The brand gold (#e3c9a1)
+     scores only ~1.6:1 on white and fails WCAG AA for text. Use this darker
+     bronze (~5:1 on white) wherever gold is used as readable copy on a light
+     surface — e.g. className="text-gold-text". On dark surfaces the brand
+     gold is fine. */
+  --luxury-gold-text: #8a6a2c;
+  /* Black (same as dark for text) */
+  --luxury-charcoal: #231f20;
+  /* Taupe: PANTONE 170-6 C */
+  --luxury-muted: #8e8684;
+  --luxury-border: rgba(227, 201, 161, 0.25);
+  /* Sage: PANTONE 178-8 C */
+  --brand-sage: #868a79;
+  /* Light Gray: PANTONE 169-3 C */
+  --brand-light-gray: #cccccb;
+
+  /* ---- Background ---- */
+  --background: #ffffff;
+  --foreground: #231f20;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  /* Brand palette exposed as Tailwind utilities: text-gold, bg-gold, border-gold,
+     ring-gold, from-gold… plus opacity modifiers (text-gold/40). Change the brand
+     colour ONCE in the --luxury-* variables above to re-skin the whole site. */
+  --color-gold: var(--luxury-gold);
+  --color-gold-light: var(--luxury-gold-light);
+  --color-gold-dim: var(--luxury-gold-dim);
+  --color-gold-text: var(--luxury-gold-text);
+  --color-luxury-dark: var(--luxury-dark);
+  --color-luxury-cream: var(--luxury-cream);
+  /* New base brand palette (theme replication target): exposed as text-yellow,
+     bg-yellow, text-blue, bg-blue, border-blue… with opacity modifiers
+     (bg-yellow/25, text-blue/70). Root values live in --color-yellow /
+     --color-blue above. */
+  --color-yellow: var(--color-yellow);
+  --color-blue: var(--color-blue);
+  --font-sans: var(--font-product-sans);
+  --font-display: var(--font-cinzel);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-product-sans), 'Product Sans', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* ============================================================
+   KEYFRAME ANIMATIONS
+   ============================================================ */
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-60px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(60px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes textReveal {
+  from {
+    clip-path: inset(0 100% 0 0);
+  }
+
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% center;
+  }
+
+  100% {
+    background-position: 200% center;
+  }
+}
+
+@keyframes floatBadge {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.animate-float {
+  animation: floatBadge 3s ease-in-out infinite;
+}
+
+@keyframes scrollDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+
+  50% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+
+@keyframes goldPulse {
+
+  0%,
+  100% {
+    opacity: 0.6;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes spinSlow {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ============================================================
+   ANIMATION UTILITY CLASSES
+   ============================================================ */
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  opacity: 0;
+  will-change: opacity, transform;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.5s ease forwards;
+  opacity: 0;
+  will-change: opacity;
+}
+
+.animate-slide-in-left {
+  animation: slideInLeft 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  opacity: 0;
+  will-change: opacity, transform;
+}
+
+.animate-slide-in-right {
+  animation: slideInRight 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  opacity: 0;
+  will-change: opacity, transform;
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  opacity: 0;
+  will-change: opacity, transform;
+}
+
+/* Respect OS-level motion preference — prevents CLS and vestibular issues */
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-in-up,
+  .animate-fade-in,
+  .animate-slide-in-left,
+  .animate-slide-in-right,
+  .animate-scale-in {
+    animation: none;
+    opacity: 1;
+    transform: none;
+    will-change: auto;
+  }
+
+  .scroll-indicator,
+  .luxury-spin-badge,
+  .animate-float {
+    animation: none;
+  }
+}
+
+/* Staggered delays — kept short so content reaches full opacity quickly.
+   Long delays (0.5s+) leave content invisible and wreck Lighthouse Speed Index. */
+.delay-100 {
+  animation-delay: 0.05s;
+}
+
+.delay-200 {
+  animation-delay: 0.1s;
+}
+
+.delay-300 {
+  animation-delay: 0.15s;
+}
+
+.delay-400 {
+  animation-delay: 0.2s;
+}
+
+.delay-500 {
+  animation-delay: 0.25s;
+}
+
+.delay-600 {
+  animation-delay: 0.3s;
+}
+
+.delay-700 {
+  animation-delay: 0.35s;
+}
+
+.delay-800 {
+  animation-delay: 0.4s;
+}
+
+/* ============================================================
+   LUXURY TYPOGRAPHY
+   ============================================================ */
+
+.luxury-hero-title {
+  font-family: var(--font-cinzel), 'Cinzel', Georgia, serif;
+  font-size: clamp(3rem, 7vw, 7rem);
+  line-height: 0.95;
+  letter-spacing: 0.02em;
+  font-weight: 400;
+}
+
+.luxury-section-title {
+  font-family: var(--font-cinzel), 'Cinzel', Georgia, serif;
+  font-size: clamp(2.2rem, 4.5vw, 4.5rem);
+  line-height: 1.05;
+  letter-spacing: 0.01em;
+  font-weight: 400;
+}
+
+.luxury-subtitle {
+  font-family: var(--font-product-sans), 'Product Sans', system-ui, sans-serif;
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  line-height: 1.6;
+  font-weight: 300;
+  letter-spacing: 0.01em;
+}
+
+.luxury-label {
+  font-family: var(--font-cinzel), 'Cinzel', Georgia, serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.luxury-big-numeral {
+  font-family: var(--font-cinzel), 'Cinzel', Georgia, serif;
+  font-size: clamp(3rem, 5vw, 6rem);
+  font-weight: 400;
+  line-height: 1;
+  color: #ffff;
+}
+
+/* ============================================================
+   LUXURY COMPONENTS
+   ============================================================ */
+
+/* Gold horizontal ornament */
+.luxury-ornament {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.luxury-ornament::before,
+.luxury-ornament::after {
+  content: '';
+  width: 60px;
+  height: 1px;
+  background: var(--luxury-gold);
+}
+
+.luxury-ornament-left {
+  justify-content: flex-start;
+}
+
+.luxury-ornament-left::after {
+  display: none;
+}
+
+/* Gold divider line */
+.luxury-divider {
+  width: 80px;
+  height: 1px;
+  background: var(--luxury-gold);
+}
+
+/* Gold accent top border (reveals on hover) */
+.luxury-card-hover {
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.luxury-card-hover::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--luxury-gold);
+  transform: scaleX(0);
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  transform-origin: left;
+}
+
+.luxury-card-hover:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+}
+
+.luxury-card-hover:hover::before {
+  transform: scaleX(1);
+}
+
+/* Gold CTA button */
+.luxury-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 2.5rem;
+  border: 1px solid var(--luxury-gold);
+  color: var(--luxury-gold);
+  font-size: 0.75rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  font-weight: 500;
+  transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.luxury-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--luxury-gold);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  z-index: -1;
+}
+
+.luxury-btn:hover {
+  color: var(--luxury-dark);
+}
+
+.luxury-btn:hover::before {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+.luxury-btn-light {
+  border-color: rgba(255, 255, 255, 0.6);
+  color: white;
+}
+
+.luxury-btn-light::before {
+  background: white;
+}
+
+.luxury-btn-light:hover {
+  color: var(--luxury-dark);
+}
+
+.luxury-btn-book {
+  border-color: rgba(255, 255, 255, 0.6);
+  padding: 0.8rem 1rem;
+  color: white;
+}
+
+.luxury-btn-book::before {
+  background: white;
+}
+
+.luxury-btn-book:hover {
+  color: var(--luxury-dark);
+}
+
+.luxury-btn-solid {
+  background: var(--luxury-gold);
+  color: var(--luxury-dark);
+  border-color: var(--luxury-gold);
+}
+
+.luxury-btn-solid::before {
+  background: var(--luxury-gold-light);
+}
+
+/* Image hover zoom */
+.luxury-img-zoom {
+  overflow: hidden;
+}
+
+.luxury-img-zoom img,
+.luxury-img-zoom>div {
+  transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.luxury-img-zoom:hover img,
+.luxury-img-zoom:hover>div {
+  transform: scale(1.06);
+}
+
+/* Gold quote marks */
+.luxury-quote::before {
+  content: '\201C';
+  font-size: 8rem;
+  line-height: 0;
+  color: var(--luxury-gold);
+  opacity: 0.25;
+  font-family: Georgia, serif;
+  position: absolute;
+  top: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* Scroll indicator */
+.scroll-indicator {
+  animation: scrollDown 2s ease infinite;
+}
+
+/* Section backgrounds */
+.bg-luxury-dark {
+  background-color: var(--luxury-dark);
+}
+
+.bg-luxury-dark-alt {
+  background-color: var(--luxury-dark-alt);
+}
+
+.bg-luxury-cream {
+  background-color: var(--luxury-cream);
+}
+
+.bg-luxury-cream-alt {
+  background-color: var(--luxury-cream-alt);
+}
+
+.bg-luxury-ivory {
+  background-color: var(--luxury-ivory);
+}
+
+.text-luxury-gold {
+  color: var(--luxury-gold);
+}
+
+.text-luxury-charcoal {
+  color: var(--luxury-charcoal);
+}
+
+.text-luxury-muted {
+  color: var(--luxury-muted);
+}
+
+.border-luxury-gold {
+  border-color: var(--luxury-gold);
+}
+
+/* CMS rich text (.cms-content) can carry inline colors baked in by the
+   WYSIWYG editor. On a dark background (PackageIntro's `dark` variant, used
+   by the under-construction article pages) those would stay unreadably
+   dark, so force every descendant to cream regardless of inline styles. */
+.cms-content-invert,
+.cms-content-invert * {
+  color: var(--luxury-cream) !important;
+}
+
+.border-luxury-border {
+  border-color: var(--luxury-border);
+}
+
+/* Embla carousel dots */
+.embla-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: 1px solid var(--luxury-gold);
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.3s ease;
+}
+
+.embla-dot.is-selected {
+  background: var(--luxury-gold);
+  transform: scale(1.3);
+}
+
+/* Parallax section */
+.luxury-parallax {
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+}
+
+@media (max-width: 768px) {
+  .luxury-parallax {
+    background-attachment: scroll;
+  }
+}
+
+/* Spinning badge */
+.luxury-spin-badge {
+  animation: spinSlow 15s linear infinite;
+}
+
+
+/* Package page */
+/* Zoom effect on active slide */
+.swiper-slide-active .swiper-image-zoom {
+  animation: slow-zoom-swiper 20s linear infinite alternate;
+}
+
+@keyframes slow-zoom-swiper {
+  from {
+    transform: scale(1);
+  }
+
+  to {
+    transform: scale(1.15);
+  }
+}
+
+/* Custom Pagination Bullet Styles */
+.custom-bullet {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+
+.custom-bullet:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.custom-bullet-active {
+  background: white !important;
+  border-color: white !important;
+  transform: scale(1.1);
+}
+
+/* Hide default swiper navigation */
+.swiper-button-next,
+.swiper-button-prev {
+  display: none !important;
+}
+
+.list-unstyled {
+    padding-left: 0;
+    list-style: none;
+    color: #222;
+}
+
+.page-list-text {
+    margin-left: 15px;
+}
+
+/* Home gallery bento mosaic (HomeGallery.tsx) — stacks to a single column on
+   mobile; from md up it becomes a 5-image mosaic where the top row splits
+   60/40 (large left, two stacked right) and the bottom row mirrors it 40/60
+   (small left, wide right). */
+.gallery-bento {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.75rem;
+}
+
+.gallery-bento-item {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+}
+
+/* grid-area only means something once grid-template-areas defines those
+   names below — set unconditionally, Chromium collapses the mobile grid's
+   tracks to 0 while resolving the unmatched named lines. */
+@media (min-width: 768px) {
+  .gallery-bento-a { grid-area: a; }
+  .gallery-bento-b { grid-area: b; }
+  .gallery-bento-c { grid-area: c; }
+  .gallery-bento-d { grid-area: d; }
+  .gallery-bento-e { grid-area: e; }
+
+  .gallery-bento {
+    grid-template-columns: repeat(10, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    grid-template-areas:
+      "a a a a a a b b b b"
+      "a a a a a a c c c c"
+      "d d d d e e e e e e";
+    aspect-ratio: 3 / 2;
+    gap: 1rem;
+  }
+
+  .gallery-bento-item {
+    aspect-ratio: auto;
+  }
+}
