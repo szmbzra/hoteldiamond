@@ -45,7 +45,7 @@ export default function FloatingButtons({ whatsappNumber }: FloatingButtonsProps
       <Link
         href="/virtual-tour"
         aria-label="Open 360° Virtual Tour"
-        className="w-12 h-12 rounded-full bg-[#2d2d2d]/90 backdrop-blur-sm text-white flex items-center justify-center shadow-lg hover:bg-[#2d2d2d] transition-all duration-300 hover:scale-110 group border border-white/10"
+        className="w-12 h-12 rounded-full bg-(--color-blue) backdrop-blur-sm text-white flex items-center justify-center shadow-lg hover:bg-[#2d2d2d] transition-all duration-300 hover:scale-110 group border border-white/10"
       >
         <span className="flex flex-col items-center justify-center gap-0">
           <PanoramaIcon />
@@ -68,7 +68,7 @@ export default function FloatingButtons({ whatsappNumber }: FloatingButtonsProps
       <button
         onClick={scrollToTop}
         aria-label="Scroll to top"
-        className={`w-12 h-12 rounded-full bg-[#2d2d2d]/90 backdrop-blur-sm text-white flex items-center justify-center shadow-lg hover:bg-[#2d2d2d] transition-all duration-300 hover:scale-110 border border-white/10 ${
+        className={`w-12 h-12 rounded-full bg-(--color-blue) backdrop-blur-sm text-white flex items-center justify-center shadow-lg hover:bg-[#2d2d2d] transition-all duration-300 hover:scale-110 border border-white/10 ${
           showScrollTop
             ? "opacity-100 translate-y-0"
             : "opacity-0 translate-y-4 pointer-events-none"
