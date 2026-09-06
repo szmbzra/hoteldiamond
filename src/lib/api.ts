@@ -25,7 +25,7 @@ export async function fetchAPI<T>(
           "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
       },
       next: {
-        revalidate: 3600,
+        revalidate: 60,
         tags: [tag, "all"], // Tag with the specific endpoint and a global "all" tag
       },
     });
