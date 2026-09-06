@@ -2,6 +2,7 @@
 
 import { useRef, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
+import type { Swiper as SwiperType } from "swiper";
 import { Autoplay, EffectFade } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/effect-fade";
@@ -10,16 +11,48 @@ import Link from "next/link";
 
 import { ArrowRight, ArrowUpRight, ChevronLeft, ChevronRight } from "lucide-react";
 
-export default function RoomsSection({ initialData , packageTitle }: { initialData: string; packageTitle: string }) {
+// TODO: replace with the real API response shape once the rooms endpoint is filled in.
+interface RoomImage {
+  src?: string;
+  url?: string;
+}
+
+interface RoomAmenityFeature {
+  img?: string;
+  title?: string;
+}
+
+interface RoomAmenityGroup {
+  items?: RoomAmenityFeature[];
+}
+
+interface RoomData {
+  label?: string;
+  title?: string;
+  sub_title?: string;
+  description?: string;
+  slug?: string;
+  gallery_images?: (string | RoomImage)[];
+  img?: (string | RoomImage)[];
+  amenities?: RoomAmenityGroup[];
+}
+
+export default function RoomsSection({
+  initialData,
+  packageTitle,
+}: {
+  initialData: RoomData | null;
+  packageTitle?: string;
+}) {
   const room = initialData;
   const packagename = packageTitle;
-  const swiperRef = useRef<any>(null);
+  const swiperRef = useRef<SwiperType | null>(null);
   const [activeIndex, setActiveIndex] = useState(0);
 
   if (!room) return null;
 
-  const images: any[] =
-    (room.gallery_images?.length > 0 ? room.gallery_images : room.img) || [];
+  const images: (string | RoomImage)[] =
+    ((room.gallery_images?.length ?? 0) > 0 ? room.gallery_images : room.img) || [];
   const features = room.amenities?.[0]?.items?.slice(0, 6) || [];
 
   return (
@@ -42,7 +75,7 @@ export default function RoomsSection({ initialData , packageTitle }: { initialDa
               {room.label || "Your Comfort, Our Priority"}
             </div>
             <div className="luxury-divider mb-6"></div>
-            <h2 className="luxury-section-title text-white">{packagename.title}</h2>
+            <h2 className="luxury-section-title text-white">{packagename}</h2>
           </div>
 
           <Link
@@ -72,7 +105,7 @@ export default function RoomsSection({ initialData , packageTitle }: { initialDa
                 }
                 className="w-full h-[320px] md:h-[520px]"
               >
-                {images.map((image: any, index: number) => {
+                {images.map((image: string | RoomImage, index: number) => {
                   const src = typeof image === "string" ? image : image?.src;
                   return (
                     <SwiperSlide key={index}>
@@ -127,7 +160,7 @@ export default function RoomsSection({ initialData , packageTitle }: { initialDa
 
             {features.length > 0 && (
               <div className="grid grid-cols-2 gap-3 mb-10">
-                {features.map((feature: any, idx: number) => (
+                {features.map((feature: RoomAmenityFeature, idx: number) => (
                   <div
                     key={idx}
                     className="flex items-center gap-3 rounded-xl px-4 py-3 bg-white/[0.04] border border-white/[0.08] hover:border-gold/40 hover:bg-white/[0.06] transition-colors duration-300 animate-fade-in-up"

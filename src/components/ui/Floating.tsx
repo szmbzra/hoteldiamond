@@ -49,7 +49,7 @@ export default function FloatingButtons({ whatsappNumber }: FloatingButtonsProps
       >
         <span className="flex flex-col items-center justify-center gap-0">
           <PanoramaIcon />
-          <span className="text-[0.5rem] font-bold leading-none">360°</span>
+          <span className="text-[0.8rem] font-bold leading-none">360°</span>
         </span>
       </Link>
 

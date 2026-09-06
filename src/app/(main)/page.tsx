@@ -38,9 +38,7 @@ export default async function Home() {
   const popupData = await getPopupItems();
 
   const deluxeRoom = (await getCategoryItems(CATEGORY_IDS.rooms))[0];
-  const packageTitle = await getPackage("1");
-      console.log(packageTitle);
-
+  const packageData = await getPackage("1");
 
   return (
     <main id="main-content" className="flex flex-col min-h-screen">
@@ -48,7 +46,7 @@ export default async function Home() {
       <Popup popupData={popupData} />
       <HeroVideo />
       <AboutSection />
-      <RoomsSection initialData={deluxeRoom} packageTitle={packageTitle} />
+      <RoomsSection initialData={deluxeRoom} packageTitle={packageData?.title} />
       <FacilitiesSection />
       {/* <DineBanner /> */}
       <ServicesSection />
