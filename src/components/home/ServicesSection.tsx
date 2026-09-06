@@ -115,7 +115,7 @@ export default async function ServicesSection() {
                       <Icon className="w-5 h-5" style={{ color: 'var(--luxury-dark)' }} />
                     </span>
                     <span className="luxury-label text-gold-text">
-                      {String(idx + 1).padStart(2, '0')} — {header.label}
+                      {String(idx + 1).padStart(2, '0')} — {item.sub_title}
                     </span>
                   </div>
 

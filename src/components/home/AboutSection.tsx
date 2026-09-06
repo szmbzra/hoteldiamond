@@ -96,7 +96,7 @@ export default async function AboutSection() {
               ))}
             </div>
 
-            <Link href="/about-us" className="luxury-btn bg-(--color-blue)">
+            <Link href="/" className="luxury-btn bg-(--color-blue)">
               Explore More
               <ArrowRight className="w-4 h-4" />
             </Link>
