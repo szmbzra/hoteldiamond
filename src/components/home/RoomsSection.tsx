@@ -38,7 +38,7 @@ interface RoomData {
 }
 
 function getImageSrc(image?: string | RoomImage): string | undefined {
-  return typeof image === "string" ? image : image?.src;
+  return typeof image === "string" ? image : image?.src || image?.url;
 }
 
 export default function RoomsSection({

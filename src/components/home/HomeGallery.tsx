@@ -39,9 +39,8 @@ export default async function HomeGallery() {
               Moments Captured in <span className="italic">Time</span>
             </h2>
             <p
-              className="luxury-subtitle mb-8"
-              style={{ color: "var(--luxury-muted)" }}
-            >
+              className="luxury-subtitle mb-8 text-base! font-normal!"
+                  style={{ color: "var(--luxury-muted)" }}>
               From candlelit dining to sunset views over the pool, every
               corner of the property has its own story. Step through the
               gallery for a closer look at the spaces that make each stay
@@ -49,7 +48,7 @@ export default async function HomeGallery() {
             </p>
             <Link
               href="#"
-              className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.25em] text-luxury-muted hover:text-gold-text transition-colors group"
+              className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.25em] luxury-btn group/btn w-fit hover:text-gold-text transition-colors group"
             >
               View Full Gallery
               <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />

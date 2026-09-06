@@ -65,7 +65,7 @@ export default function HallParallax() {
             ))}
           </div>
 
-          <Link href="/events" className="luxury-btn luxury-btn-light group">
+          <Link href="/" className="luxury-btn luxury-btn-light group">
             Explore More
             <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
           </Link>

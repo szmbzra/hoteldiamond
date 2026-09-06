@@ -2,12 +2,12 @@
 
 export default function Newsletter() {
   return (
-    <div className="w-full lg:w-auto lg:text-right">
+    <div className="w-full lg:w-auto">
       <h3
         className="text-lg font-normal leading-snug mb-4"
-        style={{ color: 'var(--luxury-charcoal)' }}
+
       >
-        Be the First One to Hear About Updates
+       Subscribe to the Newsletter
       </h3>
       <form
         className="flex w-full max-w-sm lg:ml-auto"

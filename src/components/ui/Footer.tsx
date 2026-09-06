@@ -55,13 +55,7 @@ export default async function Footer() {
           <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-10">
             {/* Social */}
             <div className="flex flex-wrap items-center gap-6">
-              <h3
-                className="text-lg leading-snug font-normal"
-                style={{ color: 'var(--luxury-charcoal)' }}
-              >
-                Follow Our
-                <br className="hidden sm:block" /> Social Networks
-              </h3>
+
               {socialLinks?.items?.length > 0 && (
                 <div className="flex gap-3">
                   {socialLinks.items.map((item: SocialLink, index: number) => (
@@ -119,7 +113,7 @@ export default async function Footer() {
 
             {/* Useful Links */}
             <div className="lg:col-span-2">
-              <h4 className="luxury-label text-gold-text mb-4">Useful Links</h4>
+              <h4 className="luxury-label text-gold-text mb-4 text-base! font-bold ">Useful Links</h4>
               <div className="luxury-divider mb-8"></div>
               <div className="grid grid-cols-1 gap-6 md:gap-8">
                 <ul className="space-y-4 min-w-0">
@@ -127,7 +121,7 @@ export default async function Footer() {
                     <li key={item.id}>
                       <Link
                         href={item.link}
-                        className="transition-colors duration-300 hover:text-gold-text"
+                        className="transition-colors duration-300"
                         style={{ color: 'var(--luxury-muted)' }}
                       >
                         {item.title}
@@ -141,7 +135,7 @@ export default async function Footer() {
 
             {/* Get In Touch */}
             <div className="lg:col-span-4">
-              <h4 className="luxury-label text-gold-text mb-4">Get In Touch</h4>
+              <h4 className="luxury-label text-gold-text mb-4 text-base! font-bold">Get In Touch</h4>
               <div className="luxury-divider mb-8"></div>
               <ul className="space-y-5">
                 {fiscalAddress && (

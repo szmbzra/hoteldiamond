@@ -62,13 +62,13 @@ export default async function AboutSection() {
 
             {data.content ? (
               <div
-                className="luxury-subtitle mb-10  text-base! leading-[2.1]"
+                className="luxury-subtitle mb-10  text-base! leading-[2.1]  lg:text-justify"
 
                 dangerouslySetInnerHTML={{ __html: data.content }}
               />
             ) : (
               <p
-                className="luxury-subtitle mb-10"
+                className="luxury-subtitle mb-10 "
 
               >
                   Content Not Available
