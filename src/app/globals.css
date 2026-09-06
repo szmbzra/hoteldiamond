@@ -70,7 +70,7 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-product-sans), 'Product Sans', system-ui, sans-serif;
+  font-family: var(--font-product-sans), 'Poppins', system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
@@ -306,7 +306,7 @@ body {
    ============================================================ */
 
 .luxury-hero-title {
-  font-family: var(--font-cinzel), 'Cinzel', Georgia, serif;
+  font-family: var(--font-cinzel), 'Cormorant Garamond', Georgia, serif;
   font-size: clamp(3rem, 7vw, 7rem);
   line-height: 0.95;
   letter-spacing: 0.02em;
@@ -314,7 +314,7 @@ body {
 }
 
 .luxury-section-title {
-  font-family: var(--font-cinzel), 'Cinzel', Georgia, serif;
+  font-family: var(--font-cinzel), 'Cormorant Garamond', Georgia, serif;
   font-size: clamp(2.2rem, 4.5vw, 4.5rem);
   line-height: 1.05;
   letter-spacing: 0.01em;
@@ -322,7 +322,7 @@ body {
 }
 
 .luxury-subtitle {
-  font-family: var(--font-product-sans), 'Product Sans', system-ui, sans-serif;
+  font-family: var(--font-product-sans), 'Poppins', system-ui, sans-serif;
   font-size: clamp(1rem, 2vw, 1.2rem);
   line-height: 1.6;
   font-weight: 300;
@@ -330,15 +330,15 @@ body {
 }
 
 .luxury-label {
-  font-family: var(--font-cinzel), 'Cinzel', Georgia, serif;
-  font-size: 0.65rem;
-  letter-spacing: 0.35em;
-  text-transform: uppercase;
-  font-weight: 500;
+  font-family: var(--font-cinzel), 'Cormorant Garamond', Georgia, serif;
+letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-size: 21px;
+    font-weight: 500;
 }
 
 .luxury-big-numeral {
-  font-family: var(--font-cinzel), 'Cinzel', Georgia, serif;
+  font-family: var(--font-cinzel), 'Cormorant Garamond', Georgia, serif;
   font-size: clamp(3rem, 5vw, 6rem);
   font-weight: 400;
   line-height: 1;

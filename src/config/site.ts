@@ -75,6 +75,38 @@ export const links = {
   social: [] as string[],
 } as const;
 
+/**
+ * Routes whose top banner has a background image/dark hero (navbar stays
+ * light/transparent until scroll). Add a route here — e.g. "/about-us" —
+ * whenever it grows a hero banner; anything not listed defaults to the
+ * plain-white treatment (navbar text/icons black from the start), like
+ * "/contact-us" which uses BreadcrumbNoBanner.
+ * A listed path also matches its own sub-routes, so "/offers" covers
+ * "/offers/summer-sale" too.
+ */
+export const pagesWithBackgroundImage = [
+  "/",
+  "/about-us",
+  "/gallery",
+  "/facilities",
+  "/rooms",
+  "/faq",
+  "/offers",
+  "/events",
+  "/restaurant",
+  "/blog",
+  "/work-with-us",
+  "/virtual-tour",
+  "/sitemap",
+] as string[];
+
+/** Whether `pathname` falls under one of the routes in {@link pagesWithBackgroundImage}. */
+export function hasBackgroundImage(pathname: string): boolean {
+  return pagesWithBackgroundImage.some((path) =>
+    path === "/" ? pathname === "/" : pathname === path || pathname.startsWith(`${path}/`)
+  );
+}
+
 /** CMS category IDs. */
 export const CATEGORY_IDS = {
   rooms: "1",

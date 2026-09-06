@@ -37,7 +37,7 @@ export default async function Home() {
   const socialLinks = await getSocialGroup(2);
   const popupData = await getPopupItems();
 
-  const deluxeRoom = (await getCategoryItems(CATEGORY_IDS.rooms))[0];
+  const rooms = await getCategoryItems(CATEGORY_IDS.rooms);
   const packageData = await getPackage("1");
 
   return (
@@ -46,7 +46,7 @@ export default async function Home() {
       <Popup popupData={popupData} />
       <HeroVideo />
       <AboutSection />
-      <RoomsSection initialData={deluxeRoom} packageTitle={packageData?.title} />
+      <RoomsSection rooms={rooms} packageTitle={packageData?.title} />
       <FacilitiesSection />
       {/* <DineBanner /> */}
       <ServicesSection />

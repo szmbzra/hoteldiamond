@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
-import { Cinzel } from "next/font/google";
-import localFont from "next/font/local";
+import { Cormorant_Garamond, Poppins } from "next/font/google";
 import "./globals.css";
 import Analytics from "@/components/ui/Analytics";
 import JsonLd from "@/components/seo/JsonLd";
@@ -9,37 +8,18 @@ import SiteScripts from "@/components/seo/SiteScripts";
 import { getSiteRegulars, getCustomCss } from "@/lib/data";
 import { site } from "@/config/site";
 
-const cinzel = Cinzel({
+const cinzel = Cormorant_Garamond({
   variable: "--font-cinzel",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
   display: "swap",
 });
 
-const productSans = localFont({
-  src: [
-    {
-      path: "../../public/fonts/Product Sans Regular.ttf",
-      weight: "400",
-      style: "normal",
-    },
-    {
-      path: "../../public/fonts/Product Sans Italic.ttf",
-      weight: "400",
-      style: "italic",
-    },
-    {
-      path: "../../public/fonts/Product Sans Bold.ttf",
-      weight: "700",
-      style: "normal",
-    },
-    {
-      path: "../../public/fonts/Product Sans Bold Italic.ttf",
-      weight: "700",
-      style: "italic",
-    },
-  ],
+const productSans = Poppins({
   variable: "--font-product-sans",
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
+  style: ["normal", "italic"],
   display: "swap",
 });
 

@@ -16,7 +16,7 @@ property site to the same SEO / AEO / performance / accessibility standard.
 | Framework | **Next.js 16** (App Router, RSC, Turbopack) |
 | Language | TypeScript 5, React 19 |
 | Styling | **Tailwind CSS v4** (CSS-first `@theme`, no `tailwind.config.js`) |
-| Fonts | `next/font` — Cinzel (Google) + Product Sans (local) |
+| Fonts | `next/font` — Cormorant Garamond (headings) + Poppins (body), both Google |
 | Data | Headless PHP/MySQL CMS over REST (`NEXT_PUBLIC_API_URL`) |
 | Forms | `react-hook-form` + `zod` + Google reCAPTCHA |
 | Carousels | `embla-carousel`, `swiper` |

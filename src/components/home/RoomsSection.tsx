@@ -37,23 +37,25 @@ interface RoomData {
   amenities?: RoomAmenityGroup[];
 }
 
+function getImageSrc(image?: string | RoomImage): string | undefined {
+  return typeof image === "string" ? image : image?.src;
+}
+
 export default function RoomsSection({
-  initialData,
+  rooms,
   packageTitle,
 }: {
-  initialData: RoomData | null;
+  rooms: RoomData[] | null;
   packageTitle?: string;
 }) {
-  const room = initialData;
   const packagename = packageTitle;
   const swiperRef = useRef<SwiperType | null>(null);
   const [activeIndex, setActiveIndex] = useState(0);
 
-  if (!room) return null;
+  if (!rooms || rooms.length === 0) return null;
 
-  const images: (string | RoomImage)[] =
-    ((room.gallery_images?.length ?? 0) > 0 ? room.gallery_images : room.img) || [];
-  const features = room.amenities?.[0]?.items?.slice(0, 6) || [];
+  const activeRoom = rooms[activeIndex] || rooms[0];
+  const features = activeRoom.amenities?.[0]?.items?.slice(0, 6) || [];
 
   return (
     <section
@@ -72,14 +74,14 @@ export default function RoomsSection({
           <div>
             <div
               className="luxury-label mb-4 text-white">
-              {room.label || "Your Comfort, Our Priority"}
+              {activeRoom.label || "Your Comfort, Our Priority"}
             </div>
             <div className="luxury-divider mb-6"></div>
             <h2 className="luxury-section-title text-white">{packagename}</h2>
           </div>
 
           <Link
-            href="/"
+            href="/rooms"
             className="hidden md:inline-flex items-center gap-2 text-xs uppercase tracking-[0.25em] text-white/90 hover:text-gold transition-colors group shrink-0"
           >
             View All Rooms
@@ -90,30 +92,30 @@ export default function RoomsSection({
         <div className="grid lg:grid-cols-12 gap-10 lg:gap-16 items-center">
           {/* Image */}
           <div className="lg:col-span-7 animate-scale-in">
-            <div className="relative rounded-2xl md:rounded-[28px] overflow-hidden shadow-2xl shadow-black/40">
+            <div className="relative rounded-2xl md:rounded-[10px] overflow-hidden shadow-2xl shadow-black/40">
               <Swiper
                 onSwiper={(s) => (swiperRef.current = s)}
                 onSlideChange={(s) => setActiveIndex(s.realIndex)}
                 modules={[Autoplay, EffectFade]}
                 effect="fade"
                 slidesPerView={1}
-                loop={images.length > 1}
+                loop={rooms.length > 1}
                 autoplay={
-                  images.length > 1
+                  rooms.length > 1
                     ? { delay: 4500, disableOnInteraction: false }
                     : false
                 }
                 className="w-full h-[320px] md:h-[520px]"
               >
-                {images.map((image: string | RoomImage, index: number) => {
-                  const src = typeof image === "string" ? image : image?.src;
+                {rooms.map((room: RoomData, index: number) => {
+                  const src = getImageSrc(room.img?.[0]);
                   return (
-                    <SwiperSlide key={index}>
+                    <SwiperSlide key={room.slug || index}>
                       <div className="relative h-full w-full">
                         {src && (
                           <Image
                             src={src}
-                            alt={`${room.title} ${index + 1}`}
+                            alt={room.title || `Room ${index + 1}`}
                             fill
                             priority={index === 0}
                             sizes="(max-width: 1024px) 100vw, 60vw"
@@ -127,18 +129,18 @@ export default function RoomsSection({
               </Swiper>
 
               {/* Prev / next arrows */}
-              {images.length > 1 && (
+              {rooms.length > 1 && (
                 <>
                   <button
                     onClick={() => swiperRef.current?.slidePrev()}
-                    aria-label="Previous image"
+                    aria-label="Previous room"
                     className="absolute z-10 left-4 top-1/2 -translate-y-1/2 hover:cursor-pointer w-10 h-10 rounded-full flex items-center justify-center bg-black/30 border border-white/15 backdrop-blur-md text-white hover:bg-black/50 hover:border-gold/50 transition-colors"
                   >
                     <ChevronLeft className="w-5 h-5" />
                   </button>
                   <button
                     onClick={() => swiperRef.current?.slideNext()}
-                    aria-label="Next image"
+                    aria-label="Next room"
                     className="absolute z-10 right-4 top-1/2 -translate-y-1/2 hover:cursor-pointer w-10 h-10 rounded-full flex items-center justify-center bg-black/30 border border-white/15 backdrop-blur-md text-white hover:bg-black/50 hover:border-gold/50 transition-colors"
                   >
                     <ChevronRight className="w-5 h-5" />
@@ -151,8 +153,16 @@ export default function RoomsSection({
 
           {/* Content */}
           <div className="lg:col-span-5 animate-slide-in-right">
-            <p className="luxury-subtitle text-white mb-10 line-clamp-3">
-              {(room.sub_title || room.description)?.replace(
+            {activeRoom.title && (
+              <h3
+                className="text-white text-2xl md:text-5xl font-light tracking-wide mb-5"
+                style={{ fontFamily: "var(--font-cinzel), Georgia, serif" }}
+              >
+                {activeRoom.title}
+              </h3>
+            )}
+            <p className=" text-white mb-10  leading-relaxed">
+              {(activeRoom.sub_title || activeRoom.description)?.replace(
                 /<\/?p[^>]*>/g,
                 ""
               )}
@@ -188,7 +198,7 @@ export default function RoomsSection({
             )}
 
             <div className="flex flex-col sm:flex-row sm:items-center gap-5">
-              <Link href={`/rooms/${room.slug}`} className="luxury-btn group w-fit">
+              <Link href={`/rooms/${activeRoom.slug}`} className="luxury-btn group w-fit">
                 Explore Room
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
               </Link>

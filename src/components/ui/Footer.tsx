@@ -104,9 +104,9 @@ export default async function Footer() {
                   <Image
                     src={logoUrl}
                     alt={brandName}
-                    width={400}
-                    height={400}
-                    className="h-12 w-auto object-contain"
+                    width={100}
+                    height={100}
+                    className=" w-auto object-contain"
                   />
                 )}
               </Link>

@@ -22,8 +22,8 @@ const CHAMBERS = [
 export default function HallParallax() {
   return (
     <section
-      className="relative bg-fixed bg-cover bg-center bg-no-repeat"
-      style={{ backgroundImage: "url('/hall.jpg')" }}
+      className="relative bg-fixed bg-cover bg-center bg-no-repeat lg:mt-20"
+      style={{ backgroundImage: "url('/hall.jpeg')" }}
     >
       {/* Dark overlay for text legibility */}
       <div className="absolute inset-0 bg-black/60" aria-hidden="true" />

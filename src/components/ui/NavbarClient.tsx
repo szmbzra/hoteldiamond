@@ -3,10 +3,11 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Menu } from "lucide-react";
 import Sidebar from "./Sidebar";
 import { NavItem } from "@/types";
-import { links } from "@/config/site";
+import { links, hasBackgroundImage } from "@/config/site";
 
 interface NavbarClientProps {
   menu: NavItem[];
@@ -16,6 +17,8 @@ interface NavbarClientProps {
 export default function NavbarClient({ menu, logoUrl }: NavbarClientProps) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const pathname = usePathname();
+  const isDark = isScrolled || !hasBackgroundImage(pathname);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -41,9 +44,9 @@ export default function NavbarClient({ menu, logoUrl }: NavbarClientProps) {
                 alt="Hotel Diamond Palace"
                 width={200}
                 loading="eager"
-                height={82}
+                height={200}
                 className={`transition-all duration-300 object-contain ${
-                  isScrolled ? "h-16 w-auto" : "h-20 w-auto"
+                  isScrolled ? "h-20 w-auto" : "h-25 w-auto"
                 }`}
               />
             ) : (
@@ -61,7 +64,7 @@ export default function NavbarClient({ menu, logoUrl }: NavbarClientProps) {
               href={links.booking}
               target="_blank"
               tabIndex={isSidebarOpen ? -1 : 0}
-              className={`luxury-btn luxury-btn-book text-[10px] text-luxury-dark  ${ isScrolled ? " text-black! border-black!" : ""}`}
+              className={`luxury-btn luxury-btn-book text-[10px] text-luxury-dark  ${ isDark ? " text-black! border-black!" : ""}`}
             >
               Book Now
             </Link>
@@ -74,7 +77,7 @@ export default function NavbarClient({ menu, logoUrl }: NavbarClientProps) {
               aria-controls="sidebar-menu"
               tabIndex={isSidebarOpen ? -1 : 0}
             >
-              <Menu className={`w-6 h-6  ${ isScrolled ? "text-black" : "text-white"}`} />
+              <Menu className={`w-6 h-6  ${ isDark ? "text-black" : "text-white"}`} />
             </button>
           </div>
         </div>

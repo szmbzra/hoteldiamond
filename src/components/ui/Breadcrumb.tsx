@@ -61,11 +61,11 @@ export default function Breadcrumb({
         <h1 className="text-3xl md:text-5xl lg:text-6xl text-white font-light tracking-[0.15em] uppercase mb-8 drop-shadow-lg">
           {title}
         </h1>
-        
+
         {/* Decorative Divider */}
         <div className="flex flex-col items-center justify-center">
           <div className="w-16 h-px mb-6" style={{ background: "var(--luxury-gold, #e3c9a1)" }}></div>
-          
+
           {/* Breadcrumb Navigation */}
           <nav aria-label="Breadcrumb">
             <ol className="flex items-center space-x-2 text-xs md:text-sm tracking-[0.2em] uppercase">
@@ -95,6 +95,47 @@ export default function Breadcrumb({
               })}
             </ol>
           </nav>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export function BreadcrumbNoBanner({
+  title,
+  items,
+  backgroundImage,
+}: BreadcrumbProps) {
+  // BreadcrumbList rich result — absolute URLs; the final (current) crumb may
+  // omit `item` per schema.org, which is fine for items without an href.
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: items.map((item, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: item.label,
+      ...(item.href && { item: `${SITE_URL}${item.href}` }),
+    })),
+  };
+
+  return (
+    <div className="relative w-full h-[100vh] min-h-[150px] max-h-[250px] flex items-center justify-center">
+      <JsonLd schema={breadcrumbSchema} />
+      {/* Background Media */}
+
+
+      {/* Content */}
+      <div className="relative z-10 text-center px-6 mt-16 md:mt-24">
+        {/* Luxury Title — the page's single <h1> (pages using this banner have
+            no other h1, so this anchors both a11y heading order and SEO). */}
+        <h1 className="text-3xl md:text-5xl lg:text-6xl tracking-[0.15em] uppercase mb-8">
+          {title}
+        </h1>
+
+        {/* Decorative Divider */}
+        <div className="flex flex-col items-center justify-center">
+          <div className="w-16 h-px mb-6" style={{ background: "var(--luxury-gold, #e3c9a1)" }}></div>
         </div>
       </div>
     </div>

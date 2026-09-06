@@ -1,13 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Sparkles, Waves, Dumbbell } from "lucide-react";
+import { ArrowRight, BedDouble, Building2, Dumbbell } from "lucide-react";
 import { getHomeArticleById, getSiteRegulars } from "@/lib/data";
 import { contact } from "@/config/site";
 
 const HIGHLIGHTS = [
-  { icon: Waves, label: "Swimming Pool" },
-  { icon: Dumbbell, label: "Fitness Center" },
-  { icon: Sparkles, label: "Spa" },
+  { icon: BedDouble, label: "Rooms & Suites" },
+  { icon: Building2, label: " Event Halls" },
+  { icon: Dumbbell, label: "Wellness & Fitness" },
 ];
 
 export default async function AboutSection() {
@@ -29,7 +29,7 @@ export default async function AboutSection() {
         <div className="flex flex-col lg:flex-row gap-16 xl:gap-20 items-center">
           {/* Image Side */}
           <div className="w-full lg:w-1/2 relative animate-slide-in-left">
-            <div className="relative z-10 luxury-img-zoom">
+            <div className="relative z-10">
               {data?.gallery_images?.map((img: any) => (
                 <Image
                   key={img.id}
@@ -62,14 +62,14 @@ export default async function AboutSection() {
 
             {data.content ? (
               <div
-                className="luxury-subtitle mb-10"
-                style={{ color: "var(--luxury-muted)" }}
+                className="luxury-subtitle mb-10  text-base! leading-[2.1]"
+
                 dangerouslySetInnerHTML={{ __html: data.content }}
               />
             ) : (
               <p
                 className="luxury-subtitle mb-10"
-                style={{ color: "var(--luxury-muted)" }}
+
               >
                   Content Not Available
               </p>
@@ -84,11 +84,11 @@ export default async function AboutSection() {
                 <div key={i} className="flex items-center gap-3">
                   <Icon
                     className="w-5 h-5 shrink-0"
-                    style={{ color: "var(--luxury-gold)" }}
+
                   />
                   <p
                     className="text-sm font-light tracking-wide w-auto"
-                    style={{ color: "var(--luxury-charcoal)" }}
+
                   >
                     {label}
                   </p>

@@ -27,7 +27,7 @@ export default function NearbyLandmarksClient({ landmarks }: NearbyLandmarksClie
   const mapSrc = extractMapSrc(activeLandmark.map_url);
 
   return (
-    <section className="relative overflow-hidden mt-25" style={{ background: "var(--luxury-dark)" }}>
+    <section className="relative overflow-hidden" style={{ background: "var(--luxury-dark)" }}>
       {/* Decorative background — a huge, faint map glyph instead of a photo */}
       <MapIcon
         className="pointer-events-none absolute -right-16 -top-20 w-[420px] h-[420px] md:w-[600px] md:h-[600px] text-gold/[0.06] rotate-[8deg]"
