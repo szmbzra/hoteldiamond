@@ -5,8 +5,8 @@ import { getHomeArticleById, getSiteRegulars } from "@/lib/data";
 import { contact } from "@/config/site";
 
 const HIGHLIGHTS = [
-  { icon: BedDouble, label: "Rooms & Suites" },
-  { icon: Building2, label: " Event Halls" },
+  { icon: BedDouble, label: "95 Rooms & Suites" },
+  { icon: Building2, label: "3 Event Halls" },
   { icon: Dumbbell, label: "Wellness & Fitness" },
 ];
 
