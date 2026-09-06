@@ -98,7 +98,7 @@ export default async function ServicesSection() {
                     {item.title}
                   </h3>
 
-                  <p className="text-sm font-light leading-relaxed text-white/70 line-clamp-2 lg:line-clamp-3 mt-2 mb-5 max-w-md">
+                  <p className="leading-relaxed lg:line-clamp-3 line-clamp-2 mb-5 mt-2 text-white">
                     {description}
                   </p>
 

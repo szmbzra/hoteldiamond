@@ -210,19 +210,6 @@ export default function HeroClient({
           </>
         )}
       </div>
-
-      {/* Scroll Indicator */}
-      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-3 animate-fade-in delay-700 pointer-events-none">
-        <span className="text-white/40 text-[0.65rem] tracking-[0.3em] uppercase">
-          {fallbackData.scrollText}
-        </span>
-        <div className="w-px h-10 bg-gradient-to-b from-white/40 to-transparent scroll-indicator"></div>
-      </div>
-
-      {/* SR-Only for SEO */}
-      <h2 className="sr-only">
-        Hotel Diamond Pvt. Ltd — Luxury Resort in Manakamana
-      </h2>
     </div>
   );
 }

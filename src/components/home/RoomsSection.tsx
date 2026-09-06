@@ -7,10 +7,12 @@ import "swiper/css";
 import "swiper/css/effect-fade";
 import Image from "next/image";
 import Link from "next/link";
+
 import { ArrowRight, ArrowUpRight, ChevronLeft, ChevronRight } from "lucide-react";
 
-export default function RoomsSection({ initialData }: { initialData: any }) {
+export default function RoomsSection({ initialData , packageTitle }: { initialData: string; packageTitle: string }) {
   const room = initialData;
+  const packagename = packageTitle;
   const swiperRef = useRef<any>(null);
   const [activeIndex, setActiveIndex] = useState(0);
 
@@ -36,18 +38,16 @@ export default function RoomsSection({ initialData }: { initialData: any }) {
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-14 animate-fade-in-up">
           <div>
             <div
-              className="luxury-label mb-4"
-              style={{ color: "var(--luxury-gold)" }}
-            >
+              className="luxury-label mb-4 text-white">
               {room.label || "Your Comfort, Our Priority"}
             </div>
             <div className="luxury-divider mb-6"></div>
-            <h2 className="luxury-section-title text-white">{room.title}</h2>
+            <h2 className="luxury-section-title text-white">{packagename.title}</h2>
           </div>
 
           <Link
             href="/"
-            className="hidden md:inline-flex items-center gap-2 text-xs uppercase tracking-[0.25em] text-white/50 hover:text-gold transition-colors group shrink-0"
+            className="hidden md:inline-flex items-center gap-2 text-xs uppercase tracking-[0.25em] text-white/90 hover:text-gold transition-colors group shrink-0"
           >
             View All Rooms
             <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
@@ -99,63 +99,26 @@ export default function RoomsSection({ initialData }: { initialData: any }) {
                   <button
                     onClick={() => swiperRef.current?.slidePrev()}
                     aria-label="Previous image"
-                    className="absolute z-10 left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full flex items-center justify-center bg-black/30 border border-white/15 backdrop-blur-md text-white hover:bg-black/50 hover:border-gold/50 transition-colors"
+                    className="absolute z-10 left-4 top-1/2 -translate-y-1/2 hover:cursor-pointer w-10 h-10 rounded-full flex items-center justify-center bg-black/30 border border-white/15 backdrop-blur-md text-white hover:bg-black/50 hover:border-gold/50 transition-colors"
                   >
                     <ChevronLeft className="w-5 h-5" />
                   </button>
                   <button
                     onClick={() => swiperRef.current?.slideNext()}
                     aria-label="Next image"
-                    className="absolute z-10 right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full flex items-center justify-center bg-black/30 border border-white/15 backdrop-blur-md text-white hover:bg-black/50 hover:border-gold/50 transition-colors"
+                    className="absolute z-10 right-4 top-1/2 -translate-y-1/2 hover:cursor-pointer w-10 h-10 rounded-full flex items-center justify-center bg-black/30 border border-white/15 backdrop-blur-md text-white hover:bg-black/50 hover:border-gold/50 transition-colors"
                   >
                     <ChevronRight className="w-5 h-5" />
                   </button>
                 </>
               )}
 
-              {/* Floating glass info card */}
-              {images.length > 0 && (
-                <div className="absolute z-10 bottom-0 left-0 right-0 pt-24 pb-5 px-5 flex items-end justify-between gap-4 bg-gradient-to-t from-black/70 via-black/25 to-transparent">
-                  <div className="backdrop-blur-md bg-black/30 border border-white/15 rounded-xl px-5 py-3">
-                    <span className="text-[10px] uppercase tracking-[0.25em] text-white/60 block mb-1">
-                      Room
-                    </span>
-                    <span className="text-2xl font-light text-white tracking-wide">
-                      {String(activeIndex + 1).padStart(2, "0")}
-                      <span className="text-white/40">
-                        {" "}
-                        / {String(images.length).padStart(2, "0")}
-                      </span>
-                    </span>
-                  </div>
-
-                  {images.length > 1 && (
-                    <div className="flex gap-2 pb-1">
-                      {images.map((_: any, i: number) => (
-                        <button
-                          key={i}
-                          onClick={() => swiperRef.current?.slideToLoop(i)}
-                          aria-label={`Go to image ${i + 1}`}
-                          className="h-1.5 rounded-full transition-all duration-300"
-                          style={{
-                            width: activeIndex === i ? "28px" : "8px",
-                            background:
-                              activeIndex === i
-                                ? "var(--luxury-gold)"
-                                : "rgba(255,255,255,0.3)",
-                          }}
-                        />
-                      ))}
-                    </div>
-                  )}
-                </div>
-              )}
             </div>
           </div>
 
           {/* Content */}
           <div className="lg:col-span-5 animate-slide-in-right">
-            <p className="luxury-subtitle text-white/60 mb-10 line-clamp-3">
+            <p className="luxury-subtitle text-white mb-10 line-clamp-3">
               {(room.sub_title || room.description)?.replace(
                 /<\/?p[^>]*>/g,
                 ""

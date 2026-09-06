@@ -43,11 +43,11 @@ export default function NearbyLandmarksClient({ landmarks }: NearbyLandmarksClie
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-14">
           <div>
-            <div className="luxury-label text-gold-text mb-4">Explore The Area</div>
+            <div className="luxury-label text-white mb-4">Explore The Area</div>
             <div className="luxury-divider mb-6"></div>
             <h2 className="luxury-section-title text-white">Nearby Landmarks</h2>
           </div>
-          <p className="max-w-xs text-sm text-white/40 font-light leading-relaxed">
+          <p className="max-w-xs text-sm text-white/90 font-light leading-relaxed">
             Everything worth seeing is only a short ride away — here&apos;s how close you really are.
           </p>
         </div>
@@ -94,14 +94,9 @@ export default function NearbyLandmarksClient({ landmarks }: NearbyLandmarksClie
               {String(activeIndex + 1).padStart(2, "0")}
             </span>
 
-            <h3 className="mb-2 text-2xl font-light tracking-tight text-white md:text-3xl">
+            <h3 className="mb-5 text-2xl font-light tracking-tight text-white md:text-3xl">
               {activeLandmark.title}
             </h3>
-            {activeLandmark.subtitle && (
-              <h6 className="mb-6 text-sm italic" style={{ color: "var(--luxury-gold)" }}>
-                {activeLandmark.subtitle}
-              </h6>
-            )}
             {activeLandmark.content && (
               <div
                 className="mb-8 text-[0.95rem] font-light leading-relaxed text-white"

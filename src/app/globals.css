@@ -403,7 +403,6 @@ body {
 
 .luxury-card-hover:hover {
   transform: translateY(-6px);
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
 }
 
 .luxury-card-hover:hover::before {

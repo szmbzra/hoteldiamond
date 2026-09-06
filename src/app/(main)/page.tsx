@@ -3,6 +3,7 @@ import { Metadata } from "next";
 import {
   getCategoryItems,
   getTestimonials,
+  getPackage,
   getSocialGroup,
   getPopupItems,
 } from "@/lib/data";
@@ -37,7 +38,9 @@ export default async function Home() {
   const popupData = await getPopupItems();
 
   const deluxeRoom = (await getCategoryItems(CATEGORY_IDS.rooms))[0];
-  console.log(deluxeRoom);
+  const packageTitle = await getPackage("1");
+      console.log(packageTitle);
+
 
   return (
     <main id="main-content" className="flex flex-col min-h-screen">
@@ -45,7 +48,7 @@ export default async function Home() {
       <Popup popupData={popupData} />
       <HeroVideo />
       <AboutSection />
-      <RoomsSection initialData={deluxeRoom} />
+      <RoomsSection initialData={deluxeRoom} packageTitle={packageTitle} />
       <FacilitiesSection />
       {/* <DineBanner /> */}
       <ServicesSection />

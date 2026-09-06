@@ -30,15 +30,10 @@ export default async function VirtualTourPage() {
           Immersive Journey
         </span>
         <h2 className="text-3xl md:text-5xl font-light tracking-[0.1em] uppercase mb-8 leading-tight text-gray-900">
-          Experience Manakamana <br />{" "}
+          Experience Hotel Diamond
           <span className="italic text-gold-text">In 360 Degrees</span>
         </h2>
         <div className="w-16 h-[1.5px] bg-gold mx-auto mb-8"></div>
-        <p className="text-sm md:text-base leading-relaxed tracking-wide font-light text-gray-500 max-w-2xl mx-auto">
-          Embark on a virtual exploration of our breathtaking mountain resort. Traverse the elegant
-          pathways, discover our luxurious amenities, and experience the majestic Himalayan scenery 
-          directly from your screen.
-        </p>
       </section>
 
       {/* Virtual Tour App Component */}

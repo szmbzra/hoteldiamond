@@ -33,7 +33,7 @@ export default async function HomeGallery() {
             </div>
             <div className="luxury-divider mb-6"></div>
             <h2
-              className="luxury-section-title mb-6"
+              className="luxury-section-title mb-6 text-5xl!"
               style={{ color: "var(--luxury-charcoal)" }}
             >
               Moments Captured in <span className="italic">Time</span>
