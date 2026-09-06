@@ -157,12 +157,9 @@ export default function AboutPage({
                 className="luxury-subtitle mb-8"
                 style={{ color: "var(--luxury-muted)" }}
               >
-                Nestled in the serene hills near the sacred Manakamana Temple,
-                Hotel Diamond Pvt. Ltd is a haven of peace, comfort, and
-                breathtaking natural beauty. Offering panoramic views of the
-                majestic Himalayas and lush green valleys, the resort is an
-                ideal escape for spiritual seekers, nature lovers, and those
-                simply looking to unwind in a luxurious setting.
+Welcome to Hotel Diamond Palace Pvt. Ltd, a premier destination in the heart of Nepalgunj. We combine modern luxury with warm Nepalese hospitality, offering guests an unforgettable stay whether they are here for business, leisure, or celebration.
+
+Our property features 95 elegantly designed rooms, versatile event facilities, and exceptional dining outlets that showcase both authentic Nepalese flavours and international cuisine. With amenities like a swimming pool, fitness center, spa, and 24‑hour front desk, we ensure comfort and convenience at every step.
               </p>
             )}
 
