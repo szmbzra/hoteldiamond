@@ -3,12 +3,9 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { Menu } from "lucide-react";
 import Sidebar from "./Sidebar";
 import { NavItem } from "@/types";
-import { links, hasBackgroundImage } from "@/config/site";
-
 interface NavbarClientProps {
   menu: NavItem[];
   logoUrl?: string;
