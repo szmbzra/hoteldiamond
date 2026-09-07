@@ -1,11 +1,8 @@
 "use client";
 
-import { useRef, useState } from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import type { Swiper as SwiperType } from "swiper";
-import { Autoplay, EffectFade } from "swiper/modules";
-import "swiper/css";
-import "swiper/css/effect-fade";
+import { useEffect, useState } from "react";
+import useEmblaCarousel from "embla-carousel-react";
+import Autoplay from "embla-carousel-autoplay";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -49,8 +46,24 @@ export default function RoomsSection({
   packageTitle?: string;
 }) {
   const packagename = packageTitle;
-  const swiperRef = useRef<SwiperType | null>(null);
   const [activeIndex, setActiveIndex] = useState(0);
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: (rooms?.length ?? 0) > 1 }, [
+    Autoplay({ delay: 4500, stopOnInteraction: false }),
+  ]);
+
+  useEffect(() => {
+    if (!emblaApi) return;
+
+    const onSelect = () => setActiveIndex(emblaApi.selectedScrollSnap());
+    onSelect();
+    emblaApi.on("select", onSelect);
+    emblaApi.on("reInit", onSelect);
+
+    return () => {
+      emblaApi.off("select", onSelect);
+      emblaApi.off("reInit", onSelect);
+    };
+  }, [emblaApi]);
 
   if (!rooms || rooms.length === 0) return null;
 
@@ -93,25 +106,15 @@ export default function RoomsSection({
           {/* Image */}
           <div className="lg:col-span-7 animate-scale-in">
             <div className="relative rounded-2xl md:rounded-[10px] overflow-hidden shadow-2xl shadow-black/40">
-              <Swiper
-                onSwiper={(s) => (swiperRef.current = s)}
-                onSlideChange={(s) => setActiveIndex(s.realIndex)}
-                modules={[Autoplay, EffectFade]}
-                effect="fade"
-                slidesPerView={1}
-                loop={rooms.length > 1}
-                autoplay={
-                  rooms.length > 1
-                    ? { delay: 4500, disableOnInteraction: false }
-                    : false
-                }
-                className="w-full h-[320px] md:h-[520px]"
-              >
-                {rooms.map((room: RoomData, index: number) => {
-                  const src = getImageSrc(room.img?.[0]);
-                  return (
-                    <SwiperSlide key={room.slug || index}>
-                      <div className="relative h-full w-full">
+              <div className="overflow-hidden w-full h-[320px] md:h-[520px]" ref={emblaRef}>
+                <div className="flex h-full">
+                  {rooms.map((room: RoomData, index: number) => {
+                    const src = getImageSrc(room.img?.[0]);
+                    return (
+                      <div
+                        key={room.slug || index}
+                        className="relative h-full min-w-0 flex-[0_0_100%]"
+                      >
                         {src && (
                           <Image
                             src={src}
@@ -123,23 +126,23 @@ export default function RoomsSection({
                           />
                         )}
                       </div>
-                    </SwiperSlide>
-                  );
-                })}
-              </Swiper>
+                    );
+                  })}
+                </div>
+              </div>
 
               {/* Prev / next arrows */}
               {rooms.length > 1 && (
                 <>
                   <button
-                    onClick={() => swiperRef.current?.slidePrev()}
+                    onClick={() => emblaApi?.scrollPrev()}
                     aria-label="Previous room"
                     className="absolute z-10 left-4 top-1/2 -translate-y-1/2 hover:cursor-pointer w-10 h-10 rounded-full flex items-center justify-center bg-black/30 border border-white/15 backdrop-blur-md text-white hover:bg-black/50 hover:border-gold/50 transition-colors"
                   >
                     <ChevronLeft className="w-5 h-5" />
                   </button>
                   <button
-                    onClick={() => swiperRef.current?.slideNext()}
+                    onClick={() => emblaApi?.scrollNext()}
                     aria-label="Next room"
                     className="absolute z-10 right-4 top-1/2 -translate-y-1/2 hover:cursor-pointer w-10 h-10 rounded-full flex items-center justify-center bg-black/30 border border-white/15 backdrop-blur-md text-white hover:bg-black/50 hover:border-gold/50 transition-colors"
                   >

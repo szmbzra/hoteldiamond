@@ -84,27 +84,6 @@ export const links = {
  * A listed path also matches its own sub-routes, so "/offers" covers
  * "/offers/summer-sale" too.
  */
-export const pagesWithBackgroundImage = [
-  "/about-us",
-  "/gallery",
-  "/facilities",
-  "/rooms",
-  "/faq",
-  "/offers",
-  "/events",
-  "/restaurant",
-  "/blog",
-  "/work-with-us",
-  "/virtual-tour",
-  "/sitemap",
-] as string[];
-
-/** Whether `pathname` falls under one of the routes in {@link pagesWithBackgroundImage}. */
-export function hasBackgroundImage(pathname: string): boolean {
-  return pagesWithBackgroundImage.some((path) =>
-    path === "/" ? pathname === "/" : pathname === path || pathname.startsWith(`${path}/`)
-  );
-}
 
 /** CMS category IDs. */
 export const CATEGORY_IDS = {

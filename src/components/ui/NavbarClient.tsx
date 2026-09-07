@@ -17,8 +17,7 @@ interface NavbarClientProps {
 export default function NavbarClient({ menu, logoUrl }: NavbarClientProps) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const pathname = usePathname();
-  const isDark = isScrolled || !hasBackgroundImage(pathname);
+
 
   useEffect(() => {
     const handleScroll = () => {
@@ -64,7 +63,7 @@ export default function NavbarClient({ menu, logoUrl }: NavbarClientProps) {
               href={links.booking}
               target="_blank"
               tabIndex={isSidebarOpen ? -1 : 0}
-              className={`luxury-btn luxury-btn-book text-[10px] text-luxury-dark  ${ isDark ? " text-black! border-black!" : ""}`}
+              className={`luxury-btn luxury-btn-book text-[10px] text-luxury-dark  ${ isScrolled ? " text-black! border-black!" : ""}`}
             >
               Book Now
             </Link>
@@ -77,7 +76,7 @@ export default function NavbarClient({ menu, logoUrl }: NavbarClientProps) {
               aria-controls="sidebar-menu"
               tabIndex={isSidebarOpen ? -1 : 0}
             >
-              <Menu className={`w-6 h-6  ${ isDark ? "text-black" : "text-white"}`} />
+              <Menu className={`w-6 h-6  ${ isScrolled ? "text-black" : "text-white"}`} />
             </button>
           </div>
         </div>
