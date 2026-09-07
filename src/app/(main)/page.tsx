@@ -47,14 +47,14 @@ export default async function Home() {
       <HeroVideo />
       <AboutSection />
       <RoomsSection rooms={rooms} packageTitle={packageData?.title} />
-      <FacilitiesSection />
+      {/* <FacilitiesSection /> */}
       {/* <DineBanner /> */}
       <ServicesSection />
       <HomeGallery />
       <HallParallax />
       <NearbyLandmarks />
       <Testimonials testimonials={testimonials} />
-      <LatestNews />
+      {/* <LatestNews /> */}
       <PartnerSlider items={socialLinks?.items}/>
     </main>
   );
