@@ -113,7 +113,7 @@ export default async function Footer() {
 
             {/* Useful Links */}
             <div className="lg:col-span-2">
-              <h4 className="luxury-label text-gold-text mb-4 text-base! font-bold ">Useful Links</h4>
+              <h4 className="luxury-label text-gold-text mb-4 text-base! font-bold!">Useful Links</h4>
               <div className="luxury-divider mb-8"></div>
               <div className="grid grid-cols-1 gap-6 md:gap-8">
                 <ul className="space-y-4 min-w-0">
@@ -135,7 +135,7 @@ export default async function Footer() {
 
             {/* Get In Touch */}
             <div className="lg:col-span-4">
-              <h4 className="luxury-label text-gold-text mb-4 text-base! font-bold">Get In Touch</h4>
+              <h4 className="luxury-label text-gold-text mb-4 text-base! font-bold!">Get In Touch</h4>
               <div className="luxury-divider mb-8"></div>
               <ul className="space-y-5">
                 {fiscalAddress && (
