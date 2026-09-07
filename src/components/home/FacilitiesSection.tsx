@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { FACILITIES_HEADER } from "@/data/data";
 import { getServices } from "@/lib/data";
 
@@ -5,6 +6,7 @@ export default async function FacilitiesSection() {
   const header = FACILITIES_HEADER;
   const service = await getServices(1);
   const facilities = service?.[0]?.items?.slice(0, 8) ?? [];
+  console.log(service);
 
   if (facilities.length === 0) return null;
 
@@ -28,61 +30,46 @@ export default async function FacilitiesSection() {
               {header.title}
             </h2>
           </div>
-          <div className="w-full lg:w-7/12 flex items-end animate-slide-in-right">
-            <p
-              className="luxury-subtitle max-w-xl"
-              style={{ color: "var(--luxury-muted)" }}
-            >
-              {header.description}
-            </p>
-          </div>
         </div>
 
         {/* Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {facilities?.map((facility: any, idx: number) => (
-            <div
-              key={idx}
-              className="luxury-card-hover bg-white p-8 animate-fade-in-up"
-              style={{ animationDelay: `${0.15 * idx}s` }}
-            >
-              {/* Number */}
-              <div className="mb-6">
-                <span
-                  className="text-4xl font-extralight"
-                  style={{ color: "var(--luxury-gold)", opacity: 0.6 }}
-                >
-                  {String(idx + 1).padStart(2, "0")}
-                </span>
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
+          {facilities?.map((facility: any, idx: number) => {
+            const image = facility.gallery_images?.[0];
+
+            return (
+              <div
+                key={idx}
+                className="luxury-card-hover bg-white flex flex-col items-center text-center px-6 py-12 shadow-[0_4px_20px_rgba(0,0,0,0.03)] animate-fade-in-up"
+                style={{ animationDelay: `${0.1 * idx}s` }}
+              >
+                {/* Icon / Image */}
+              <div className="mb-6 w-12 h-12 flex items-center justify-center">
+                {facility.icon ? (
+                  <i
+                    className={`${facility.icon} text-4xl`}
+                    style={{ color: "var(--luxury-charcoal)" }}
+                  />
+                ) : image?.src ? (
+                  <Image
+                    src={image.src}
+                    alt={image.title || facility.title || ""}
+                    width={48}
+                    height={48}
+                    className="w-12 h-12 object-contain"
+                  />
+                ) : null}
               </div>
 
-              {/* Title */}
-              <div
-                className="text-lg font-light mb-3 tracking-wide"
-                style={{ color: "var(--luxury-charcoal)" }}
-              >
+                {/* Title */}
                 <div
+                  className="text-base font-light tracking-wide"
+                  style={{ color: "var(--luxury-charcoal)" }}
                   dangerouslySetInnerHTML={{ __html: facility.title || "" }}
                 />
               </div>
-
-              {/* Divider */}
-              <div
-                className="w-8 h-px mb-4"
-                style={{ background: "var(--luxury-gold)" }}
-              ></div>
-
-              {/* Description */}
-              <div
-                className="text-sm font-light leading-relaxed"
-                style={{ color: "var(--luxury-muted)" }}
-              >
-                <div
-                  dangerouslySetInnerHTML={{ __html: facility.content_0 || "" }}
-                />
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>
