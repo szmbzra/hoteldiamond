@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Menu } from "lucide-react";
 import Sidebar from "./Sidebar";
+import { links } from "@/config/site";
 import { NavItem } from "@/types";
 interface NavbarClientProps {
   menu: NavItem[];
