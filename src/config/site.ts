@@ -85,7 +85,6 @@ export const links = {
  * "/offers/summer-sale" too.
  */
 export const pagesWithBackgroundImage = [
-  "/",
   "/about-us",
   "/gallery",
   "/facilities",
