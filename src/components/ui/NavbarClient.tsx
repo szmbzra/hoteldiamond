@@ -68,7 +68,7 @@ export default function NavbarClient({ menu, logoUrl }: NavbarClientProps) {
 
             <button
               className="p-3 focus-visible:outline-2 focus-visible:outline-white hover:cursor-pointer focus-visible:outline-offset-2 rounded"
-              onClick={() => setIsSidebarOpen(true)}
+              onClick={() => setIsSidebarOpen(false)}
               aria-label="Open navigation menu"
               aria-expanded={isSidebarOpen}
               aria-controls="sidebar-menu"
