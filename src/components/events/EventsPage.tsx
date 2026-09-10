@@ -14,7 +14,7 @@ import { DecorativeGlow, DecorativeAccent } from "@/components/ui/DecorativeBlob
 
 // Shown whenever the CMS hasn't filled in a real `amenities` list yet — swapped
 // out automatically the moment `pkg.amenities[0].items` has entries.
-const DEFAULT_AMENITIES = [
+const DEFAULT_AMENITIES: { title: string; icon: typeof Wifi; img?: string }[] = [
   { title: "Free Wi-Fi", icon: Wifi },
   { title: "AV Equipment", icon: MonitorPlay },
   { title: "Natural Daylight", icon: Sun },

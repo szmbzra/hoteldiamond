@@ -46,7 +46,7 @@ export default function ReviewsPage({
   reviews: Review[];
   heroImage: string;
 }) {
-  const [filter, setFilter] = useState<(typeof PLATFORMS)[number]>("All");
+  const [filter, setFilter] = useState<"All" | keyof typeof REVIEW_LINKS>("All");
 
   const filtered =
     filter === "All" ? reviews : reviews.filter((r) => r.via === filter);
