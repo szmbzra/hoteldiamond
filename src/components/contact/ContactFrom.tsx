@@ -227,7 +227,7 @@ export default function ContactFrom() {
               )}
             </div>
 
-            <Recaptcha onChange={(token) => setCaptchaToken(token)} />
+            {/* <Recaptcha onChange={(token) => setCaptchaToken(token)} /> */}
             {submitError && (
               <p className="text-red-500 text-sm font-medium">{submitError}</p>
             )}
