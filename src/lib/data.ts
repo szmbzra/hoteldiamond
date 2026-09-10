@@ -71,6 +71,20 @@ export async function getPackage(id: string): Promise<any | null> {
   return packages?.find((p) => String(p.id) === id) ?? null;
 }
 
+/**
+ * One `package` entry by its CMS `slug` (e.g. "dining" for Dining & Bar).
+ * Pass `type` to disambiguate when several entries share a slug-less type —
+ * e.g. `findPackageBySlug("dining", "0")` for the type-0 Dining & Bar record.
+ */
+export async function findPackageBySlug(slug: string, type?: string): Promise<any | null> {
+  const packages = await fetchAPI<any[]>("package");
+  return (
+    packages?.find(
+      (p) => p.slug === slug && (type === undefined || String(p.type) === type),
+    ) ?? null
+  );
+}
+
 /** Raw `subpackage` response — only for consumers that scan every category. */
 export function getSubpackages(): Promise<any[] | null> {
   return fetchAPI<any[]>("subpackage");

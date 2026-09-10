@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, BedDouble, Building2, Dumbbell } from "lucide-react";
 import { getHomeArticleById, getSiteRegulars } from "@/lib/data";
+import { DecorativeGlow } from "@/components/ui/DecorativeBlobs";
 import { contact } from "@/config/site";
 
 const HIGHLIGHTS = [
@@ -25,7 +26,8 @@ export default async function AboutSection() {
       className="relative overflow-hidden"
       style={{ background: "var(--luxury-cream)" }}
     >
-      <div className="max-w-[1400px] mx-auto py-20 px-6 md:px-12 lg:px-24">
+      <DecorativeGlow variant="dark-gold" />
+      <div className="relative max-w-[1400px] mx-auto py-20 px-6 md:px-12 lg:px-24">
         <div className="flex flex-col lg:flex-row gap-16 xl:gap-20 items-center">
           {/* Image Side */}
           <div className="w-full lg:w-1/2 relative animate-slide-in-left">

@@ -37,7 +37,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
         ...(ogImage && { images: [{ url: ogImage }] }),
       },
     },
-    `/rooms/${slug}`
+    `/accommodations/${slug}`
   );
 }
 
@@ -65,8 +65,8 @@ export default async function RoomDetailPage({ params }: PageProps) {
     "@type": "BreadcrumbList",
     itemListElement: [
       { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
-      { "@type": "ListItem", position: 2, name: "Rooms", item: `${SITE_URL}/rooms` },
-      { "@type": "ListItem", position: 3, name: item.title ?? slug, item: `${SITE_URL}/rooms/${slug}` },
+      { "@type": "ListItem", position: 2, name: "Accommodations", item: `${SITE_URL}/accommodations` },
+      { "@type": "ListItem", position: 3, name: item.title ?? slug, item: `${SITE_URL}/accommodations/${slug}` },
     ],
   };
 
@@ -87,14 +87,14 @@ export default async function RoomDetailPage({ params }: PageProps) {
     name: item.title ?? slug,
     ...(item.meta_description && { description: item.meta_description }),
     ...(roomImage && { image: roomImage }),
-    url: `${SITE_URL}/rooms/${slug}`,
+    url: `${SITE_URL}/accommodations/${slug}`,
     ...(Number.isFinite(priceNumber) && priceNumber > 0 && {
       offers: {
         "@type": "Offer",
         price: priceNumber,
         priceCurrency: business.currency,
         availability: "https://schema.org/InStock",
-        url: `${SITE_URL}/rooms/${slug}`,
+        url: `${SITE_URL}/accommodations/${slug}`,
       },
     }),
   };

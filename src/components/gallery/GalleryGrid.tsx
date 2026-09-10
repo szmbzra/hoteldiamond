@@ -67,11 +67,9 @@ export default function GalleryGrid({ items: rawItems }: GalleryGridProps) {
             <button
               key={cat}
               onClick={() => setActiveCategory(cat)}
-              className={`px-8 py-2 text-xs uppercase tracking-[0.2em] transition-all duration-300 border-b-2 ${
+              className={`px-8 py-3.5 text-xs uppercase  hover:cursor-pointer tracking-[0.2em] transition-all duration-300 ${
                 activeCategory === cat
-                  ? "border-[var(--luxury-gold, #e3c9a1)] "
-                  : "border-transparent hover:text-gold"
-              }`}
+                  ? "bg-(--color-blue)  text-white" : ""}`}
             >
               {cat}
             </button>
@@ -116,25 +114,25 @@ export default function GalleryGrid({ items: rawItems }: GalleryGridProps) {
 
       {/* Lightbox */}
       {selectedImageIndex !== null && (
-        <div 
+        <div
           className="fixed inset-0 z-[100] bg-black/95 flex items-center justify-center p-4 md:p-10 animate-fade-in"
           onClick={closeLightbox}
         >
-          <button 
+          <button
             className="absolute top-6 right-6 text-white/70 hover:text-white transition-colors z-[110]"
             onClick={closeLightbox}
           >
             <X size={32} />
           </button>
 
-          <button 
+          <button
             className="absolute left-4 md:left-10 top-1/2 -translate-y-1/2 text-white/50 hover:text-white transition-colors z-[110]"
             onClick={prevImage}
           >
             <ChevronLeft size={48} />
           </button>
 
-          <button 
+          <button
             className="absolute right-4 md:right-10 top-1/2 -translate-y-1/2 text-white/50 hover:text-white transition-colors z-[110]"
             onClick={nextImage}
           >
@@ -152,7 +150,7 @@ export default function GalleryGrid({ items: rawItems }: GalleryGridProps) {
                 priority
               />
             </div>
-            
+
             {/* Lightbox Caption */}
             <div className="mt-8 text-center" onClick={(e) => e.stopPropagation()}>
               <p className="text-[var(--luxury-gold, #e3c9a1)] text-[0.65rem] uppercase tracking-[0.4em] mb-2">

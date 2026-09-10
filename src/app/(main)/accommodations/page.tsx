@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
-import { getPackage, getCategoryItems, getSiteRegulars } from "@/lib/data";
+import { getPackage, getCategoryItems } from "@/lib/data";
 import { buildMetadata, buildPackageSchemas } from "@/lib/metadata";
-import Breadcrumb from "@/components/ui/Breadcrumb";
+import { BreadcrumbNoBanner } from "@/components/ui/Breadcrumb";
+import { GeometricAccent } from "@/components/ui/GeometricAccents";
 import JsonLd from "@/components/seo/JsonLd";
 import RoomsList from "@/components/rooms/RoomsList";
 import { CATEGORY_IDS } from "@/config/site";
@@ -19,24 +20,15 @@ export async function generateMetadata(): Promise<Metadata> {
       ...(pkg?.meta_keywords && { keywords: pkg.meta_keywords }),
       ...(pkg?.fb_img && { openGraph: { images: [{ url: pkg.fb_img }] } }),
     },
-    "/rooms",
+    "/accommodations",
   );
 }
 
 export default async function RoomsPage() {
-  const [pkg, rooms, siteRegulars] = await Promise.all([
+  const [pkg, rooms] = await Promise.all([
     getPackage(ROOMS_PARENT_ID),
     getCategoryItems(ROOMS_PARENT_ID),
-    getSiteRegulars(),
   ]);
-
-  // Prefer the package's dedicated banner; fall back to the first room image.
-  const heroImage =
-    pkg?.banner_img?.[0]?.url ??
-    rooms[0]?.gallery_images?.[0]?.src ??
-    rooms[0]?.gallery_images?.[0] ??
-    siteRegulars?.default ??
-    "";
 
   const schemas = buildPackageSchemas(pkg);
 
@@ -45,23 +37,21 @@ export default async function RoomsPage() {
       {schemas.map((schema, i) => (
         <JsonLd key={i} schema={schema} />
       ))}
-      <Breadcrumb
-        title="Our Rooms"
-        backgroundImage={
-          typeof heroImage === "string" ? heroImage : (heroImage?.src ?? "")
-        }
-        items={[{ label: "Home", href: "/" }, { label: "Rooms" }]}
-      />
-      <div className="max-w-[1400px] mx-auto py-20 px-6 md:px-12 lg:px-24">
-        {pkg?.description && (
-          <div
-            className="luxury-subtitle max-w-3xl mx-auto text-center mb-16"
-            style={{ color: "var(--luxury-muted)" }}
-            dangerouslySetInnerHTML={{ __html: pkg.description }}
-          />
-        )}
-        <RoomsList rooms={rooms} />
-      </div>
+      <BreadcrumbNoBanner title="Accommodations" />
+      <section className="relative overflow-hidden">
+        <GeometricAccent side="left" color="gold" opacity={0.5} />
+        <GeometricAccent side="right" color="gold" opacity={0.5} />
+        <div className="relative max-w-[1400px] mx-auto py-20 px-6 md:px-12 lg:px-24">
+          {pkg?.description && (
+            <div
+              className="luxury-subtitle max-w-3xl mx-auto text-center mb-16"
+              style={{ color: "var(--luxury-muted)" }}
+              dangerouslySetInnerHTML={{ __html: pkg.description }}
+            />
+          )}
+          <RoomsList rooms={rooms} />
+        </div>
+      </section>
     </>
   );
 }

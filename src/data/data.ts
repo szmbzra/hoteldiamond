@@ -227,7 +227,7 @@ export const DINE_DATA = {
   label: "Premium Service",
   title:
     "Offering panoramic views of the majestic Himalayas with our delicious catering service which please your gourmet",
-  link: "/basera-restaurant",
+  link: "/dining",
   linkText: "Explore",
   image: "/images/placeholder-dine.webp",
 };
@@ -506,6 +506,152 @@ export const ROOM_EXCLUDES = [
   "Spa treatments",
 ];
 
+// TODO: temporary static fallback until the CMS exposes a per-room `amenities`
+// field — RoomPage falls back to this only when the CMS item has none.
+export const ROOM_AMENITIES_FALLBACK = [
+  {
+    group_title: "Room Amenities",
+    items: [
+      { title: "Free Wi-Fi" },
+      { title: "Air Conditioning" },
+      { title: "LED Television" },
+      { title: "Attached Bathroom" },
+      { title: "Hot & Cold Water" },
+      { title: "Complimentary Toiletries" },
+      { title: "Daily Housekeeping" },
+      { title: "24-Hour Room Service" },
+      { title: "Wardrobe" },
+      { title: "Study Table" },
+      { title: "Intercom" },
+      { title: "Power Backup" },
+    ],
+  },
+];
+
+// TODO: temporary static fallback shown on /dining and /events until the CMS
+// has real `subpackage` entries under parent_id CATEGORY_IDS.restaurant (7)
+// and CATEGORY_IDS.events (6). Shaped like real subpackage items
+// (gallery_images: {id,src,title}[]) so the listing/detail components don't
+// need to special-case dummy vs. CMS data — swap these out (or just remove
+// them) once real outlets/venues are added in the CMS.
+export const DUMMY_DINING_OUTLETS = [
+  {
+    id: "dummy-diamond-restaurant",
+    slug: "diamond-restaurant",
+    title: "The Diamond Restaurant",
+    sub_title: "All-day multi-cuisine dining with sweeping views over the Manakamana hills.",
+    description:
+      "<p>Our signature restaurant serves a thoughtfully curated menu of Nepali, Indian and continental favourites, from a leisurely breakfast spread to a candlelit dinner. Floor-to-ceiling windows frame the surrounding hills, making every table a room with a view.</p>",
+    gallery_images: [
+      {
+        id: 1,
+        src: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=1600&auto=format&fit=crop",
+        title: "The Diamond Restaurant",
+      },
+    ],
+    amenities: [],
+  },
+  {
+    id: "dummy-sunrise-rooftop-lounge",
+    slug: "sunrise-rooftop-lounge",
+    title: "Sunrise Rooftop Lounge",
+    sub_title: "Craft cocktails and small plates against a Himalayan sunset.",
+    description:
+      "<p>Perched above the property, our rooftop lounge is the place to unwind — hand-crafted cocktails, a curated wine list, and light bites served as the sky turns gold over the hills. Live acoustic sets on select evenings.</p>",
+    gallery_images: [
+      {
+        id: 1,
+        src: "https://images.unsplash.com/photo-1613066697157-e8345495b665?q=80&w=1600&auto=format&fit=crop",
+        title: "Sunrise Rooftop Lounge",
+      },
+    ],
+    amenities: [],
+  },
+  {
+    id: "dummy-garden-cafe",
+    slug: "garden-cafe",
+    title: "Garden Café",
+    sub_title: "A relaxed all-day café for coffee, light bites, and afternoon tea.",
+    description:
+      "<p>Set among the gardens, our café is the easy-going spot for a slow coffee, fresh pastries, or afternoon tea between activities. Open all day, with plenty of shaded outdoor seating.</p>",
+    gallery_images: [
+      {
+        id: 1,
+        src: "https://images.unsplash.com/photo-1504963642567-227b3bbd79de?q=80&w=1600&auto=format&fit=crop",
+        title: "Garden Caf\u00e9",
+      },
+    ],
+    amenities: [],
+  },
+];
+
+export const DUMMY_EVENT_VENUES = [
+  {
+    id: "dummy-grand-ballroom",
+    slug: "grand-ballroom",
+    title: "The Grand Ballroom",
+    sub_title: "An elegant pillar-free hall for weddings, galas, and large conferences.",
+    description:
+      "<p>Our largest event space comfortably hosts weddings, galas and large-scale conferences, with a pillar-free floor plan, a dedicated event team, and full audio-visual support.</p>",
+    gallery_images: [
+      {
+        id: 1,
+        src: "https://images.unsplash.com/photo-1675247488725-22d1b78e75db?q=80&w=1600&auto=format&fit=crop",
+        title: "The Grand Ballroom",
+      },
+    ],
+    amenities: [],
+    size: "2,400 sq.ft",
+    u_shape: "80 Pax",
+    class_room_style: "120 Pax",
+    theater: "220 Pax",
+    round_table: "160 Pax",
+  },
+  {
+    id: "dummy-manakamana-conference-hall",
+    slug: "manakamana-conference-hall",
+    title: "Manakamana Conference Hall",
+    sub_title: "A refined boardroom-style space for meetings and corporate retreats.",
+    description:
+      "<p>A quieter, boardroom-style venue suited to meetings, workshops and corporate retreats, equipped with natural daylight and modern AV equipment.</p>",
+    gallery_images: [
+      {
+        id: 1,
+        src: "https://images.unsplash.com/photo-1505845753232-f74a87b62db6?q=80&w=1600&auto=format&fit=crop",
+        title: "Manakamana Conference Hall",
+      },
+    ],
+    amenities: [],
+    size: "850 sq.ft",
+    u_shape: "30 Pax",
+    class_room_style: "40 Pax",
+    theater: "60 Pax",
+    round_table: "40 Pax",
+  },
+  {
+    id: "dummy-terrace-garden-venue",
+    slug: "terrace-garden-venue",
+    title: "Terrace Garden Venue",
+    sub_title: "An open-air lawn setting for celebrations under the stars.",
+    description:
+      "<p>An open-air lawn framed by the surrounding hills — ideal for receptions, sundowners and celebrations that call for fresh air and a view.</p>",
+    gallery_images: [
+      {
+        id: 1,
+        src: "https://images.unsplash.com/photo-1758403037080-39e759895454?q=80&w=1600&auto=format&fit=crop",
+        title: "Terrace Garden Venue",
+      },
+    ],
+    amenities: [],
+    size: "3,000 sq.ft",
+    u_shape: "—",
+    class_room_style: "—",
+    theater: "300 Pax",
+    round_table: "200 Pax",
+  },
+];
+
+
 export const ROOM_POLICIES = [
   { label: "Check-in", value: "2:00 PM" },
   { label: "Check-out", value: "12:00 PM (noon)" },
@@ -571,7 +717,7 @@ export const menuData = [
   {
     id: "basera-restaurant",
     title: "Restaurant",
-    link: "/restaurant/basera-restaurant",
+    link: "/dining/basera-restaurant",
   },
   {
     id: "service/aila-bar",

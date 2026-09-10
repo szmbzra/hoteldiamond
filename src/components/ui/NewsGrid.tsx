@@ -26,11 +26,11 @@ export default function NewsGrid({ news }: { news: NewsData[] }) {
         {visibleNews.map((item, idx) => (
           <div
             key={idx}
-            className="group cursor-pointer animate-fade-in-up"
+            className="group cursor-pointer animate-fade-in-up bg-(--luxury-cream)"
             style={{ animationDelay: `${(idx % 3) * 0.15}s` }}
           >
             {/* Image */}
-            <div className="relative h-72 md:h-80 overflow-hidden mb-8 luxury-img-zoom">
+            <div className="relative h-72 md:h-80 overflow-hidden  luxury-img-zoom">
               {item.image && (
                 <Image
                   src={item.image}
@@ -45,7 +45,7 @@ export default function NewsGrid({ news }: { news: NewsData[] }) {
             </div>
 
             {/* Content */}
-            <div>
+            <div className="p-6">
               {/* Date */}
               <div className="text-sm italic mb-3 font-light text-gold-text">
                 {item.date}
@@ -60,8 +60,8 @@ export default function NewsGrid({ news }: { news: NewsData[] }) {
               </h4>
 
               {/* Description */}
-              <div 
-                className="line-clamp-3 text-sm font-light leading-relaxed mb-6" 
+              <div
+                className="line-clamp-3 text-sm font-light leading-relaxed mb-6"
                 style={{ color: 'var(--luxury-muted)' }}
                 dangerouslySetInnerHTML={{ __html: item.content }}
               />
@@ -89,7 +89,7 @@ export default function NewsGrid({ news }: { news: NewsData[] }) {
             <div className="w-8 h-px bg-current group-hover:w-12 transition-all duration-500"></div>
           </button>
         )}
-        
+
         {visibleCount > 6 && (
           <button
             onClick={viewLess}

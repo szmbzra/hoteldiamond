@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { FACILITIES_HEADER } from "@/data/data";
 import { getServices } from "@/lib/data";
+import { DecorativeGlow } from "@/components/ui/DecorativeBlobs";
 
 export default async function FacilitiesSection() {
   const header = FACILITIES_HEADER;
@@ -15,7 +16,8 @@ export default async function FacilitiesSection() {
       className="relative overflow-hidden"
       style={{ background: "var(--luxury-ivory)" }}
     >
-      <div className="max-w-[1400px] mx-auto py-20 px-6 md:px-12 lg:px-24">
+      <DecorativeGlow variant="gold-dark" />
+      <div className="relative max-w-[1400px] mx-auto py-20 px-6 md:px-12 lg:px-24">
         {/* Header */}
         <div className="flex flex-col lg:flex-row gap-12 lg:gap-20 mb-16">
           <div className="w-full lg:w-5/12 animate-slide-in-left">

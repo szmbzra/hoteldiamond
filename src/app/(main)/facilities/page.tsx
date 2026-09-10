@@ -1,6 +1,6 @@
-import Breadcrumb from "@/components/ui/Breadcrumb";
+import { BreadcrumbNoBanner } from "@/components/ui/Breadcrumb";
 import PageSchemas from "@/components/seo/PageSchemas";
-import { getPageHeroImage, getServices } from "@/lib/data";
+import { getServices } from "@/lib/data";
 import { buildMetadata } from "@/lib/metadata";
 import { Metadata } from "next";
 import Image from "next/image";
@@ -10,8 +10,6 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function FacilitiesPage() {
-  const backgroundImage = await getPageHeroImage("facilities");
-
   const facilities = await getServices();
   const facilitiesData = Array.isArray(facilities)
     ? facilities.find((item: any) => item.type === 1)
@@ -20,16 +18,21 @@ export default async function FacilitiesPage() {
   return (
     <>
       <PageSchemas slug="facilities" />
-      <Breadcrumb
-        backgroundImage={backgroundImage}
-        title="Facilities"
-        items={[{ label: "Home", href: "/" }, { label: "Facilities" }]}
-      />
+      <BreadcrumbNoBanner title="Facilities" />
 
       <section className="py-24 px-6 md:px-12 bg-[#f9f7f2]">
         <div className="max-w-7xl mx-auto">
+          <p
+            className="luxury-subtitle max-w-2xl mx-auto text-center mb-16"
+            style={{ color: "var(--luxury-muted)" }}
+          >
+            From wellness and recreation to seamless business amenities, every
+            facility at Hotel Diamond Palace is thoughtfully curated to make
+            your stay effortless and memorable.
+          </p>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {facilitiesData?.items?.map((item: any, idx: number) => (
+
               <div
                 key={item.id}
                 className="group bg-white p-8 shadow-[0_4px_15px_rgba(0,0,0,0.02)] hover:shadow-[0_15px_40px_rgba(0,0,0,0.06)] transition-all duration-700 relative overflow-hidden border border-gray-100 flex flex-col items-center text-center animate-fade-in-up"
@@ -37,7 +40,11 @@ export default async function FacilitiesPage() {
               >
                 {/* Icon/Image */}
                 <div className="mb-6 w-14 h-14 flex items-center justify-center transition-all duration-700 group-hover:scale-110">
-                  {item.gallery_images?.[0] ? (
+                  {item.icon ? (
+                    <i
+                      className={`${item.icon} text-4xl text-gold opacity-80 group-hover:opacity-100 transition-opacity`}
+                    />
+                  ) : item.gallery_images?.[0] ? (
                     <Image
                       height={56}
                       width={56}

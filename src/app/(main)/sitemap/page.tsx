@@ -40,11 +40,11 @@ export default async function SitemapPage() {
       return { title: "Guest Reviews", category: "Core Page", icon: "fa-star", color: "bg-emerald-50 text-emerald-700 border-emerald-200" };
     }
 
-    if (pathname === "/rooms") {
-      return { title: "Rooms & Suites", category: "Accommodation", icon: "fa-bed", color: "bg-blue-50 text-blue-700 border-blue-200" };
+    if (pathname === "/accommodations") {
+      return { title: "Accommodations", category: "Accommodation", icon: "fa-bed", color: "bg-blue-50 text-blue-700 border-blue-200" };
     }
-    if (pathname.startsWith("/rooms/")) {
-      const slug = pathname.replace("/rooms/", "");
+    if (pathname.startsWith("/accommodations/")) {
+      const slug = pathname.replace("/accommodations/", "");
       const title = slug.split("-").map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(" ");
       return { title, category: "Accommodation", icon: "fa-bed", color: "bg-blue-50 text-blue-700 border-blue-200" };
     }
@@ -58,11 +58,11 @@ export default async function SitemapPage() {
       return { title, category: "Events", icon: "fa-calendar-days", color: "bg-purple-50 text-purple-700 border-purple-200" };
     }
 
-    if (pathname === "/restaurant") {
+    if (pathname === "/dining") {
       return { title: "Restaurant & Dining", category: "Dining", icon: "fa-utensils", color: "bg-orange-50 text-orange-700 border-orange-200" };
     }
-    if (pathname.startsWith("/restaurant/")) {
-      const slug = pathname.replace("/restaurant/", "");
+    if (pathname.startsWith("/dining/")) {
+      const slug = pathname.replace("/dining/", "");
       const title = slug.split("-").map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(" ");
       return { title, category: "Dining", icon: "fa-utensils", color: "bg-orange-50 text-orange-700 border-orange-200" };
     }
@@ -118,7 +118,7 @@ export default async function SitemapPage() {
             </div>
             <div className="flex flex-wrap gap-2">
               <span className="text-xs bg-emerald-50 text-emerald-700 border border-emerald-200 px-3 py-1 rounded-full font-bold">Core</span>
-              <span className="text-xs bg-blue-50 text-blue-700 border border-blue-200 px-3 py-1 rounded-full font-bold">Rooms</span>
+              <span className="text-xs bg-blue-50 text-blue-700 border border-blue-200 px-3 py-1 rounded-full font-bold">Accommodations</span>
               <span className="text-xs bg-purple-50 text-purple-700 border border-purple-200 px-3 py-1 rounded-full font-bold">Events</span>
               <span className="text-xs bg-orange-50 text-orange-700 border border-orange-200 px-3 py-1 rounded-full font-bold">Dining</span>
               <span className="text-xs bg-amber-50 text-amber-700 border border-amber-200 px-3 py-1 rounded-full font-bold">Blog</span>

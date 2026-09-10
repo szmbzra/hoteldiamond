@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import NotFound from "@/app/not-found";
 import JsonLd from "@/components/seo/JsonLd";
 import OfferDetail from "@/components/offers/OfferDetail";
-import { findOfferBySlug, findSchemaEntryBySlug, getOffers, getSiteRegulars } from "@/lib/data";
+import { findOfferBySlug, getOffers } from "@/lib/data";
 import { buildMetadata } from "@/lib/metadata";
 import { SITE_URL, site } from "@/config/site";
 
@@ -33,13 +33,10 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function OfferDetailPage({ params }: PageProps) {
   const { slug } = await params;
-  const [offer, offersSchema, siteBackground, allOffers] = await Promise.all([
+  const [offer, allOffers] = await Promise.all([
     findOfferBySlug(slug),
-    findSchemaEntryBySlug("offers"),
-    getSiteRegulars(),
     getOffers(),
   ]);
-  const bannerImg = offersSchema?.image || offersSchema?.fb_upload || siteBackground?.default || undefined;
 
   if (!offer) return <NotFound />;
 
@@ -61,7 +58,7 @@ export default async function OfferDetailPage({ params }: PageProps) {
   return (
     <>
       <JsonLd schema={breadcrumbSchema} />
-      <OfferDetail offer={offer} siteBackground={bannerImg} otherOffers={otherOffers} />
+      <OfferDetail offer={offer} otherOffers={otherOffers} />
     </>
   );
 }

@@ -44,18 +44,18 @@ export default async function OfferSection() {
               <Link
                 key={item.id ?? idx}
                 href={`/offers/${item.slug}`}
-                className="group relative flex flex-col overflow-hidden bg-white shadow-[0_4px_20px_rgba(0,0,0,0.06)] hover:shadow-xl transition-all duration-500 animate-fade-in-up"
+                className="group relative flex flex-col overflow-hidden transition-all duration-500 animate-fade-in-up"
                 style={{ animationDelay: `${idx * 0.1}s` }}
               >
                 {/* Image */}
-                <div className="relative h-72 overflow-hidden">
+                <div className="relative h-[500px] overflow-hidden">
                   {imageSrc ? (
                     <Image
                       src={imageSrc}
                       alt={plainTitle || "Offer image"}
                       fill
                       sizes="(max-width: 768px) 100vw, 33vw"
-                      className="object-cover transition-transform duration-700 group-hover:scale-105"
+                      className="object-cover transition-transform duration-700"
                     />
                   ) : (
                     <div className="w-full h-full bg-[#f9f7f2] flex items-center justify-center">
@@ -64,11 +64,11 @@ export default async function OfferSection() {
                       </span>
                     </div>
                   )}
-                  <div className="absolute inset-0 bg-black/25 group-hover:bg-black/10 transition-colors duration-500" />
+                  <div className="absolute inset-0 transition-colors duration-500" />
 
                   {/* Expiry date — top */}
                   {item.end_date && (
-                    <div className="absolute top-4 left-4 inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium tracking-wide bg-white/95 text-gold-text">
+                    <div className="absolute bottom-4 left-2 inline-flex items-center gap-2 px-3 py-1.5 text-xs font-medium tracking-wide bg-white/95 text-gold-text">
                       <CalendarDays className="w-3.5 h-3.5" />
                       Expires {item.end_date}
                     </div>
@@ -76,16 +76,11 @@ export default async function OfferSection() {
                 </div>
 
                 {/* Offer name — bottom */}
-                <div className="p-6 flex-grow flex flex-col justify-between bg-white">
+                <div className="pt-3  flex-grow flex flex-col justify-between">
                   <h3
-                    className="text-lg md:text-xl font-light tracking-wide line-clamp-2 mb-4"
-                    style={{ color: "var(--luxury-charcoal)" }}
-                    dangerouslySetInnerHTML={{ __html: item.title || "" }}
-                  />
-                  <span className="inline-flex items-center gap-2 text-xs font-medium uppercase tracking-wider text-gold-text w-fit">
-                    View Details
-                    <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                  </span>
+                    className="text-lg md:text-xl font-light tracking-wide line-clamp-2 mb-4">
+                      {item?.title}
+                      </h3>
                 </div>
               </Link>
             );

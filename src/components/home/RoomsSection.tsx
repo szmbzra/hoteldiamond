@@ -94,7 +94,7 @@ export default function RoomsSection({
           </div>
 
           <Link
-            href="/rooms"
+            href="/accommodations"
             className="hidden md:inline-flex items-center gap-2 text-xs uppercase tracking-[0.25em] text-white/90 hover:text-gold transition-colors group shrink-0"
           >
             View All Rooms
@@ -201,12 +201,12 @@ export default function RoomsSection({
             )}
 
             <div className="flex flex-col sm:flex-row sm:items-center gap-5">
-              <Link href={`/rooms/${activeRoom.slug}`} className="luxury-btn group w-fit">
+              <Link href={`/accommodations/${activeRoom.slug}`} className="luxury-btn group w-fit">
                 Explore Room
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
               </Link>
               <Link
-                href="/rooms"
+                href="/accommodations"
                 className="md:hidden inline-flex items-center gap-2 text-xs uppercase tracking-[0.25em] text-white/50 hover:text-gold transition-colors w-fit"
               >
                 View All Rooms

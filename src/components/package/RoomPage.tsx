@@ -1,68 +1,91 @@
 "use client";
 
 import { Check, X, Phone } from "lucide-react";
-import BookingWidget from "@/components/ui/BookingWidget";
 import FaqAccordion from "@/components/faq/FaqAccordion";
-import PackageHero from "./sections/PackageHero";
-import PackageIntro from "./sections/PackageIntro";
+import ImageSlider from "@/components/ui/ImageSlider";
 import AmenitiesGrid from "./sections/AmenitiesGrid";
+import RoomBookingCard from "./sections/RoomBookingCard";
 import { contact } from "@/config/site";
+import { normalizeFaqs } from "@/lib/faq";
+import { ROOM_AMENITIES_FALLBACK } from "@/data/data";
+import { DecorativeGlow, DecorativeAccent } from "@/components/ui/DecorativeBlobs";
 
 export default function RoomPage({ pkg }: { pkg: any }) {
   if (!pkg) return null;
 
   const {
     title,
+    sub_title,
     gallery_images = [],
     description,
     content_0,
     content_1,
-    amenities = [],
+    amenities: cmsAmenities = [],
     includes = [],
     excludes = [],
     faq = [],
     faq_schema = [],
     book_url,
+    price,
+    currency,
+    occupancy,
+    rooms_Size,
   } = pkg;
 
   const tourUrl = pkg.tour_url as string | undefined;
-
-  // Safely parse FAQs in case they are stringified JSON
-  const parseFaqs = (data: any) => {
-    if (typeof data === "string") {
-      try {
-        return JSON.parse(data);
-      } catch {
-        return [];
-      }
-    }
-    return Array.isArray(data) ? data : [];
-  };
-
-  const parsedFaq = parseFaqs(faq);
-  const parsedFaqSchema = parseFaqs(faq_schema);
-  const rawFaqs = parsedFaq.length > 0 ? parsedFaq : parsedFaqSchema;
-
-  const faqs = rawFaqs.map((f: any) => ({
-    question: f.q ?? f.question ?? "",
-    answer: f.a ?? f.answer ?? "",
-  }));
+  const faqs = normalizeFaqs(faq, faq_schema);
+  const amenities = cmsAmenities.length > 0 ? cmsAmenities : ROOM_AMENITIES_FALLBACK;
 
   return (
     <div style={{ background: "var(--luxury-ivory)" }}>
-      <PackageHero
-        title={title}
-        images={gallery_images}
-        label="Accommodation"
-        breadcrumbHref="/rooms"
-        breadcrumbLabel="Rooms"
-      />
+      {/* ── OVERVIEW + BOOKING ───────────────────────────────────── */}
+      <section className="relative max-w-[1400px] mx-auto pt-14 pb-20 px-6 md:px-12 lg:px-24">
+        <DecorativeAccent color="gold" corner="top-left" size={420} />
+        <div className="relative grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-16">
+          <div className="order-first lg:order-last lg:col-span-1">
+            <div className="lg:sticky lg:top-28">
+              <RoomBookingCard
+                price={price}
+                currency={currency}
+                occupancy={occupancy}
+                roomSize={rooms_Size}
+                bookUrl={book_url}
+              />
+            </div>
+          </div>
 
-      <PackageIntro
-        label="Accommodation"
-        title={title}
-        description={description}
-      />
+          <div className="order-last lg:order-first lg:col-span-2">
+            {gallery_images.length > 0 && (
+              <div className="relative rounded-2xl overflow-hidden shadow-2xl shadow-black/10 mb-10">
+                <ImageSlider images={gallery_images} title={title} overlayClassName="bg-black/0" showArrows />
+              </div>
+            )}
+
+            <h1
+              className="luxury-section-title mb-6"
+              style={{ color: "var(--luxury-charcoal)" }}
+            >
+              {title}
+            </h1>
+            <div className="luxury-divider mb-8" />
+            {sub_title && (
+              <p
+                className="text-xl md:text-2xl font-light leading-relaxed mb-8"
+                style={{ color: "var(--luxury-charcoal)" }}
+              >
+                {sub_title}
+              </p>
+            )}
+            {description && (
+              <div
+                className="cms-content luxury-subtitle"
+                style={{ color: "var(--luxury-muted)" }}
+                dangerouslySetInnerHTML={{ __html: description }}
+              />
+            )}
+          </div>
+        </div>
+      </section>
 
       <AmenitiesGrid amenities={amenities} />
 
@@ -99,8 +122,10 @@ export default function RoomPage({ pkg }: { pkg: any }) {
       {/* ── INCLUDES / EXCLUDES ──────────────────────────────────── */}
       {(includes.length > 0 || excludes.length > 0) && (
         <section
-          className="max-w-[1400px] mx-auto py-20 px-6 md:px-12 lg:px-24"
+          className="relative overflow-hidden max-w-[1400px] mx-auto py-20 px-6 md:px-12 lg:px-24"
         >
+          <DecorativeGlow variant="gold-dark" />
+          <div className="relative">
           <h3
             className="text-2xl font-light tracking-wide uppercase mb-2"
             style={{ color: "var(--luxury-charcoal)" }}
@@ -169,10 +194,12 @@ export default function RoomPage({ pkg }: { pkg: any }) {
               </div>
             )}
           </div>
+          </div>
         </section>
       )}
 
       {/* ── ROOM POLICIES & ADDITIONAL CONTENT ────────────────────── */}
+      {(content_0 || content_1) && (
       <section className="max-w-[1400px] mx-auto mb-8 py-20 px-6 md:px-12 lg:px-24" style={{ background: "var(--luxury-cream)" }}>
         {content_0 && (
           <div
@@ -180,38 +207,16 @@ export default function RoomPage({ pkg }: { pkg: any }) {
           />
         )}
         {content_1 && <div dangerouslySetInnerHTML={{ __html: content_1 }} />}
-        {/* <div
-          className="max-w-[1400px] mx-auto py-20 px-6 md:px-12 lg:px-24"
-        >
-          <h3 className="text-2xl font-light tracking-wide uppercase mb-2" style={{ color: "var(--luxury-charcoal)" }}>
-            Room Policies
-          </h3>
-          <div className="w-12 h-px mb-10" style={{ background: "var(--luxury-gold)" }} />
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {ROOM_POLICIES.map((policy, i) => (
-              <div
-                key={i}
-                className="p-6 rounded-xl"
-                style={{ background: "var(--luxury-ivory)", border: "1px solid var(--luxury-border)" }}
-              >
-                <p className="text-[10px] uppercase tracking-[0.2em] mb-2 text-gold-text">
-                  {policy.label}
-                </p>
-                <p className="text-sm leading-relaxed" style={{ color: "var(--luxury-charcoal)" }}>
-                  {policy.value}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div> */}
       </section>
+      )}
 
       {/* ── FAQS ─────────────────────────────────────────────────── */}
       {faqs.length > 0 && (
         <section
-          className="max-w-[1400px] mx-auto py-20 px-6 md:px-12 lg:px-24"
+          className="relative overflow-hidden max-w-[1400px] mx-auto py-20 px-6 md:px-12 lg:px-24"
         >
-          <div className="max-w-3xl mx-auto">
+          <DecorativeGlow variant="dark-gold" />
+          <div className="relative max-w-3xl mx-auto">
             <h3
               className="text-2xl font-light tracking-wide uppercase mb-2"
               style={{ color: "var(--luxury-charcoal)" }}
@@ -227,58 +232,40 @@ export default function RoomPage({ pkg }: { pkg: any }) {
         </section>
       )}
 
-      {/* ── BOOKING CTA ──────────────────────────────────────────── */}
+      {/* ── CLOSING CTA ──────────────────────────────────────────── */}
       <section
-        className="relative min-h-[600px] flex items-center py-20 bg-fixed bg-cover bg-center"
+        className="relative min-h-[420px] flex items-center py-20 bg-fixed bg-cover bg-center"
         style={{
           backgroundImage: "url(/bgimg.jpg)",
         }}
       >
         <div className="absolute inset-0 bg-black/40 backdrop-blur-[2px]" />
-        <div
-          className="relative z-10 max-w-[1400px] mx-auto w-full px-6 md:px-12 lg:px-24"
-        >
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <div className="text-white space-y-8">
-              <p
-                className="luxury-label"
-                style={{ color: "var(--luxury-gold)" }}
-              >
-                Reserve Your Stay
-              </p>
-              <p className="text-2xl md:text-3xl font-light leading-relaxed max-w-xl">
-                Each room features a private bath, Wi-Fi, LED television and
-                complimentary full breakfast.
-              </p>
-              <div className="flex items-center gap-6 group">
-                <div
-                  className="w-16 h-16 rounded-full border border-white/30 flex items-center justify-center transition-all group-hover:border-[var(--luxury-gold)]"
-                  style={{ color: "var(--luxury-gold)" }}
-                >
-                  <Phone size={22} />
-                </div>
-                <div>
-                  <p className="text-xs uppercase tracking-[0.2em] text-white/50 mb-1">
-                    Call to Reserve
-                  </p>
-                  <a
-                    href={`tel:${contact.phoneE164}`}
-                    className="text-2xl md:text-3xl font-light tracking-wider hover:opacity-80 transition-opacity"
-                  >
-                    {contact.phone}
-                  </a>
-                </div>
-              </div>
-            </div>
-            <div className="flex justify-center lg:justify-end">
-              <div
-                className="p-10 md:p-14 w-full max-w-[500px] shadow-2xl"
-                style={{ background: "var(--luxury-cream)" }}
-              >
-                <BookingWidget bookUrl={book_url} />
-              </div>
-            </div>
-          </div>
+        <div className="relative z-10 max-w-[1400px] mx-auto w-full px-6 md:px-12 lg:px-24 text-center text-white">
+          <p className="luxury-label mb-4" style={{ color: "var(--luxury-gold)" }}>
+            Reserve Your Stay
+          </p>
+          <p className="text-2xl md:text-3xl font-light leading-relaxed max-w-2xl mx-auto mb-10">
+            Speak with our reservations team to secure the {title}.
+          </p>
+          <a
+            href={`tel:${contact.phoneE164}`}
+            className="inline-flex items-center gap-6 group"
+          >
+            <span
+              className="w-16 h-16 rounded-full border border-white/30 flex items-center justify-center transition-all group-hover:border-[var(--luxury-gold)]"
+              style={{ color: "var(--luxury-gold)" }}
+            >
+              <Phone size={22} />
+            </span>
+            <span className="text-left">
+              <span className="block text-xs uppercase tracking-[0.2em] text-white/50 mb-1">
+                Call to Reserve
+              </span>
+              <span className="block text-2xl md:text-3xl font-light tracking-wider hover:opacity-80 transition-opacity">
+                {contact.phone}
+              </span>
+            </span>
+          </a>
         </div>
       </section>
     </div>

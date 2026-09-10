@@ -6,6 +6,7 @@ import Link from "next/link";
 import { Menu } from "lucide-react";
 import Sidebar from "./Sidebar";
 import { links } from "@/config/site";
+import { usePathname } from "next/navigation";
 import { NavItem } from "@/types";
 interface NavbarClientProps {
   menu: NavItem[];
@@ -15,6 +16,8 @@ interface NavbarClientProps {
 export default function NavbarClient({ menu, logoUrl }: NavbarClientProps) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+const pathname = usePathname();
+
 
 
   useEffect(() => {
@@ -27,8 +30,8 @@ export default function NavbarClient({ menu, logoUrl }: NavbarClientProps) {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-[70] transition-all duration-300 ${
-        isScrolled ? "bg-(--luxury-cream) shadow-md py-2" : "bg-transparent py-4"
+      className={` ${pathname == "/" ? " fixed" : ""} top-0 left-0 right-0 z-[70] transition-all duration-300 ${
+        isScrolled ? "bg-(--luxury-cream) shadow-md py-2 fixed" : "bg-transparent py-4"
       }`}
     >
       <div className="container mx-auto px-4">
@@ -61,7 +64,9 @@ export default function NavbarClient({ menu, logoUrl }: NavbarClientProps) {
               href={links.booking}
               target="_blank"
               tabIndex={isSidebarOpen ? -1 : 0}
-              className={`luxury-btn luxury-btn-book text-[10px] text-luxury-dark  ${ isScrolled ? " text-black! border-black!" : ""}`}
+              className={` ${pathname !== "/" ? " text-black! border-black!" : ""} luxury-btn luxury-btn-book text-[10px] text-luxury-dark  ${
+
+                isScrolled ? " text-black! border-black!" : ""}`}
             >
               Book Now
             </Link>
@@ -74,7 +79,7 @@ export default function NavbarClient({ menu, logoUrl }: NavbarClientProps) {
               aria-controls="sidebar-menu"
               tabIndex={isSidebarOpen ? -1 : 0}
             >
-              <Menu className={`w-6 h-6  ${ isScrolled ? "text-black" : "text-white"}`} />
+              <Menu className={` ${pathname !== "/" ? " text-black! border-black!" : ""} w-6 h-6  ${ isScrolled ? "text-black" : "text-white"}`} />
             </button>
           </div>
         </div>

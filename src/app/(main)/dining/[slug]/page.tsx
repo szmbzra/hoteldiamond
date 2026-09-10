@@ -3,32 +3,32 @@ import { notFound } from "next/navigation";
 import { findCategoryItem, getSiteRegulars } from "@/lib/data";
 import { buildMetadata } from "@/lib/metadata";
 import { resolveHeroImages } from "@/lib/images";
-import EventsPage from "@/components/events/EventsPage";
+import DiningPage from "@/components/restaurant/DiningPage";
 import JsonLd from "@/components/seo/JsonLd";
 import { CATEGORY_IDS, SITE_URL, site, contact } from "@/config/site";
-import { DUMMY_EVENT_VENUES } from "@/data/data";
+import { DUMMY_DINING_OUTLETS } from "@/data/data";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
 }
 
-async function findEventBySlug(slug: string): Promise<any | null> {
-  const real = await findCategoryItem(CATEGORY_IDS.events, slug);
+async function findRestaurantBySlug(slug: string): Promise<any | null> {
+  const real = await findCategoryItem(CATEGORY_IDS.restaurant, slug);
   if (real) return real;
-  // Falls back to the same dummy venues shown on /events until the CMS has
-  // real `subpackage` entries under CATEGORY_IDS.events.
-  return DUMMY_EVENT_VENUES.find((v) => v.slug === slug) ?? null;
+  // Falls back to the same dummy outlets shown on /dining until the CMS has
+  // real `subpackage` entries under CATEGORY_IDS.restaurant.
+  return DUMMY_DINING_OUTLETS.find((o) => o.slug === slug) ?? null;
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
-  const item = await findEventBySlug(slug);
-  if (!item) return { title: "Venue Not Found" };
+  const item = await findRestaurantBySlug(slug);
+  if (!item) return { title: "Restaurant Not Found" };
 
   const ogImage = resolveHeroImages(item)[0] ?? "";
 
   return buildMetadata(
-    "events",
+    "restaurant",
     {
       title: `${item.meta_title || item.title} | ${site.shortName}`,
       description: item.meta_description ?? item.sub_title ?? undefined,
@@ -39,27 +39,27 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
         ...(ogImage && { images: [{ url: ogImage }] }),
       },
     },
-    `/events/${slug}`,
+    `/dining/${slug}`,
   );
 }
 
-export default async function EventDetailPage({ params }: PageProps) {
+export default async function RestaurantDetailPage({ params }: PageProps) {
   const { slug } = await params;
 
   const [item, siteRegulars] = await Promise.all([
-    findEventBySlug(slug),
+    findRestaurantBySlug(slug),
     getSiteRegulars(),
   ]);
 
   if (!item) notFound();
 
   const heroUrls = resolveHeroImages(item, item.fb_img ?? siteRegulars?.default ?? "");
-  const whatsapp: string =
-    siteRegulars?.whatsapp_a ?? siteRegulars?.contact_info ?? contact.whatsapp;
+  const phone: string =
+    siteRegulars?.whatsapp_a ?? siteRegulars?.contact_info ?? contact.phone;
 
-  // EventsPage expects `banner_img: {id,url,alt}[]`, while subpackage items
-  // (and the dummy fallback) carry `gallery_images` — adapt here so
-  // EventsPage itself doesn't need to know which shape it's getting.
+  // DiningPage expects `banner_img: {id,url,alt}[]`, while subpackage items
+  // (and the dummy fallback) carry `gallery_images` — adapt here so DiningPage
+  // itself doesn't need to know which shape it's getting.
   const pkg = {
     ...item,
     description: item.description ?? item.content_0 ?? item.content,
@@ -72,15 +72,15 @@ export default async function EventDetailPage({ params }: PageProps) {
     "@type": "BreadcrumbList",
     itemListElement: [
       { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
-      { "@type": "ListItem", position: 2, name: "Meeting & Events", item: `${SITE_URL}/events` },
-      { "@type": "ListItem", position: 3, name: item.title ?? slug, item: `${SITE_URL}/events/${slug}` },
+      { "@type": "ListItem", position: 2, name: "Dining & Bar", item: `${SITE_URL}/dining` },
+      { "@type": "ListItem", position: 3, name: item.title ?? slug, item: `${SITE_URL}/dining/${slug}` },
     ],
   };
 
   return (
     <>
       <JsonLd schema={breadcrumbSchema} />
-      <EventsPage pkg={pkg} whatsapp={whatsapp} />
+      <DiningPage pkg={pkg} phone={phone} />
     </>
   );
 }

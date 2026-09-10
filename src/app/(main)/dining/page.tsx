@@ -3,40 +3,40 @@ import { findPackageBySlug, getCategoryItems } from "@/lib/data";
 import { buildMetadata, buildPackageSchemas } from "@/lib/metadata";
 import { BreadcrumbNoBanner } from "@/components/ui/Breadcrumb";
 import JsonLd from "@/components/seo/JsonLd";
-import EventsList from "@/components/events/EventsList";
+import RestaurantList from "@/components/restaurant/RestaurantList";
 import { GeometricAccent } from "@/components/ui/GeometricAccents";
 import { CATEGORY_IDS } from "@/config/site";
-import { DUMMY_EVENT_VENUES } from "@/data/data";
+import { DUMMY_DINING_OUTLETS } from "@/data/data";
 
-// CMS `package` record (slug "meeting-events", type "0") supplies the
-// listing's own title/intro copy/meta; individual venues come from
-// `subpackage` under CATEGORY_IDS.events — falls back to DUMMY_EVENT_VENUES
-// until the CMS has real entries there.
-async function getEventsPackage() {
-  return findPackageBySlug("meeting-events", "0");
+// CMS `package` record (slug "dining", type "0") supplies the listing's own
+// title/intro copy/meta; individual outlets come from `subpackage` under
+// CATEGORY_IDS.restaurant — falls back to DUMMY_DINING_OUTLETS until the CMS
+// has real entries there.
+async function getDiningPackage() {
+  return findPackageBySlug("dining", "0");
 }
 
 export async function generateMetadata(): Promise<Metadata> {
-  const pkg = await getEventsPackage();
+  const pkg = await getDiningPackage();
   return buildMetadata(
-    "events",
+    "restaurant",
     {
       ...(pkg?.meta_title && { title: pkg.meta_title }),
       ...(pkg?.meta_description && { description: pkg.meta_description }),
       ...(pkg?.meta_keywords && { keywords: pkg.meta_keywords }),
       ...(pkg?.fb_img && { openGraph: { images: [{ url: pkg.fb_img }] } }),
     },
-    "/events",
+    "/dining",
   );
 }
 
-export default async function EventsRoute() {
+export default async function DiningRoute() {
   const [pkg, items] = await Promise.all([
-    getEventsPackage(),
-    getCategoryItems(CATEGORY_IDS.events),
+    getDiningPackage(),
+    getCategoryItems(CATEGORY_IDS.restaurant),
   ]);
 
-  const venues = items.length > 0 ? items : DUMMY_EVENT_VENUES;
+  const outlets = items.length > 0 ? items : DUMMY_DINING_OUTLETS;
   const schemas = buildPackageSchemas(pkg);
 
   return (
@@ -44,11 +44,11 @@ export default async function EventsRoute() {
       {schemas.map((schema, i) => (
         <JsonLd key={i} schema={schema} />
       ))}
-      <BreadcrumbNoBanner title={pkg?.title || "Meeting & Events"} />
+      <BreadcrumbNoBanner title={pkg?.title || "Dining & Bar"} />
 
       <section className="relative overflow-hidden py-24 px-6 md:px-12 bg-[#f9f7f2]">
-        <GeometricAccent side="left" color="dark" opacity={0.5} />
-        <GeometricAccent side="right" color="dark" opacity={0.5} />
+        <GeometricAccent side="left" color="gold" opacity={0.5} />
+        <GeometricAccent side="right" color="gold" opacity={0.5} />
         <div className="relative max-w-7xl mx-auto">
           {pkg?.description ? (
             <div
@@ -61,12 +61,12 @@ export default async function EventsRoute() {
               className="luxury-subtitle max-w-2xl mx-auto text-center mb-16"
               style={{ color: "var(--luxury-muted)" }}
             >
-              From an intimate boardroom to a pillar-free ballroom and an
-              open-air lawn — find the right setting for your meeting,
-              conference or celebration.
+              From an elegant multi-cuisine restaurant to a rooftop lounge and
+              a relaxed garden café — every outlet at Hotel Diamond Palace is
+              built around a great view and an easy pace.
             </p>
           )}
-          <EventsList events={venues} />
+          <RestaurantList outlets={outlets} />
         </div>
       </section>
     </>

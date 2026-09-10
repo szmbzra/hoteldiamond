@@ -78,26 +78,43 @@ export default function Sidebar({ isOpen, onClose, menu }: SidebarProps) {
                   const isSubmenuActive =
                     isActive || item.subLinks.some((sub) => pathname === sub.link || (sub.link !== "/" && pathname.startsWith(sub.link)));
                   const isDropdownOpen = openDropdown === item.title;
+                  const submenuId = `submenu-${item.id}`;
                   return (
                     <div key={item.id} className="mb-1">
-                      <button
-                        onClick={() => toggleDropdown(item.title)}
-                        aria-expanded={isDropdownOpen}
-                        className={`group w-full flex items-center justify-between py-3.5 text-sm uppercase tracking-[0.2em] font-medium transition-colors duration-300 ${
+                      {/* Split row: the label navigates to the listing page, the arrow toggles the submenu */}
+                      <div
+                        className={`group flex items-center justify-between py-3.5 text-sm uppercase tracking-[0.2em] font-medium transition-colors duration-300 ${
                           isSubmenuActive ? "text-blue" : "text-blue/70 hover:text-blue"
                         }`}
                       >
-                        <span className="relative inline-block">
-                          {item.title}
-                          <FadeUnderline active={isSubmenuActive} />
-                        </span>
-                        <ChevronDown
-                          className={` hover:cursor-pointer w-4 h-4 text-blue/50 transition-transform duration-300 ${
-                            isDropdownOpen ? "rotate-180 text-blue" : ""
-                          }`}
-                        />
-                      </button>
+                        <NavLink
+                          href={item.link}
+                          linktype={item.linktype}
+                          onClick={onClose}
+                          className="flex-1"
+                        >
+                          <span className="relative inline-block">
+                            {item.title}
+                            <FadeUnderline active={isSubmenuActive} />
+                          </span>
+                        </NavLink>
+                        <button
+                          type="button"
+                          onClick={() => toggleDropdown(item.title)}
+                          aria-expanded={isDropdownOpen}
+                          aria-controls={submenuId}
+                          aria-label={`${isDropdownOpen ? "Collapse" : "Expand"} ${item.title} submenu`}
+                          className="p-2 -m-2 hover:cursor-pointer"
+                        >
+                          <ChevronDown
+                            className={`w-4 h-4 text-blue/50 transition-transform duration-300 ${
+                              isDropdownOpen ? "rotate-180 text-blue" : ""
+                            }`}
+                          />
+                        </button>
+                      </div>
                       <div
+                        id={submenuId}
                         className={`grid overflow-hidden transition-all duration-300 ease-in-out ${
                           isDropdownOpen ? "grid-rows-[1fr] opacity-100 pb-4" : "grid-rows-[0fr] opacity-0"
                         }`}

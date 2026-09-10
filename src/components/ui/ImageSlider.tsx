@@ -1,7 +1,10 @@
 'use client';
 
+import { useRef } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination, EffectFade } from 'swiper/modules';
+import type { Swiper as SwiperType } from 'swiper';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 // Import Swiper styles
 import 'swiper/css';
@@ -14,6 +17,7 @@ interface ImageSliderProps {
   title?: string;
   fullHeight?: boolean;
   overlayClassName?: string;
+  showArrows?: boolean;
 }
 
 export default function ImageSlider({
@@ -21,7 +25,10 @@ export default function ImageSlider({
   title = '',
   fullHeight = false,
   overlayClassName = 'bg-black/10',
+  showArrows = false,
 }: ImageSliderProps) {
+  const swiperRef = useRef<SwiperType | null>(null);
+
   if (!images.length) return null;
 
   return (
@@ -41,6 +48,7 @@ export default function ImageSlider({
           bulletActiveClass: 'custom-bullet-active',
         }}
         loop={images.length > 1}
+        onSwiper={(swiper) => { swiperRef.current = swiper; }}
         className="h-full w-full"
       >
         {images.map((img, i) => {
@@ -71,6 +79,27 @@ export default function ImageSlider({
         {/* Custom Pagination Dots - Bottom Right */}
         <div className="custom-pagination absolute bottom-10 right-10 flex pr-20 pb-5 justify-end gap-3 z-30 pointer-events-auto"></div>
       </Swiper>
+
+      {showArrows && images.length > 1 && (
+        <>
+          <button
+            type="button"
+            onClick={() => swiperRef.current?.slidePrev()}
+            aria-label="Previous image"
+            className="absolute z-30 left-4 top-1/2 -translate-y-1/2 hover:cursor-pointer w-10 h-10 rounded-full flex items-center justify-center bg-black/30 border border-white/15 backdrop-blur-md text-white hover:bg-black/50 hover:border-gold/50 transition-colors"
+          >
+            <ChevronLeft className="w-5 h-5" />
+          </button>
+          <button
+            type="button"
+            onClick={() => swiperRef.current?.slideNext()}
+            aria-label="Next image"
+            className="absolute z-30 right-4 top-1/2 -translate-y-1/2 hover:cursor-pointer w-10 h-10 rounded-full flex items-center justify-center bg-black/30 border border-white/15 backdrop-blur-md text-white hover:bg-black/50 hover:border-gold/50 transition-colors"
+          >
+            <ChevronRight className="w-5 h-5" />
+          </button>
+        </>
+      )}
     </div>
   );
 }

@@ -84,10 +84,10 @@ export default function ContactFrom() {
 
   return (
     <>
-      <div className="max-w-5xl px-6 md:px-12 bg-white">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl font-light mb-4">Send Us a Message</h2>
-          <div className="h-px w-16 bg-gold mx-auto"></div>
+      <div className="max-w-5xl px-6 md:px-12 max-w-5xl px-6 md:px-12">
+        <div className="mb-10">
+          <h2 className="text-3xl uppercase mb-4">Send Us a Message</h2>
+          <div className="h-px w-16 bg-gold"></div>
         </div>
         {submitSuccess ? (
           <div
@@ -232,7 +232,7 @@ export default function ContactFrom() {
               <p className="text-red-500 text-sm font-medium">{submitError}</p>
             )}
 
-            <div className="flex justify-center mt-8">
+            <div className="flex  mt-8">
               <button
                 type="submit"
                 disabled={isSubmitting}
