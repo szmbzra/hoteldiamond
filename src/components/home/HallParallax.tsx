@@ -23,7 +23,7 @@ export default function HallParallax() {
   return (
     <section
       className="relative bg-fixed bg-cover bg-center bg-no-repeat lg:mt-20"
-      style={{ backgroundImage: "url('/hall.jpeg')" }}
+      style={{ backgroundImage: "url('/hall.jpg')" }}
     >
       {/* Dark overlay for text legibility */}
       <div className="absolute inset-0 bg-black/60" aria-hidden="true" />

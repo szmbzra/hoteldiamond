@@ -34,6 +34,7 @@ const securityHeaders = [
 const nextConfig: NextConfig = {
   // Drop the "X-Powered-By: Next.js" fingerprint.
   poweredByHeader: false,
+ allowedDevOrigins: ['192.168.18.53'],
   images: {
     // Serve modern formats — browsers that support AVIF/WebP get ~50% smaller files
     formats: ["image/avif", "image/webp"],
