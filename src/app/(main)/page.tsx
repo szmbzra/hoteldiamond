@@ -48,6 +48,7 @@ export default async function Home() {
       <HeroVideo />
       <AboutSection />
       <RoomsSection rooms={rooms} packageTitle={packageData?.title} />
+      {/* <FacilitiesSection /> */}
       {/* <DineBanner /> */}
       <HomeGallery />
       <HallParallax />
@@ -56,7 +57,7 @@ export default async function Home() {
       <NearbyLandmarks />
       <OfferSection />
       <Testimonials testimonials={testimonials} />
-      <LatestNews />    {/* blog */}
+      {/* <LatestNews /> */}
       <PartnerSlider items={socialLinks?.items}/>
     </main>
   );
