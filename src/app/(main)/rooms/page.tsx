@@ -4,9 +4,10 @@ import { buildMetadata, buildPackageSchemas } from "@/lib/metadata";
 import Breadcrumb from "@/components/ui/Breadcrumb";
 import JsonLd from "@/components/seo/JsonLd";
 import RoomsList from "@/components/rooms/RoomsList";
+import { CATEGORY_IDS } from "@/config/site";
 
 // CMS `package`/`subpackage` parent_id for the Rooms & Suites category.
-const ROOMS_PARENT_ID = "5";
+const ROOMS_PARENT_ID = CATEGORY_IDS.rooms;
 
 export async function generateMetadata(): Promise<Metadata> {
   const pkg = await getPackage(ROOMS_PARENT_ID);

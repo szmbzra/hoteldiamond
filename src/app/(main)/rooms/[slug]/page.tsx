@@ -5,14 +5,14 @@ import NotFound from "@/app/not-found";
 import { findCategoryItem, getSiteRegulars } from "@/lib/data";
 import { buildMetadata } from "@/lib/metadata";
 import { toImageUrls, resolveHeroImages } from "@/lib/images";
-import { SITE_URL, site, business } from "@/config/site";
+import { SITE_URL, site, business, CATEGORY_IDS } from "@/config/site";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
 }
 
 // CMS `subpackage` parent_id for the Rooms & Suites category.
-const ROOMS_PARENT_ID = "5";
+const ROOMS_PARENT_ID = CATEGORY_IDS.rooms;
 
 function findRoomBySlug(slug: string): Promise<any | null> {
   return findCategoryItem(ROOMS_PARENT_ID, slug);

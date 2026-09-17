@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { useState } from "react";
 import Link from "next/link";
@@ -26,11 +26,11 @@ export default function NewsGrid({ news }: { news: NewsData[] }) {
         {visibleNews.map((item, idx) => (
           <div
             key={idx}
-            className="group cursor-pointer animate-fade-in-up"
+            className="group cursor-pointer animate-fade-in-up bg-(--luxury-cream)"
             style={{ animationDelay: `${(idx % 3) * 0.15}s` }}
           >
             {/* Image */}
-            <div className="relative h-72 md:h-80 overflow-hidden mb-8 luxury-img-zoom">
+            <div className="relative h-72 md:h-80 overflow-hidden  luxury-img-zoom">
               {item.image && (
                 <Image
                   src={item.image}
@@ -45,24 +45,29 @@ export default function NewsGrid({ news }: { news: NewsData[] }) {
             </div>
 
             {/* Content */}
-            <div>
+            <div className="p-6">
               {/* Date */}
               <div className="text-sm italic mb-3 font-light text-gold-text">
                 {item.date}
               </div>
 
               {/* Title */}
-              <h4 className="text-xl md:text-2xl font-light tracking-tight mb-3 transition-colors duration-300"
-                  style={{ color: 'var(--luxury-charcoal)' }}>
-                <Link href={`/blog/${item.slug}`} className="group-hover:opacity-70 transition-opacity">
+              <h4
+                className="text-xl mb-3 transition-colors duration-300"
+                style={{ color: "var(--luxury-charcoal)" }}
+              >
+                <Link
+                  href={`/blog/${item.slug}`}
+                  className="group-hover:opacity-70 transition-opacity"
+                >
                   {item.title}
                 </Link>
               </h4>
 
               {/* Description */}
-              <div 
-                className="line-clamp-3 text-sm font-light leading-relaxed mb-6" 
-                style={{ color: 'var(--luxury-muted)' }}
+              <div
+                className="line-clamp-3 text-sm font-light leading-relaxed mb-6"
+                style={{ color: "var(--luxury-muted)" }}
                 dangerouslySetInnerHTML={{ __html: item.content }}
               />
 
@@ -72,7 +77,10 @@ export default function NewsGrid({ news }: { news: NewsData[] }) {
                 className="inline-flex items-center gap-2 text-xs tracking-[0.2em] uppercase font-medium transition-all duration-300 text-gold-text"
               >
                 Read More
-                <ArrowRight size={16} className="transition-transform duration-300 group-hover:translate-x-2" />
+                <ArrowRight
+                  size={16}
+                  className="transition-transform duration-300 group-hover:translate-x-2"
+                />
               </Link>
             </div>
           </div>
@@ -89,7 +97,7 @@ export default function NewsGrid({ news }: { news: NewsData[] }) {
             <div className="w-8 h-px bg-current group-hover:w-12 transition-all duration-500"></div>
           </button>
         )}
-        
+
         {visibleCount > 6 && (
           <button
             onClick={viewLess}

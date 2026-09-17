@@ -15,6 +15,10 @@ export interface BreadcrumbProps {
   items: BreadcrumbItem[];
   backgroundImage?: string;
 }
+export interface BreadcrumbNoBanner {
+  title: string;
+  sub_title?: string;
+}
 
 export default function Breadcrumb({
   title,
@@ -64,7 +68,10 @@ export default function Breadcrumb({
 
         {/* Decorative Divider */}
         <div className="flex flex-col items-center justify-center">
-          <div className="w-16 h-px mb-6" style={{ background: "var(--luxury-gold, #e3c9a1)" }}></div>
+          <div
+            className="w-16 h-px mb-6"
+            style={{ background: "var(--luxury-gold, #e3c9a1)" }}
+          ></div>
 
           {/* Breadcrumb Navigation */}
           <nav aria-label="Breadcrumb">
@@ -101,42 +108,21 @@ export default function Breadcrumb({
   );
 }
 
-export function BreadcrumbNoBanner({
-  title,
-  items,
-  backgroundImage,
-}: BreadcrumbProps) {
+export function BreadcrumbNoBanner({ title, sub_title }: BreadcrumbNoBanner) {
   // BreadcrumbList rich result — absolute URLs; the final (current) crumb may
-  // omit `item` per schema.org, which is fine for items without an href.
-  const breadcrumbSchema = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: items.map((item, index) => ({
-      "@type": "ListItem",
-      position: index + 1,
-      name: item.label,
-      ...(item.href && { item: `${SITE_URL}${item.href}` }),
-    })),
-  };
-
   return (
-    <div className="relative w-full h-[100vh] min-h-[150px] max-h-[250px] flex items-center justify-center">
-      <JsonLd schema={breadcrumbSchema} />
+    <div className="relative w-full  min-h-[120px] max-h-[250px] flex items-center justify-center">
       {/* Background Media */}
-
-
       {/* Content */}
-      <div className="relative z-10 text-center px-6 mt-16 md:mt-24">
+      <div className="relative z-10 text-center px-6">
         {/* Luxury Title — the page's single <h1> (pages using this banner have
             no other h1, so this anchors both a11y heading order and SEO). */}
-        <h1 className="text-3xl md:text-5xl lg:text-6xl tracking-[0.15em] uppercase mb-8">
+        {sub_title && (
+          <p className="luxury-label text-gold-text mb-4">{sub_title}</p>
+        )}
+        <h1 className="text-3xl md:text-5xl lg:text-6xl uppercase room-font ">
           {title}
         </h1>
-
-        {/* Decorative Divider */}
-        <div className="flex flex-col items-center justify-center">
-          <div className="w-16 h-px mb-6" style={{ background: "var(--luxury-gold, #e3c9a1)" }}></div>
-        </div>
       </div>
     </div>
   );

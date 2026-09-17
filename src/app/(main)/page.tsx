@@ -20,6 +20,7 @@ import HallParallax from "@/components/home/HallParallax";
 const AboutSection = dynamic(() => import("@/components/home/AboutSection"));
 const RoomsSection = dynamic(() => import("@/components/home/RoomsSection"));
 const FacilitiesSection = dynamic(() => import("@/components/home/FacilitiesSection"));
+const OfferSection = dynamic(() => import("@/components/home/OfferSection"));
 const DineBanner = dynamic(() => import("@/components/home/DineBanner"));
 const ServicesSection = dynamic(() => import("@/components/home/ServicesSection"));
 const HomeGallery = dynamic(() => import("@/components/home/HomeGallery"));
@@ -49,10 +50,12 @@ export default async function Home() {
       <RoomsSection rooms={rooms} packageTitle={packageData?.title} />
       {/* <FacilitiesSection /> */}
       {/* <DineBanner /> */}
-      <ServicesSection />
       <HomeGallery />
       <HallParallax />
+      <ServicesSection />
+      <FacilitiesSection />
       <NearbyLandmarks />
+      <OfferSection />
       <Testimonials testimonials={testimonials} />
       {/* <LatestNews /> */}
       <PartnerSlider items={socialLinks?.items}/>

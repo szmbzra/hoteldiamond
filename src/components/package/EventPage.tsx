@@ -1,15 +1,29 @@
 "use client";
 
 import EventEnquiryForm from "@/components/ui/EventEnquiryForm";
+import FaqAccordion from "@/components/faq/FaqAccordion";
 import PackageHero from "./sections/PackageHero";
 import PackageIntro from "./sections/PackageIntro";
 import AmenitiesGrid from "./sections/AmenitiesGrid";
 import { contact } from "@/config/site";
+import { normalizeFaqs } from "@/lib/faq";
 
 export default function EventPage({ pkg }: { pkg: any }) {
   if (!pkg) return null;
 
-  const { title, gallery_images = [], description, amenities = [] } = pkg;
+  const {
+    title,
+    sub_title,
+    gallery_images = [],
+    description,
+    amenities = [],
+    content_0,
+    content_1,
+    faq = [],
+    faq_schema = [],
+  } = pkg;
+
+  const faqs = normalizeFaqs(faq, faq_schema);
 
   const setupStyles = [
     { label: "Hall Size",   value: pkg.size              },
@@ -30,7 +44,12 @@ export default function EventPage({ pkg }: { pkg: any }) {
         breadcrumbLabel="Events"
       />
 
-      <PackageIntro label="Events & Venues" title={title} description={description} />
+      <PackageIntro
+        label="Events & Venues"
+        title={title}
+        subtitle={sub_title}
+        description={description}
+      />
 
       <AmenitiesGrid amenities={amenities} />
 
@@ -87,6 +106,33 @@ export default function EventPage({ pkg }: { pkg: any }) {
           >
             WhatsApp for Enquiry
           </a>
+        </section>
+      )}
+
+      {/* ── VENUE POLICIES & ADDITIONAL CONTENT ─────────────────────── */}
+      {(content_0 || content_1) && (
+        <section
+          className="max-w-[1400px] mx-auto py-20 px-6 md:px-12 lg:px-24"
+          style={{ background: "var(--luxury-cream)" }}
+        >
+          {content_0 && <div dangerouslySetInnerHTML={{ __html: content_0 }} />}
+          {content_1 && <div dangerouslySetInnerHTML={{ __html: content_1 }} />}
+        </section>
+      )}
+
+      {/* ── FAQS ─────────────────────────────────────────────────── */}
+      {faqs.length > 0 && (
+        <section className="max-w-[1400px] mx-auto py-20 px-6 md:px-12 lg:px-24">
+          <div className="max-w-3xl mx-auto">
+            <h3
+              className="text-2xl font-light tracking-wide uppercase mb-2"
+              style={{ color: "var(--luxury-charcoal)" }}
+            >
+              Frequently Asked Questions
+            </h3>
+            <div className="w-12 h-px mb-10" style={{ background: "var(--luxury-gold)" }} />
+            <FaqAccordion items={faqs} />
+          </div>
         </section>
       )}
 

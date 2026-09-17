@@ -2,14 +2,26 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 
 function getFirstImage(item: any): string {
   const gallery = item.gallery_images;
   const img = item.img;
-  const src = Array.isArray(gallery) && gallery.length > 0 ? gallery[0] : Array.isArray(img) && img.length > 0 ? img[0] : null;
+  const src =
+    Array.isArray(gallery) && gallery.length > 0
+      ? gallery[0]
+      : Array.isArray(img) && img.length > 0
+        ? img[0]
+        : null;
   if (!src) return "";
-  return typeof src === "string" ? src : src?.src ?? src?.url ?? "";
+  return typeof src === "string" ? src : (src?.src ?? src?.url ?? "");
+}
+
+// Dummy fallback images (images.unsplash.com) aren't in next/image's
+// configured remotePatterns, so render those with a plain <img> — real CMS
+// images (mayurstay.com) still go through next/image below.
+function isUnoptimisedSrc(src: string) {
+  return src.startsWith("https://images.unsplash.com/");
 }
 
 export default function RestaurantList({ outlets }: { outlets: any[] }) {
@@ -22,52 +34,85 @@ export default function RestaurantList({ outlets }: { outlets: any[] }) {
   }
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+    <div className="flex flex-col gap-16 md:gap-24">
       {outlets.map((outlet: any, idx: number) => {
         const image = getFirstImage(outlet);
+        const reversed = idx % 2 === 1;
+        const index = String(idx + 1).padStart(2, "0");
 
         return (
           <Link
             key={outlet.slug ?? idx}
-            href={`/restaurant/${outlet.slug}`}
-            className="group bg-white overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 flex flex-col animate-fade-in-up"
-            style={{ animationDelay: `${idx * 0.08}s` }}
+            href={`/dining-bar/${outlet.slug}`}
+            className="group grid md:grid-cols-2 gap-8 md:gap-16 items-center animate-fade-in-up"
+            style={{ animationDelay: `${idx * 0.1}s` }}
           >
             {/* Image */}
-            <div className="relative h-72 overflow-hidden bg-[#f9f7f2]">
+            <div
+              className={`relative aspect-[4/3] md:aspect-[5/4] overflow-hidden rounded-3xl luxury-img-zoom ${
+                reversed ? "md:order-2" : ""
+              }`}
+              style={{ background: "var(--luxury-cream)" }}
+            >
               {image ? (
-                <Image
-                  src={image}
-                  alt={outlet.title || "Restaurant"}
-                  fill
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                  className="object-cover transition-transform duration-700 group-hover:scale-105"
-                />
+                isUnoptimisedSrc(image) ? (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img
+                    src={image}
+                    alt={outlet.title || "Restaurant"}
+                    className="absolute inset-0 w-full h-full object-cover"
+                  />
+                ) : (
+                  <Image
+                    src={image}
+                    alt={outlet.title || "Restaurant"}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    className="object-cover"
+                  />
+                )
               ) : (
                 <div className="w-full h-full flex items-center justify-center">
-                  <span className="text-6xl font-light text-gold/40">
-                    {String(idx + 1).padStart(2, "0")}
+                  <span className="text-7xl font-light text-gold/30">
+                    {index}
                   </span>
                 </div>
               )}
-              <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-500" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
+
+              {/* Numbered badge */}
+              <div className="absolute bottom-5 left-5 w-11 h-11 rounded-full flex items-center justify-center text-xs tracking-widest text-white backdrop-blur-sm bg-black/40 border border-white/30">
+                {index}
+              </div>
             </div>
 
             {/* Content */}
-            <div className="p-8 flex flex-col flex-grow">
-              <h3 className="text-xl font-light text-gray-900 tracking-wide mb-3">
+            <div className={reversed ? "md:order-1" : ""}>
+              <p className="luxury-label text-gold-text mb-4">Dining Outlet</p>
+              <div className="luxury-divider mb-6" />
+
+              <h3
+                className="text-3xl md:text-4xl lg:text-[2.75rem] mb-5 transition-colors duration-300 group-hover:text-gold-text"
+                style={{
+                  fontFamily: "var(--font-heading), 'Playfair Display', Georgia, serif",
+                  color: "var(--luxury-charcoal)",
+                }}
+              >
                 {outlet.title}
               </h3>
 
               {outlet.sub_title && (
-                <p className="text-sm text-gray-500 font-light leading-relaxed mb-5 line-clamp-2">
+                <p
+                  className="text-base font-light leading-relaxed mb-8 max-w-md"
+                  style={{ color: "var(--luxury-muted)" }}
+                >
                   {outlet.sub_title}
                 </p>
               )}
 
-              <div className="mt-auto flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-gray-400 group-hover:text-gold transition-colors duration-300">
-                View Restaurant
-                <ArrowRight className="w-3 h-3 transition-transform group-hover:translate-x-1" />
+              <div className="inline-flex items-center gap-3 text-xs uppercase tracking-[0.2em] text-gold-text pb-1 border-b border-transparent group-hover:border-current transition-colors">
+                Explore Menu
+                <ArrowUpRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
               </div>
             </div>
           </Link>

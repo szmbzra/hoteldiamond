@@ -1,4 +1,4 @@
-import Breadcrumb from "@/components/ui/Breadcrumb";
+import {BreadcrumbNoBanner}  from "@/components/ui/Breadcrumb";
 import FaqAccordion from "@/components/faq/FaqAccordion";
 import JsonLd from "@/components/seo/JsonLd";
 import PageSchemas from "@/components/seo/PageSchemas";
@@ -36,14 +36,10 @@ export default async function Page() {
     <>
       {faqSchema && <JsonLd schema={faqSchema} />}
       <PageSchemas slug="faq" />
-      <Breadcrumb
-        backgroundImage={siteRegulars?.default}
-        title="FAQ"
-        items={[{ label: "Home", href: "/" }, { label: "FAQ" }]}
-      />
+      <BreadcrumbNoBanner title="FAQ" />
 
-      <section className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
-        <div className="text-center mb-12">
+      <section className="mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20 grid lg:grid-cols-12 gap-20 justify-center max-w-7xl items-start">
+        <div className="text-center mb-12 lg:col-span-4 sticky top-50">
           <span className="text-[10px] md:text-xs font-semibold tracking-[0.3em] uppercase text-gold-text mb-4 block">
             Help Center
           </span>
@@ -52,7 +48,7 @@ export default async function Page() {
           </h2>
           <div className="w-12 h-[1.5px] bg-gold mx-auto mb-6" />
           <p className="text-sm text-gray-400 font-light max-w-lg mx-auto leading-relaxed">
-            Find answers to common questions about your stay at {site.name}.
+            Everything you need to know before your stay at {site.name}.
           </p>
         </div>
 

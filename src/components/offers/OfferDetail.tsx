@@ -6,7 +6,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import Image from "next/image";
 import Recaptcha from "../ui/Recaptcha";
-import Breadcrumb from "../ui/Breadcrumb";
+import { BreadcrumbNoBanner } from "../ui/Breadcrumb";
+import { DecorativeGlow } from "../ui/DecorativeBlobs";
 import OfferList from "./OfferList";
 
 const todayISO = () => new Date().toISOString().split("T")[0];
@@ -30,9 +31,8 @@ const inputClass =
 const errorInputClass = "border-red-300 bg-red-50";
 const labelClass = "block text-sm font-medium text-luxury-dark mb-1";
 
-export default function OfferDetail({ offer, siteBackground, otherOffers }: { offer: any, siteBackground?: string, otherOffers?: any[] }) {
+export default function OfferDetail({ offer, otherOffers }: { offer: any, otherOffers?: any[] }) {
   const plainTitle = offer.title?.replace(/<[^>]+>/g, "") || "";
-  const bannerImg = siteBackground;
   const imageSrc = offer.image || (offer.img && offer.img[0]);
 
   // Form State
@@ -155,18 +155,14 @@ export default function OfferDetail({ offer, siteBackground, otherOffers }: { of
 
   return (
     <div style={{ background: "var(--luxury-ivory)" }}>
-      <Breadcrumb
-        title={plainTitle}
-        backgroundImage={bannerImg}
-        items={[{ label: "Home", href: "/" }, { label: "Offers", href: "/offers" }, { label: plainTitle }]}
-      />
+      <BreadcrumbNoBanner title={plainTitle} />
 
       <section className="max-w-[1400px] mx-auto py-16 md:py-20 px-6 md:px-12 lg:px-24">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
           {/* Left: image + dates + content */}
           <div>
             {imageSrc && (
-              <div className="relative w-full rounded-xl overflow-hidden mb-8">
+              <div className="relative w-full rounded-xl overflow-hidden mb-8 lg:sticky lg:top-24">
                 <Image
                   src={imageSrc}
                   alt={plainTitle}
@@ -400,13 +396,16 @@ export default function OfferDetail({ offer, siteBackground, otherOffers }: { of
 
       {otherOffers && otherOffers.length > 0 && (
         <section
-          className="max-w-[1400px] mx-auto pb-20 md:pb-24 px-6 md:px-12 lg:px-24"
+          className="relative overflow-hidden max-w-[1400px] mx-auto pb-20 md:pb-24 px-6 md:px-12 lg:px-24"
         >
-          <h3 className="text-2xl font-light tracking-wide uppercase mb-2" style={{ color: "var(--luxury-charcoal)" }}>
-            Other Offers
-          </h3>
-          <div className="w-12 h-px mb-10" style={{ background: "var(--luxury-gold)" }} />
-          <OfferList offers={otherOffers} />
+          <DecorativeGlow variant="gold-dark" />
+          <div className="relative">
+            <h3 className="text-2xl font-light tracking-wide uppercase mb-2" style={{ color: "var(--luxury-charcoal)" }}>
+              Other Offers
+            </h3>
+            <div className="w-12 h-px mb-10" style={{ background: "var(--luxury-gold)" }} />
+            <OfferList offers={otherOffers} />
+          </div>
         </section>
       )}
 

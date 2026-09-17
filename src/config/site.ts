@@ -4,10 +4,11 @@
  * ============================================================================
  */
 
-export const SITE_URL = (
+export const SITE_URL =
   // process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://hoteldiamond.vercel.app/"
-).replace(/\/$/, "");
+  (
+    process.env.NEXT_PUBLIC_SITE_URL ?? "https://hoteldiamond.vercel.app/"
+  ).replace(/\/$/, "");
 
 /** Core brand identity. */
 export const site = {
@@ -15,7 +16,7 @@ export const site = {
   shortName: "Hotel Diamond Palace",
   title: "Hotel Diamond Palace Pvt. Ltd | Nepalgunj, Nepal",
   description:
-    "Hotel Diamond Palace Pvt. Ltd offers luxury accommodation in Nepalgunj, just steps from the revered Bageshwori Temple and close to Banke National Park. Guests enjoy modern comfort, exceptional dining, and versatile event spaces.",
+    "Hotel Diamond Palace offers comfortable accommodation in Nepalgunj, steps from the sacred Bageshwori Temple and close to Banke National Park. Guests enjoy modern comfort, dining, and versatile event spaces.",
   keywords:
     "Hotel Diamond Palace, Nepalgunj hotel, Bageshwori Temple, Banke National Park, luxury hotel Nepal, 4-star hotel Nepalgunj, business hotel Nepal",
   locale: "en",
@@ -38,7 +39,7 @@ export const address = {
   postalCode: "21900",
   country: "NP",
   full: "Bageshwori Tole-2, Surkhet Road, Nepalgunj, Banke, Nepal",
-  geo: { latitude: 28.0500, longitude: 81.6167 }, // approximate Nepalgunj coords
+  geo: { latitude: 28.05, longitude: 81.6167 }, // approximate Nepalgunj coords
   mapUrl: "https://maps.app.goo.gl/yourhotelmaplink",
 } as const;
 
@@ -71,7 +72,8 @@ export const business = {
 
 /** Booking + social links. */
 export const links = {
-  booking: "https://hoteldiamondpalace.com.np/book",
+  booking:
+    "https://www.mayurstay.com/parklandhotel/result.php?hotel_code=OGUhbL7",
   social: [] as string[],
 } as const;
 
@@ -88,6 +90,6 @@ export const links = {
 /** CMS category IDs. */
 export const CATEGORY_IDS = {
   rooms: "1",
-  events: "6",
-  restaurant: "7",
+  events: "3",
+  restaurant: "2",
 } as const;

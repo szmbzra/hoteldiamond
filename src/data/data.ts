@@ -17,13 +17,7 @@ import footerLogo from "@/assets/light-logo.png";
 import favicon from "@/assets/favicon.png";
 import { site, contact, address, SITE_URL } from "@/config/site";
 
-
-
-
-
-
 export const metaData = {
-
   // ---------------------------------------------------------------------------
   // SITE IDENTITY
   // DB columns: sitetitle, sitename
@@ -179,9 +173,8 @@ export const metaData = {
   booking_code: "",
 };
 
-
 export const HERO_DATA = {
-  headline: "Manakamana Hillcrest",
+  headline: "Hotel Diamond Pvt. Ltd",
   subheadline: "A Sanctuary in the Himalayas",
   tagline: "Where serenity meets luxury",
   videoSrc: "/video/hero.webm",
@@ -194,9 +187,9 @@ export const ABOUT_DATA = {
   paragraphs: [
     "Welcome to Hotel Diamond Palace Pvt. Ltd, a premier destination in the heart of Nepalgunj. We combine modern luxury with warm Nepalese hospitality, offering guests an unforgettable stay whether they are here for business, leisure, or celebration.",
 
-"Our property features 95 elegantly designed rooms, versatile event facilities, and exceptional dining outlets that showcase both authentic Nepalese flavours and international cuisine. With amenities like a swimming pool, fitness center, spa, and 24‑hour front desk, we ensure comfort and convenience at every step.",
+    "Our property features 95 elegantly designed rooms, versatile event facilities, and exceptional dining outlets that showcase both authentic Nepalese flavours and international cuisine. With amenities like a swimming pool, fitness center, spa, and 24‑hour front desk, we ensure comfort and convenience at every step.",
 
-"Located near the revered Bageshwori Temple and close to Banke National Park, Hotel Diamond Palace is perfectly positioned for cultural exploration and natural adventures. Our dedicated team strives to deliver personalized service, making every guest feel at home.",
+    "Located near the revered Bageshwori Temple and close to Banke National Park, Hotel Diamond Palace is perfectly positioned for cultural exploration and natural adventures. Our dedicated team strives to deliver personalized service, making every guest feel at home.",
   ],
   phone: contact.phoneE164,
   phoneLabel: "Reserve Now",
@@ -219,17 +212,15 @@ export const ROOMS_DATA = {
 };
 
 export const FACILITIES_HEADER = {
-  label: "Quality. Comfort. Care",
-  title: "Why Choose Us",
-  description:
-    "There's so much to Discover. The best prices for your relaxing vacation. Every stay here is not just a vacation—but a memory in the making.",
+  label: "Amenities That Elevate Your Stay",
+  title: "Our Services",
 };
 
 export const DINE_DATA = {
   label: "Premium Service",
   title:
     "Offering panoramic views of the majestic Himalayas with our delicious catering service which please your gourmet",
-  link: "/basera-restaurant",
+  link: "/dining",
   linkText: "Explore",
   image: "/images/placeholder-dine.webp",
 };
@@ -237,6 +228,11 @@ export const DINE_DATA = {
 export const SERVICES_HEADER = {
   label: "Relax. Refresh. Rejuvenate",
   title: "Our Services",
+};
+
+export const OFFERS_HEADER = {
+  label: "Exclusive Deals",
+  title: "Special Offers",
 };
 
 export const LANDMARKS_HEADER = {
@@ -250,7 +246,7 @@ export const TESTIMONIALS_HEADER = {
 };
 
 export const NEWS_HEADER = {
-  label: "Hillcrest Blog",
+  label: "Recent Updates",
   title: "Latest News",
 };
 
@@ -261,63 +257,69 @@ export const NEWS_HEADER = {
 export const LANDMARKS: Landmark[] = [
   {
     id: "manakamana-temple",
-    tab: "Manakamana Temple",
-    title: "Manakamana Temple",
-    subtitle: "Ancient Temple of Fulfilled Desires",
-    content: 'Manakamana Temple sits peacefully on a hill and is one of Nepal\'s most respected religious sites. It\'s dedicated to Goddess Bhagwati and offers beautiful views of the valleys and Himalayas. Many visitors come here to feel the spiritual energy and enjoy the calm surroundings. The name "Manakamana" means "wish of the heart," symbolizing hope and devotion.',
-    distance: "240 m",
+    tab: "Bageshwori Temple",
+    title: "Bageshwori Temple",
+    subtitle: "A Sacred Landmark of Nepalgunj",
+    content:
+      "Bageshwori Temple is one of the most revered religious sites in Nepalgunj and an important cultural landmark of the city. Dedicated to Goddess Bageshwori, the temple attracts devotees and visitors throughout the year. Its peaceful surroundings and rich religious significance make it a meaningful place to visit while staying at Hotel Diamond Palace.",
+    distance: "2.5 km",
     map_url:
-      "https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d3525.953482981846!2d84.5815912247255!3d27.90340077607072!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m13!3e0!4m5!1s0x39951f0004390a0f%3A0x7c2164964f8c3196!2sManakamana%20Hillcrest%20Resort%2C%20WH3M%2B3WQ%2C%20Manakamana!3m2!1d27.9027045!2d84.5848547!4m5!1s0x39951f36313173a1%3A0x419b37da0e2d746a!2sManakamana%20Temple%2C%20Manakamana!3m2!1d27.9042125!2d84.58404689999999!5e0!3m2!1sen!2snp!4v1761803072466!5m2!1sen!2snp",
+      "https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d3525.953482981846!2d84.5815912247255!3d27.90340077607072!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m13!3e0!4m5!1s0x39951f0004390a0f%3A0x7c2164964f8c3196!2sHotel%20Diamond%20Palace%2C%20Nepalgunj!3m2!1d28.05!2d81.62!4m5!1s0x0%3A0x0!2sBageshwori%20Temple%2C%20Nepalgunj!3m2!1d28.0525!2d81.6165!5e0!3m2!1sen!2snp",
   },
   {
     id: "cable-car",
-    tab: "Manakamana Cable Car",
-    title: "Manakamana Cable Car",
-    subtitle: "A Scenic Journey Above the Hills",
-    content: "The Manakamana Cable Car is one of Nepal's most popular attractions, offering an unforgettable 10-minute ride from Kurintar to the hilltop temple. As you ascend over the Trishuli River and forested hills, breathtaking views unfold beneath you. It's a smooth, safe, and scenic experience ideal for pilgrims and sightseers alike.",
-    distance: "450 m",
+    tab: "Banke National Park",
+    title: "Banke National Park",
+    subtitle: "A Natural Escape Near Nepalgunj",
+    content:
+      "Banke National Park is a protected natural area known for its forests, wildlife, and peaceful natural surroundings. The park provides opportunities to experience Nepal's diverse wildlife and explore the beauty of the Terai landscape. It is an ideal destination for guests looking to enjoy nature and discover the region beyond the city.",
+    distance: "Approximately 12 km",
     map_url:
-      "https://www.google.com/maps/embed?pb=!1m24!1m8!1m3!1d3525.968631473595!2d84.58268607547436!3d27.90293592607103!3m2!1i1024!2i768!4f13.1!4m13!3e0!4m5!1s0x39951f0004390a0f%3A0x7c2164964f8c3196!2sManakamana%20Hillcrest%20Resort%2C%20WH3M%2B3WQ%2C%20Manakamana!3m2!1d27.9027045!2d84.5848547!4m5!1s0x39951ff13463019f%3A0xd6ab14bddfcdc211!2sManakamana%20Cable%20Car%2C%20Manakamana%20Cable%20Car%2C%20Manakamana!3m2!1d27.903412399999997!2d84.5854746!5e0!3m2!1sen!2snp!4v1761806796508!5m2!1sen!2snp",
+      "https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d3525.968631473595!2d81.58!3d28.1!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m13!3e0!4m5!1s0x0%3A0x0!2sHotel%20Diamond%20Palace%2C%20Nepalgunj!3m2!1d28.05!2d81.62!4m5!1s0x0%3A0x0!2sBanke%20National%20Park!3m2!1d81.75!2d28.1!5e0!3m2!1sen!2snp",
   },
   {
     id: "siddha-cave",
-    tab: "Gorakhnath Siddha Cave",
-    title: "Gorakhnath Siddha Cave",
-    subtitle: "A Sacred Meditation Site",
-    content: "Located near Manakamana Temple, Gorakhnath Cave is dedicated to the revered sage Gorakhnath, who is believed to have meditated here centuries ago. The site offers a tranquil and spiritual environment, allowing visitors to experience Nepal's mystical traditions while enjoying serene views of the surrounding hills.",
-    distance: "2.2 km",
+    tab: "Mahendra Park & Mini Zoo",
+    title: "Mahendra Park & Mini Zoo",
+    subtitle: "A Relaxing Family Destination",
+    content:
+      "Mahendra Park & Mini Zoo is a family-friendly attraction in Nepalgunj featuring open green spaces, a small zoo, and areas where visitors can relax and enjoy time outdoors. It is a convenient place for families and guests looking for a relaxed outing close to the city.",
+    distance: "1.2 km",
     map_url:
-      "https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d14102.888529586282!2d84.57893589345024!3d27.91049916706307!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m13!3e0!4m5!1s0x39951f0004390a0f%3A0x7c2164964f8c3196!2sManakamana%20Hillcrest%20Resort%2C%20WH3M%2B3WQ%2C%20Manakamana!3m2!1d27.9027045!2d84.5848547!4m5!1s0x399519f68a2a7a21%3A0x9ebc3b405e0a62f!2sGorakhnath%20Siddha%20Cave%2C%20WH9V%2B9G7%2C%20Bakrang!3m2!1d27.918409999999998!2d84.59378509999999!5e0!3m2!1sen!2snp!4v1761806904458!5m2!1sen!2snp",
+      "https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d14102.888529586282!2d81.62!3d28.05!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m13!3e0!4m5!1s0x0%3A0x0!2sHotel%20Diamond%20Palace%2C%20Nepalgunj!3m2!1d28.05!2d81.62!4m5!1s0x0%3A0x0!2sMahendra%20Park%20and%20Mini%20Zoo!3m2!1d81.62!2d28.06!5e0!3m2!1sen!2snp",
   },
   {
     id: "lakhan-thapa-cave",
-    tab: "Lakhan Thapa Cave",
-    title: "Lakhan Thapa Cave",
-    subtitle: "The Origin of Faith",
-    content: "Named after Lakhan Thapa, the first priest of Manakamana Temple, this cave holds deep historical and cultural significance. It is believed that Goddess Manakamana first appeared here, marking the beginning of the temple's spiritual story. The short trail leading to the cave is perfect for guests who enjoy nature walks combined with local legend.",
-    distance: "2.3 km",
+    tab: "Kanti Tal (Puraini Lake)",
+    title: "Kanti Tal (Puraini Lake)",
+    subtitle: "Peaceful Waterside Surroundings",
+    content:
+      "Kanti Tal, also known as Puraini Lake, is a peaceful natural landmark near Nepalgunj. Surrounded by open landscapes and greenery, the lake offers visitors a quiet setting away from the busy city environment. It is a pleasant destination for guests who enjoy nature, fresh air, and relaxing outdoor surroundings.",
+    distance: "Approximately 4 km",
     map_url:
-      "https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d11744.770057542326!2d84.58795050458559!3d27.916745166435803!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m13!3e0!4m5!1s0x39951f0004390a0f%3A0x7c2164964f8c3196!2sManakamana%20Hillcrest%20Resort%2C%20WH3M%2B3WQ%2C%20Manakamana!3m2!1d27.9027045!2d84.5848547!4m5!1s0x399519a83b0d4a2f%3A0x998e95a2c5707a0b!2sSidhha%20lakhan%20thapa%20cave%2C%20WHCW%2B9H9%2C%20Bakrang!3m2!1d27.920903799999998!2d84.5964858!5e0!3m2!1sen!2snp!4v1761803438308!5m2!1sen!2snp",
+      "https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d11744.770057542326!2d81.62!3d28.05!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m13!3e0!4m5!1s0x0%3A0x0!2sHotel%20Diamond%20Palace%2C%20Nepalgunj!3m2!1d28.05!2d81.62!4m5!1s0x0%3A0x0!2sKanti%20Tal%20Puraini%20Lake!3m2!1d81.62!2d28.07!5e0!3m2!1sen!2snp",
   },
   {
     id: "bakreshwor",
-    tab: "Bakreshwor Mahadev Temple",
-    title: "Bakreshwor Mahadev Temple",
-    subtitle: "Serenity in the Hills",
-    content: "Just a short hike from the main temple area, Bakreshwor Mahadev Temple is a peaceful spiritual spot surrounded by lush greenery. It is dedicated to Lord Shiva and provides a calm retreat for meditation and reflection. The scenic walk to the temple also offers a chance to admire the natural beauty of the Manakamana region.",
-    distance: "2.3 km",
+    tab: "Nepalgunj Local Market",
+    title: "Nepalgunj Local Market",
+    subtitle: "Discover the Flavours of the City",
+    content:
+      "The local markets of Nepalgunj offer an authentic glimpse into the everyday life and culture of the city. Guests can explore local shops, traditional products, food, and everyday goods while experiencing the lively atmosphere of one of western Nepal's important commercial centres.",
+    distance: "Nearby",
     map_url:
-      "https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d17598.33939342822!2d84.58494353532969!3d27.91018880469049!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m13!3e0!4m5!1s0x39951f0004390a0f%3A0x7c2164964f8c3196!2sManakamana%20Hillcrest%20Resort%2C%20WH3M%2B3WQ%2C%20Manakamana!3m2!1d27.9027045!2d84.5848547!4m5!1s0x39951913f906d1bb%3A0xd38af16a810bb1e7!2sBakreshori%20Temple%2C%20WH9V%2B9XJ%2C%20Bakrang!3m2!1d27.9184591!2d84.5948827!5e0!3m2!1sen!2snp!4v1761803189331!5m2!1sen!2snp",
+      "https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d17598.33939342822!2d81.62!3d28.05!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m13!3e0!4m5!1s0x0%3A0x0!2sHotel%20Diamond%20Palace%2C%20Nepalgunj!3m2!1d28.05!2d81.62!4m5!1s0x0%3A0x0!2sNepalgunj%20Market!3m2!1d81.62!2d28.05!5e0!3m2!1sen!2snp",
   },
   {
     id: "bharatpur-airport",
-    tab: "Bharatpur Airport",
-    title: "Bharatpur Airport",
-    subtitle: "Gateway to the Hills",
-    content: "Located approximately 67.9 km from the resort, Bharatpur Airport serves as the nearest air connection for guests traveling from Kathmandu or Pokhara. The scenic drive from the airport to Manakamana takes about an hour, following the picturesque Trishuli River and offering glimpses of rural life and green hills along the way.",
-    distance: "67.9 km",
+    tab: "Nepalgunj Airport",
+    title: "Nepalgunj Airport",
+    subtitle: "Gateway to Western Nepal",
+    content:
+      "Nepalgunj Airport provides convenient air connectivity for guests travelling to and from western Nepal. Located close to the city, the airport makes Hotel Diamond Palace an accessible choice for both business and leisure travellers arriving in Nepalgunj.",
+    distance: "Approximately 10 km",
     map_url:
-      "https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d225855.8756642616!2d84.34240540570418!3d27.80983068125511!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m13!3e0!4m5!1s0x39951f0004390a0f%3A0x7c2164964f8c3196!2sManakamana%20Hillcrest%20Resort%2C%20WH3M%2B3WQ%2C%20Manakamana!3m2!1d27.9027045!2d84.5848547!4m5!1s0x3994fb28bdc01095%3A0xe3a546b17da5024d!2sBharatpur%20Airport%2C%20Bharatpur!3m2!1d27.6785769!2d84.4296105!5e0!3m2!1sen!2snp!4v1761805603200!5m2!1sen!2snp",
+      "https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d225855.8756642616!2d81.62!3d28.05!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m13!3e0!4m5!1s0x0%3A0x0!2sHotel%20Diamond%20Palace%2C%20Nepalgunj!3m2!1d28.05!2d81.62!4m5!1s0x0%3A0x0!2sNepalgunj%20Airport!3m2!1d81.67!2d28.10!5e0!3m2!1sen!2snp",
   },
 ];
 
@@ -325,42 +327,42 @@ export const TESTIMONIALS: Testimonial[] = [
   {
     title: "Great stay with friends!",
     content:
-      "Visited Hotel Diamond Pvt. Ltd with friends and had a great time. Reaching the hotel was super easy thanks to the complimentary cable car, which was a really nice experience. The rooms were clean and comfortable, the views were beautiful, and the atmosphere was very relaxing. Staff were friendly and helpful throughout our stay, and the food was good too. Overall, a perfect place to stay with friends. Would definitely recommend!",
+      "Visited Hotel Diamond Palace with friends and had a great time. The rooms were clean and comfortable, the atmosphere was peaceful, and the hospitality was excellent. The staff were friendly and helpful throughout our stay, and the food was delicious too. Overall, it was a wonderful experience and a great place to stay with friends. Would definitely recommend!",
     author: "James G",
     source: "Tripadvisor",
   },
   {
-    title: "Hotel Diamond Pvt. Ltd - Manakamana, Nepal",
+    title: "Hotel Diamond Palace - Nepalgunj, Nepal",
     content:
-      "This is definitely one of the best hotels we have stayed in Nepal. Location of this 4 star hotel located in Manakamana is excellent. Walk to the Manakamana temple is just a few minutes away. Hotel provides you free cable car tickets and picks you and your luggage from the station below. Customer service was excellent. Rooms were clean and spotless with great views. Complimentary sauna and breakfast is included in package...",
+      "This is definitely one of the best hotels we have stayed in Nepal. The location of Hotel Diamond Palace in Nepalgunj is excellent, making it convenient for exploring the city and nearby attractions. The customer service was excellent, the rooms were clean and comfortable, and the overall atmosphere was relaxing. The staff were welcoming and attentive throughout our stay, making the experience truly enjoyable.",
     author: "Falcha",
     source: "Tripadvisor",
   },
   {
     title: "Holiday ❘ Family",
     content:
-      "The stay was amazing with amazing views. The hospitality there was like no other hotels. Another good thing about the hotel is that you have priority boarding for cable car (no line). Would recommend 10/10.",
+      "The stay was amazing and the hospitality was excellent. The hotel has a comfortable and welcoming atmosphere, making it a great choice for a family holiday. The staff were friendly and attentive, and everything was well taken care of during our stay. Would recommend 10/10.",
     author: "Aditya maharjan",
     source: "Google",
   },
   {
     title: "Holiday ❘ Friends",
     content:
-      "This is one of the best hotels in Manakamana Hill. The staff are very friendly and welcoming. I personally highly recommend this place. We were a group of 42 people and booked 21 rooms, and the service was excellent throughout our stay. Everything was perfect. You must visit and stay here.",
+      "This is one of the best hotels to stay at in Nepalgunj. The staff are very friendly and welcoming, and the service was excellent throughout our stay. We were a group of friends and had a very comfortable and enjoyable experience. Everything was well managed and the atmosphere was perfect. You must visit and stay here.",
     author: "Prakash Dhakhwa",
     source: "Google",
   },
   {
     title: "Holiday ❘ Family",
     content:
-      "We had a lovely stay with our daughter. The staff were very kind and welcoming, and the room was clean and comfortable. Everything felt easy and family-friendly. Thank you for making our stay so special we would definitely come back again!",
+      "We had a lovely stay with our family. The staff were very kind and welcoming, and the room was clean, comfortable, and spacious. Everything felt easy and family-friendly throughout our stay. Thank you for making our visit so special. We would definitely come back again!",
     author: "Sunil Thapa",
     source: "Google",
   },
   {
     title: "Holiday ❘ Couple",
     content:
-      "Hotel Diamond Pvt. Ltd is one of the best hotels to stay at in the Manakamana area. We had a wonderful experience at this beautiful property. The staff—Rup Maya, Muskan, Sandesh, and Dubisha—were outstanding and provided exceptional hospitality throughout our stay.",
+      "Hotel Diamond Palace is one of the best hotels to stay at in Nepalgunj. We had a wonderful experience at this beautiful property. The staff were welcoming, attentive, and provided excellent hospitality throughout our stay. The comfortable rooms, pleasant atmosphere, and quality service made our visit truly enjoyable.",
     author: "Krishna Shrestha",
     source: "Google",
   },
@@ -496,47 +498,215 @@ export const ROOM_EXCLUDES = [
   "Spa treatments",
 ];
 
+// TODO: temporary static fallback until the CMS exposes a per-room `amenities`
+// field — RoomPage falls back to this only when the CMS item has none.
+export const ROOM_AMENITIES_FALLBACK = [
+  {
+    group_title: "Room Amenities",
+    items: [
+      { title: "Free Wi-Fi" },
+      { title: "Air Conditioning" },
+      { title: "LED Television" },
+      { title: "Attached Bathroom" },
+      { title: "Hot & Cold Water" },
+      { title: "Complimentary Toiletries" },
+      { title: "Daily Housekeeping" },
+      { title: "24-Hour Room Service" },
+      { title: "Wardrobe" },
+      { title: "Study Table" },
+      { title: "Intercom" },
+      { title: "Power Backup" },
+    ],
+  },
+];
+
+// TODO: temporary static fallback shown on /dining and /events until the CMS
+// has real `subpackage` entries under parent_id CATEGORY_IDS.restaurant (7)
+// and CATEGORY_IDS.events (6). Shaped like real subpackage items
+// (gallery_images: {id,src,title}[]) so the listing/detail components don't
+// need to special-case dummy vs. CMS data — swap these out (or just remove
+// them) once real outlets/venues are added in the CMS.
+export const DUMMY_DINING_OUTLETS = [
+  {
+    id: "dummy-diamond-restaurant",
+    slug: "diamond-restaurant",
+    title: "The Diamond Restaurant",
+    sub_title:
+      "All-day multi-cuisine dining with sweeping views over the Manakamana hills.",
+    description:
+      "<p>Our signature restaurant serves a thoughtfully curated menu of Nepali, Indian and continental favourites, from a leisurely breakfast spread to a candlelit dinner. Floor-to-ceiling windows frame the surrounding hills, making every table a room with a view.</p>",
+    gallery_images: [
+      {
+        id: 1,
+        src: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=1600&auto=format&fit=crop",
+        title: "The Diamond Restaurant",
+      },
+    ],
+    amenities: [],
+  },
+  {
+    id: "dummy-sunrise-rooftop-lounge",
+    slug: "sunrise-rooftop-lounge",
+    title: "Sunrise Rooftop Lounge",
+    sub_title: "Craft cocktails and small plates against a Himalayan sunset.",
+    description:
+      "<p>Perched above the property, our rooftop lounge is the place to unwind — hand-crafted cocktails, a curated wine list, and light bites served as the sky turns gold over the hills. Live acoustic sets on select evenings.</p>",
+    gallery_images: [
+      {
+        id: 1,
+        src: "https://images.unsplash.com/photo-1613066697157-e8345495b665?q=80&w=1600&auto=format&fit=crop",
+        title: "Sunrise Rooftop Lounge",
+      },
+    ],
+    amenities: [],
+  },
+  {
+    id: "dummy-garden-cafe",
+    slug: "garden-cafe",
+    title: "Garden Café",
+    sub_title:
+      "A relaxed all-day café for coffee, light bites, and afternoon tea.",
+    description:
+      "<p>Set among the gardens, our café is the easy-going spot for a slow coffee, fresh pastries, or afternoon tea between activities. Open all day, with plenty of shaded outdoor seating.</p>",
+    gallery_images: [
+      {
+        id: 1,
+        src: "https://images.unsplash.com/photo-1504963642567-227b3bbd79de?q=80&w=1600&auto=format&fit=crop",
+        title: "Garden Caf\u00e9",
+      },
+    ],
+    amenities: [],
+  },
+];
+
+export const DUMMY_EVENT_VENUES = [
+  {
+    id: "dummy-grand-ballroom",
+    slug: "grand-ballroom",
+    title: "The Grand Ballroom",
+    sub_title:
+      "An elegant pillar-free hall for weddings, galas, and large conferences.",
+    description:
+      "<p>Our largest event space comfortably hosts weddings, galas and large-scale conferences, with a pillar-free floor plan, a dedicated event team, and full audio-visual support.</p>",
+    gallery_images: [
+      {
+        id: 1,
+        src: "https://images.unsplash.com/photo-1675247488725-22d1b78e75db?q=80&w=1600&auto=format&fit=crop",
+        title: "The Grand Ballroom",
+      },
+    ],
+    amenities: [],
+    size: "2,400 sq.ft",
+    u_shape: "80 Pax",
+    class_room_style: "120 Pax",
+    theater: "220 Pax",
+    round_table: "160 Pax",
+  },
+  {
+    id: "dummy-manakamana-conference-hall",
+    slug: "manakamana-conference-hall",
+    title: "Manakamana Conference Hall",
+    sub_title:
+      "A refined boardroom-style space for meetings and corporate retreats.",
+    description:
+      "<p>A quieter, boardroom-style venue suited to meetings, workshops and corporate retreats, equipped with natural daylight and modern AV equipment.</p>",
+    gallery_images: [
+      {
+        id: 1,
+        src: "https://images.unsplash.com/photo-1505845753232-f74a87b62db6?q=80&w=1600&auto=format&fit=crop",
+        title: "Manakamana Conference Hall",
+      },
+    ],
+    amenities: [],
+    size: "850 sq.ft",
+    u_shape: "30 Pax",
+    class_room_style: "40 Pax",
+    theater: "60 Pax",
+    round_table: "40 Pax",
+  },
+  {
+    id: "dummy-terrace-garden-venue",
+    slug: "terrace-garden-venue",
+    title: "Terrace Garden Venue",
+    sub_title: "An open-air lawn setting for celebrations under the stars.",
+    description:
+      "<p>An open-air lawn framed by the surrounding hills — ideal for receptions, sundowners and celebrations that call for fresh air and a view.</p>",
+    gallery_images: [
+      {
+        id: 1,
+        src: "https://images.unsplash.com/photo-1758403037080-39e759895454?q=80&w=1600&auto=format&fit=crop",
+        title: "Terrace Garden Venue",
+      },
+    ],
+    amenities: [],
+    size: "3,000 sq.ft",
+    u_shape: "—",
+    class_room_style: "—",
+    theater: "300 Pax",
+    round_table: "200 Pax",
+  },
+];
+
 export const ROOM_POLICIES = [
   { label: "Check-in", value: "2:00 PM" },
   { label: "Check-out", value: "12:00 PM (noon)" },
-  { label: "Cancellation", value: "Free up to 48 hrs before arrival. 1-night charge applies for late cancellations." },
-  { label: "Children", value: "All ages welcome. Children under 12 stay free sharing parents' room." },
-  { label: "Smoking", value: "Non-smoking property. Designated outdoor smoking areas available." },
+  {
+    label: "Cancellation",
+    value:
+      "Free up to 48 hrs before arrival. 1-night charge applies for late cancellations.",
+  },
+  {
+    label: "Children",
+    value:
+      "All ages welcome. Children under 12 stay free sharing parents' room.",
+  },
+  {
+    label: "Smoking",
+    value: "Non-smoking property. Designated outdoor smoking areas available.",
+  },
   { label: "Payment", value: "Visa, MasterCard and cash (NPR) accepted." },
 ];
 
 export const ROOM_FAQS = [
   {
     question: "What time is check-in and check-out?",
-    answer: "Check-in is at 2:00 PM and check-out is at 12:00 PM. Early check-in and late check-out can be arranged subject to availability — please contact us in advance.",
+    answer:
+      "Check-in is at 2:00 PM and check-out is at 12:00 PM. Early check-in and late check-out can be arranged subject to availability — please contact us in advance.",
   },
   {
     question: "Is breakfast included in the room rate?",
-    answer: "Yes, complimentary breakfast for two is included with every room. Breakfast is served 7:00 AM – 10:00 AM at Basera Restaurant.",
+    answer:
+      "Yes, complimentary breakfast for two is included with every room. Breakfast is served 7:00 AM – 10:00 AM at Basera Restaurant.",
   },
   {
     question: "Are cable car tickets complimentary?",
-    answer: "Yes, all staying guests receive complimentary cable car tickets, allowing easy access between the valley station and Manakamana Temple.",
+    answer:
+      "Yes, all staying guests receive complimentary cable car tickets, allowing easy access between the valley station and Manakamana Temple.",
   },
   {
     question: "Is the swimming pool open year-round?",
-    answer: "The outdoor swimming pool is open seasonally (March – November). Sauna and steam facilities are available year-round.",
+    answer:
+      "The outdoor swimming pool is open seasonally (March – November). Sauna and steam facilities are available year-round.",
   },
   {
     question: "Do you offer airport transfers?",
-    answer: "Airport transfers can be arranged on request at an additional charge. Please contact us at least 24 hours before your arrival.",
+    answer:
+      "Airport transfers can be arranged on request at an additional charge. Please contact us at least 24 hours before your arrival.",
   },
   {
     question: "Can I request a room with a Himalayan view?",
-    answer: "Most of our rooms offer panoramic Himalayan views. Please mention your preference at the time of booking and we will do our best to accommodate you.",
+    answer:
+      "Most of our rooms offer panoramic Himalayan views. Please mention your preference at the time of booking and we will do our best to accommodate you.",
   },
   {
     question: "Is there parking at the resort?",
-    answer: "Yes, complimentary parking is available on the resort premises for all guests.",
+    answer:
+      "Yes, complimentary parking is available on the resort premises for all guests.",
   },
   {
     question: "What is the cancellation policy?",
-    answer: "Free cancellation is available up to 48 hours before check-in. A one-night charge applies for cancellations made within 48 hours of arrival.",
+    answer:
+      "Free cancellation is available up to 48 hours before check-in. A one-night charge applies for cancellations made within 48 hours of arrival.",
   },
 ];
 
@@ -561,7 +731,7 @@ export const menuData = [
   {
     id: "basera-restaurant",
     title: "Restaurant",
-    link: "/restaurant/basera-restaurant",
+    link: "/dining/basera-restaurant",
   },
   {
     id: "service/aila-bar",
@@ -638,7 +808,6 @@ export const menuData = [
     link: "/contact-us",
   },
 ];
-
 
 /** Site-wide CSS scoped to `.cms-content`, injected once in <head> (see layout.tsx).
  *  DB column: custom_css (not live yet — API should expose it next to `headers`

@@ -33,10 +33,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // 1. Static pages — ordered by crawl priority
   const staticPages: MetadataRoute.Sitemap = [
     { url: BASE_URL,                          lastModified: new Date(), changeFrequency: 'monthly', priority: 1.0 },
-    { url: `${BASE_URL}/rooms`,               lastModified: new Date(), changeFrequency: 'monthly', priority: 0.9 },
+    { url: `${BASE_URL}/accommodations`,      lastModified: new Date(), changeFrequency: 'monthly', priority: 0.9 },
     { url: `${BASE_URL}/offers`,              lastModified: new Date(), changeFrequency: 'weekly',  priority: 0.9 },
     { url: `${BASE_URL}/events`,              lastModified: new Date(), changeFrequency: 'weekly',  priority: 0.8 },
-    { url: `${BASE_URL}/restaurant`,          lastModified: new Date(), changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${BASE_URL}/dining`,              lastModified: new Date(), changeFrequency: 'monthly', priority: 0.8 },
     { url: `${BASE_URL}/blog`,                lastModified: new Date(), changeFrequency: 'weekly',  priority: 0.8 },
     { url: `${BASE_URL}/contact-us`,          lastModified: new Date(), changeFrequency: 'monthly', priority: 0.8 },
     { url: `${BASE_URL}/about`,               lastModified: new Date(), changeFrequency: 'monthly', priority: 0.7 },
@@ -62,11 +62,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.7,
   }));
 
-  const roomEntries = extractSlugsByCategory(subpackages ?? [], CATEGORY_IDS.rooms, 'rooms', 0.8, 'monthly');
+  const roomEntries = extractSlugsByCategory(subpackages ?? [], CATEGORY_IDS.rooms, 'accommodations', 0.8, 'monthly');
   const eventEntries = extractSlugsByCategory(subpackages ?? [], CATEGORY_IDS.events, 'events', 0.7, 'weekly');
+  // Dining outlets now live under `subpackage` too (CATEGORY_IDS.restaurant),
+  // same as rooms/events — matches /dining/[slug] in
+  // src/app/(main)/dining/[slug]/page.tsx.
+  const diningEntries = extractSlugsByCategory(subpackages ?? [], CATEGORY_IDS.restaurant, 'dining', 0.7, 'monthly');
 
-  // Restaurant and service items live in articles/services (flat structure)
-  const restaurantEntries: MetadataRoute.Sitemap = [];
+  // Remaining service items live in articles/services (flat structure)
   const serviceEntries: MetadataRoute.Sitemap = [];
 
   for (const source of [...(articles ?? []), ...(services ?? [])]) {
@@ -74,17 +77,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     for (const item of source.items) {
       if (!item.slug) continue;
       const slug = item.slug.replace(/^\//, '');
-      if (slug.startsWith('restaurant/')) {
-        restaurantEntries.push({ url: `${BASE_URL}/${slug}`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.7 });
-      } else {
-        serviceEntries.push({ url: `${BASE_URL}/${slug}`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.6 });
-      }
+      if (slug.startsWith('restaurant/')) continue; // superseded by diningEntries above
+      serviceEntries.push({ url: `${BASE_URL}/${slug}`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.6 });
     }
   }
 
   // Deduplicate by URL — static entries win
   const seen = new Map<string, MetadataRoute.Sitemap[number]>();
-  for (const entry of [...staticPages, ...roomEntries, ...eventEntries, ...blogEntries, ...restaurantEntries, ...serviceEntries]) {
+  for (const entry of [...staticPages, ...roomEntries, ...eventEntries, ...blogEntries, ...diningEntries, ...serviceEntries]) {
     if (!seen.has(entry.url)) seen.set(entry.url, entry);
   }
 

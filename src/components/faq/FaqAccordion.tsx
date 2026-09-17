@@ -28,7 +28,7 @@ const FaqAccordion: React.FC<FaqAccordionProps> = ({ items }) => {
   }
 
   return (
-    <div className="space-y-3">
+    <div className="space-y-3 lg:col-span-8">
       {items.map((item, index) => {
         const isOpen = openIndex === index;
         return (
@@ -42,7 +42,7 @@ const FaqAccordion: React.FC<FaqAccordionProps> = ({ items }) => {
           >
             <button
               onClick={() => toggle(index)}
-              className="w-full flex items-center justify-between px-6 py-5 text-left focus:outline-none group"
+              className="w-full flex items-center justify-between hover:cursor-pointer px-6 py-5 text-left focus:outline-none group"
               aria-expanded={isOpen}
             >
               <div className="flex items-center gap-4 pr-4">

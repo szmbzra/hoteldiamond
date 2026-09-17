@@ -51,7 +51,7 @@ export default function Sidebar({ isOpen, onClose, menu }: SidebarProps) {
         }`}
       >
         {/* Glass surface */}
-        <div className="absolute inset-0 bg-white/90  backdrop-saturate-150 border-l border-white/60" />
+        <div className="absolute inset-0 bg-white  backdrop-saturate-150 border-l border-white/60" />
         {/* Soft brand glow accents */}
 
         {/* Content */}
@@ -72,39 +72,70 @@ export default function Sidebar({ isOpen, onClose, menu }: SidebarProps) {
           <nav className="flex-1 overflow-y-auto px-8 sm:px-6 ">
             {menu &&
               menu.map((item) => {
-                const isActive = pathname === item.link || (item.link !== "/" && pathname.startsWith(item.link));
+                const isActive =
+                  pathname === item.link ||
+                  (item.link !== "/" && pathname.startsWith(item.link));
 
                 if (item.subLinks && item.subLinks.length > 0) {
                   const isSubmenuActive =
-                    isActive || item.subLinks.some((sub) => pathname === sub.link || (sub.link !== "/" && pathname.startsWith(sub.link)));
+                    isActive ||
+                    item.subLinks.some(
+                      (sub) =>
+                        pathname === sub.link ||
+                        (sub.link !== "/" && pathname.startsWith(sub.link)),
+                    );
                   const isDropdownOpen = openDropdown === item.title;
+                  const submenuId = `submenu-${item.id}`;
                   return (
                     <div key={item.id} className="mb-1">
-                      <button
-                        onClick={() => toggleDropdown(item.title)}
-                        aria-expanded={isDropdownOpen}
-                        className={`group w-full flex items-center justify-between py-3.5 text-sm uppercase tracking-[0.2em] font-medium transition-colors duration-300 ${
-                          isSubmenuActive ? "text-blue" : "text-blue/70 hover:text-blue"
+                      {/* Split row: the label navigates to the listing page, the arrow toggles the submenu */}
+                      <div
+                        className={`group flex items-center justify-between py-3.5 text-sm uppercase tracking-[0.2em] font-medium transition-colors duration-300 ${
+                          isSubmenuActive
+                            ? "text-blue"
+                            : "text-blue/70 hover:text-blue"
                         }`}
                       >
-                        <span className="relative inline-block">
-                          {item.title}
-                          <FadeUnderline active={isSubmenuActive} />
-                        </span>
-                        <ChevronDown
-                          className={` hover:cursor-pointer w-4 h-4 text-blue/50 transition-transform duration-300 ${
-                            isDropdownOpen ? "rotate-180 text-blue" : ""
-                          }`}
-                        />
-                      </button>
+                        <NavLink
+                          href={item.link}
+                          linktype={item.linktype}
+                          onClick={onClose}
+                          className="flex-1"
+                        >
+                          <span className="relative inline-block">
+                            {item.title}
+                            <FadeUnderline active={isSubmenuActive} />
+                          </span>
+                        </NavLink>
+                        <button
+                          type="button"
+                          onClick={() => toggleDropdown(item.title)}
+                          aria-expanded={isDropdownOpen}
+                          aria-controls={submenuId}
+                          aria-label={`${isDropdownOpen ? "Collapse" : "Expand"} ${item.title} submenu`}
+                          className="p-2 -m-2 hover:cursor-pointer"
+                        >
+                          <ChevronDown
+                            className={`w-4 h-4 text-blue/50 transition-transform duration-300 ${
+                              isDropdownOpen ? "rotate-180 text-blue" : ""
+                            }`}
+                          />
+                        </button>
+                      </div>
                       <div
+                        id={submenuId}
                         className={`grid overflow-hidden transition-all duration-300 ease-in-out ${
-                          isDropdownOpen ? "grid-rows-[1fr] opacity-100 pb-4" : "grid-rows-[0fr] opacity-0"
+                          isDropdownOpen
+                            ? "grid-rows-[1fr] opacity-100 pb-4"
+                            : "grid-rows-[0fr] opacity-0"
                         }`}
                       >
                         <div className="min-h-0 flex flex-col gap-3.5 pl-1 pt-1">
                           {item.subLinks.map((subLink) => {
-                            const isSubActive = pathname === subLink.link || (subLink.link !== "/" && pathname.startsWith(subLink.link));
+                            const isSubActive =
+                              pathname === subLink.link ||
+                              (subLink.link !== "/" &&
+                                pathname.startsWith(subLink.link));
                             return (
                               <NavLink
                                 key={subLink.id}
@@ -112,10 +143,11 @@ export default function Sidebar({ isOpen, onClose, menu }: SidebarProps) {
                                 linktype={subLink.linktype}
                                 onClick={onClose}
                                 className={`group flex items-center gap-3 text-xs tracking-[0.15em] uppercase transition-colors duration-300 ${
-                                  isSubActive ? "text-blue" : "text-blue/55 hover:text-blue"
+                                  isSubActive
+                                    ? "text-blue"
+                                    : "text-blue/55 hover:text-blue"
                                 }`}
                               >
-
                                 <span className="relative inline-block ms-1.5">
                                   {subLink.title}
                                   <FadeUnderline active={isSubActive} />

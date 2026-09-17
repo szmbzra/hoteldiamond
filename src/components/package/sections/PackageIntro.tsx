@@ -1,12 +1,14 @@
 export default function PackageIntro({
   label,
   title,
+  subtitle,
   description,
   className,
   dark = false,
 }: {
   label?: string;
-  title: string;
+  title?: string;
+  subtitle?: string;
   description?: string;
   className?: string;
   dark?: boolean;
@@ -23,6 +25,13 @@ export default function PackageIntro({
         <h2 className={`luxury-section-title mb-8 ${dark ? "text-luxury-cream" : "text-luxury-charcoal"}`}>
           {title}
         </h2>
+        {subtitle && (
+          <p
+            className={`text-xl md:text-2xl font-light leading-relaxed mb-8 ${dark ? "text-luxury-cream" : "text-luxury-charcoal"}`}
+          >
+            {subtitle}
+          </p>
+        )}
         {description && (
           <div
             className={`cms-content luxury-subtitle ${dark ? "text-luxury-cream cms-content-invert" : "text-luxury-muted"}`}

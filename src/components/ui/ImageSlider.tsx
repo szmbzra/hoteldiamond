@@ -1,7 +1,10 @@
 'use client';
 
+import { useRef } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination, EffectFade } from 'swiper/modules';
+import type { Swiper as SwiperType } from 'swiper';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 // Import Swiper styles
 import 'swiper/css';
@@ -9,11 +12,20 @@ import 'swiper/css/pagination';
 import 'swiper/css/effect-fade';
 import Image from 'next/image';
 
+// Dummy fallback images (images.unsplash.com) aren't in next/image's
+// configured remotePatterns, so render those with a plain <img> — real CMS
+// images (mayurstay.com) still go through next/image below. Same workaround
+// as src/components/restaurant/RestaurantList.tsx.
+function isUnoptimisedSrc(src: string) {
+  return src.startsWith('https://images.unsplash.com/');
+}
+
 interface ImageSliderProps {
   images?: (string | { src?: string; title?: string; url?: string; gallery_images?: string })[];
   title?: string;
   fullHeight?: boolean;
   overlayClassName?: string;
+  showArrows?: boolean;
 }
 
 export default function ImageSlider({
@@ -21,7 +33,10 @@ export default function ImageSlider({
   title = '',
   fullHeight = false,
   overlayClassName = 'bg-black/10',
+  showArrows = false,
 }: ImageSliderProps) {
+  const swiperRef = useRef<SwiperType | null>(null);
+
   if (!images.length) return null;
 
   return (
@@ -41,6 +56,7 @@ export default function ImageSlider({
           bulletActiveClass: 'custom-bullet-active',
         }}
         loop={images.length > 1}
+        onSwiper={(swiper) => { swiperRef.current = swiper; }}
         className="h-full w-full"
       >
         {images.map((img, i) => {
@@ -54,14 +70,23 @@ export default function ImageSlider({
           return (
             <SwiperSlide key={i} className="h-full w-full overflow-hidden">
               <div className="h-full w-full relative">
-                <Image
-                  src={imgSrc}
-                  alt={imgTitle}
-                  fill
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1920px"
-                  priority={i === 0}
-                  className="object-cover swiper-image-zoom"
-                />
+                {isUnoptimisedSrc(imgSrc) ? (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img
+                    src={imgSrc}
+                    alt={imgTitle}
+                    className="absolute inset-0 w-full h-full object-cover swiper-image-zoom"
+                  />
+                ) : (
+                  <Image
+                    src={imgSrc}
+                    alt={imgTitle}
+                    fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1920px"
+                    priority={i === 0}
+                    className="object-cover swiper-image-zoom"
+                  />
+                )}
                 <div className={`absolute inset-0 ${overlayClassName}`} />
               </div>
             </SwiperSlide>
@@ -71,6 +96,27 @@ export default function ImageSlider({
         {/* Custom Pagination Dots - Bottom Right */}
         <div className="custom-pagination absolute bottom-10 right-10 flex pr-20 pb-5 justify-end gap-3 z-30 pointer-events-auto"></div>
       </Swiper>
+
+      {showArrows && images.length > 1 && (
+        <>
+          <button
+            type="button"
+            onClick={() => swiperRef.current?.slidePrev()}
+            aria-label="Previous image"
+            className="absolute z-30 left-4 top-1/2 -translate-y-1/2 hover:cursor-pointer w-10 h-10 rounded-full flex items-center justify-center bg-black/30 border border-white/15 backdrop-blur-md text-white hover:bg-black/50 hover:border-gold/50 transition-colors"
+          >
+            <ChevronLeft className="w-5 h-5" />
+          </button>
+          <button
+            type="button"
+            onClick={() => swiperRef.current?.slideNext()}
+            aria-label="Next image"
+            className="absolute z-30 right-4 top-1/2 -translate-y-1/2 hover:cursor-pointer w-10 h-10 rounded-full flex items-center justify-center bg-black/30 border border-white/15 backdrop-blur-md text-white hover:bg-black/50 hover:border-gold/50 transition-colors"
+          >
+            <ChevronRight className="w-5 h-5" />
+          </button>
+        </>
+      )}
     </div>
   );
 }

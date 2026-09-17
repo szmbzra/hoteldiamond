@@ -1,17 +1,16 @@
-import Breadcrumb from "@/components/ui/Breadcrumb";
+import { BreadcrumbNoBanner } from "@/components/ui/Breadcrumb";
 import PageSchemas from "@/components/seo/PageSchemas";
-import { getPageHeroImage, getServices } from "@/lib/data";
+import { getServices } from "@/lib/data";
 import { buildMetadata } from "@/lib/metadata";
 import { Metadata } from "next";
 import Image from "next/image";
+import { DecorativeAccent } from "@/components/ui/MandalaMotif";
 
 export async function generateMetadata(): Promise<Metadata> {
   return buildMetadata("services", {}, "/facilities");
 }
 
 export default async function FacilitiesPage() {
-  const backgroundImage = await getPageHeroImage("facilities");
-
   const facilities = await getServices();
   const facilitiesData = Array.isArray(facilities)
     ? facilities.find((item: any) => item.type === 1)
@@ -20,14 +19,19 @@ export default async function FacilitiesPage() {
   return (
     <>
       <PageSchemas slug="facilities" />
-      <Breadcrumb
-        backgroundImage={backgroundImage}
-        title="Facilities"
-        items={[{ label: "Home", href: "/" }, { label: "Facilities" }]}
-      />
+      <BreadcrumbNoBanner title="Facilities" />
 
-      <section className="py-24 px-6 md:px-12 bg-[#f9f7f2]">
-        <div className="max-w-7xl mx-auto">
+      <section className="relative overflow-hidden pb-24 px-6 md:px-12 bg-[#f9f7f2]">
+        <DecorativeAccent color="gold" corner="top-right" size={260} />
+        <div className="relative max-w-7xl mx-auto">
+          <p
+            className="luxury-subtitle max-w-2xl mx-auto text-center mb-16"
+            style={{ color: "var(--luxury-muted)" }}
+          >
+            From comfort and convenience to business essentials, every facility
+            at Hotel Diamond Palace is designed to make your stay easy and
+            enjoyable.
+          </p>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {facilitiesData?.items?.map((item: any, idx: number) => (
               <div
@@ -37,7 +41,11 @@ export default async function FacilitiesPage() {
               >
                 {/* Icon/Image */}
                 <div className="mb-6 w-14 h-14 flex items-center justify-center transition-all duration-700 group-hover:scale-110">
-                  {item.gallery_images?.[0] ? (
+                  {item.icon ? (
+                    <i
+                      className={`${item.icon} text-4xl text-gold opacity-80 group-hover:opacity-100 transition-opacity`}
+                    />
+                  ) : item.gallery_images?.[0] ? (
                     <Image
                       height={56}
                       width={56}

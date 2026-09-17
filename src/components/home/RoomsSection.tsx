@@ -6,7 +6,12 @@ import Autoplay from "embla-carousel-autoplay";
 import Image from "next/image";
 import Link from "next/link";
 
-import { ArrowRight, ArrowUpRight, ChevronLeft, ChevronRight } from "lucide-react";
+import {
+  ArrowRight,
+  ArrowUpRight,
+  ChevronLeft,
+  ChevronRight,
+} from "lucide-react";
 
 // TODO: replace with the real API response shape once the rooms endpoint is filled in.
 interface RoomImage {
@@ -47,9 +52,10 @@ export default function RoomsSection({
 }) {
   const packagename = packageTitle;
   const [activeIndex, setActiveIndex] = useState(0);
-  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: (rooms?.length ?? 0) > 1 }, [
-    Autoplay({ delay: 4500, stopOnInteraction: false }),
-  ]);
+  const [emblaRef, emblaApi] = useEmblaCarousel(
+    { loop: (rooms?.length ?? 0) > 1 },
+    [Autoplay({ delay: 4500, stopOnInteraction: false })],
+  );
 
   useEffect(() => {
     if (!emblaApi) return;
@@ -85,8 +91,7 @@ export default function RoomsSection({
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-14 animate-fade-in-up">
           <div>
-            <div
-              className="luxury-label mb-4 text-white">
+            <div className="luxury-label mb-4 text-white">
               {activeRoom.label || "Your Comfort, Our Priority"}
             </div>
             <div className="luxury-divider mb-6"></div>
@@ -94,7 +99,7 @@ export default function RoomsSection({
           </div>
 
           <Link
-            href="/rooms"
+            href="/accommodations"
             className="hidden md:inline-flex items-center gap-2 text-xs uppercase tracking-[0.25em] text-white/90 hover:text-gold transition-colors group shrink-0"
           >
             View All Rooms
@@ -106,7 +111,10 @@ export default function RoomsSection({
           {/* Image */}
           <div className="lg:col-span-7 animate-scale-in">
             <div className="relative rounded-2xl md:rounded-[10px] overflow-hidden shadow-2xl shadow-black/40">
-              <div className="overflow-hidden w-full h-[320px] md:h-[520px]" ref={emblaRef}>
+              <div
+                className="overflow-hidden w-full h-[320px] md:h-[520px]"
+                ref={emblaRef}
+              >
                 <div className="flex h-full">
                   {rooms.map((room: RoomData, index: number) => {
                     const src = getImageSrc(room.img?.[0]);
@@ -150,7 +158,6 @@ export default function RoomsSection({
                   </button>
                 </>
               )}
-
             </div>
           </div>
 
@@ -159,7 +166,7 @@ export default function RoomsSection({
             {activeRoom.title && (
               <h3
                 className="text-white text-2xl md:text-5xl font-light tracking-wide mb-5"
-                style={{ fontFamily: "var(--font-cinzel), Georgia, serif" }}
+                style={{ fontFamily: "var(--font-heading), 'Playfair Display', Georgia, serif" }}
               >
                 {activeRoom.title}
               </h3>
@@ -167,7 +174,7 @@ export default function RoomsSection({
             <p className=" text-white mb-10  leading-relaxed">
               {(activeRoom.sub_title || activeRoom.description)?.replace(
                 /<\/?p[^>]*>/g,
-                ""
+                "",
               )}
             </p>
 
@@ -184,7 +191,7 @@ export default function RoomsSection({
                       <img
                         src={feature.img}
                         alt=""
-                        className="w-5 h-5 object-contain opacity-80 shrink-0"
+                        className="w-5 h-5 object-contain opacity-80 shrink-0 filter brightness-0 saturate-100 invert sepia-0 saturate-[7496%] hue-rotate-[278deg] brightness-[101%] contrast-100"
                       />
                     ) : (
                       <span
@@ -201,12 +208,15 @@ export default function RoomsSection({
             )}
 
             <div className="flex flex-col sm:flex-row sm:items-center gap-5">
-              <Link href={`/rooms/${activeRoom.slug}`} className="luxury-btn group w-fit">
+              <Link
+                href={`/accommodations/${activeRoom.slug}`}
+                className="luxury-btn group w-fit"
+              >
                 Explore Room
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
               </Link>
               <Link
-                href="/rooms"
+                href="/accommodations"
                 className="md:hidden inline-flex items-center gap-2 text-xs uppercase tracking-[0.25em] text-white/50 hover:text-gold transition-colors w-fit"
               >
                 View All Rooms

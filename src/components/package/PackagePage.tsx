@@ -13,13 +13,13 @@ export default function PackagePage({
 }) {
   if (!pkg) return null;
 
-  const { title, gallery_images = [], description, amenities = [] } = pkg;
+  const { title, subtitle,gallery_images = [], description, amenities = [] } = pkg;
 
   return (
     <div style={{ background: "var(--luxury-ivory)" }}>
-      <PackageHero title={title} images={gallery_images} label="Services" />
+      {/* <PackageHero title={title} images={gallery_images} label="Services" /> */}
 
-      <PackageIntro label="Services" title={title} description={description} />
+      <PackageIntro label={title} title={subtitle} description={description} />
 
       {!isArticle && <AmenitiesGrid amenities={amenities} />}
     </div>
