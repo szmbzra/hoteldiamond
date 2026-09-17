@@ -221,13 +221,13 @@ export default function DiningPage({
             )}
             {whatsappHref && (
               <a
-                href={whatsappHref}
+                href="#"
                 target="_blank"
                 rel="noreferrer"
                 className="luxury-btn luxury-btn-light"
               >
-                <i className="fa-brands fa-whatsapp text-base" />
-                WhatsApp Us
+                <i className="fa-regular fa-file-pdf text-base" />
+                View Menu
               </a>
             )}
           </div>
