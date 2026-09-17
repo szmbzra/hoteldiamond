@@ -43,7 +43,6 @@ export default async function AboutSection() {
                 />
               ))}
             </div>
-
           </div>
 
           {/* Text Side */}
@@ -65,16 +64,10 @@ export default async function AboutSection() {
             {data.content ? (
               <div
                 className="luxury-subtitle mb-10  text-base! leading-[2.1]  lg:text-justify"
-
                 dangerouslySetInnerHTML={{ __html: data.content }}
               />
             ) : (
-              <p
-                className="luxury-subtitle mb-10 "
-
-              >
-                  Content Not Available
-              </p>
+              <p className="luxury-subtitle mb-10 ">Content Not Available</p>
             )}
 
             {/* Facilities */}
@@ -84,21 +77,15 @@ export default async function AboutSection() {
             >
               {HIGHLIGHTS.map(({ icon: Icon, label }, i) => (
                 <div key={i} className="flex items-center gap-3">
-                  <Icon
-                    className="w-5 h-5 shrink-0"
-
-                  />
-                  <p
-                    className="text-sm font-light tracking-wide w-auto"
-
-                  >
+                  <Icon className="w-5 h-5 shrink-0" />
+                  <p className="text-sm font-light tracking-wide w-auto">
                     {label}
                   </p>
                 </div>
               ))}
             </div>
 
-            <Link href="/" className="luxury-btn bg-(--color-blue)">
+            <Link href="about-us" className="luxury-btn bg-(--color-blue)">
               Explore More
               <ArrowRight className="w-4 h-4" />
             </Link>

@@ -8,7 +8,10 @@ import RoomBookingCard from "./sections/RoomBookingCard";
 import { contact } from "@/config/site";
 import { normalizeFaqs } from "@/lib/faq";
 import { ROOM_AMENITIES_FALLBACK } from "@/data/data";
-import { DecorativeGlow, DecorativeAccent } from "@/components/ui/DecorativeBlobs";
+import {
+  DecorativeGlow,
+  DecorativeAccent,
+} from "@/components/ui/DecorativeBlobs";
 
 export default function RoomPage({ pkg }: { pkg: any }) {
   if (!pkg) return null;
@@ -34,7 +37,8 @@ export default function RoomPage({ pkg }: { pkg: any }) {
 
   const tourUrl = pkg.tour_url as string | undefined;
   const faqs = normalizeFaqs(faq, faq_schema);
-  const amenities = cmsAmenities.length > 0 ? cmsAmenities : ROOM_AMENITIES_FALLBACK;
+  const amenities =
+    cmsAmenities.length > 0 ? cmsAmenities : ROOM_AMENITIES_FALLBACK;
 
   return (
     <div style={{ background: "var(--luxury-ivory)" }}>
@@ -57,7 +61,12 @@ export default function RoomPage({ pkg }: { pkg: any }) {
           <div className="order-last lg:order-first lg:col-span-2">
             {gallery_images.length > 0 && (
               <div className="relative rounded-2xl overflow-hidden shadow-2xl shadow-black/10 mb-10">
-                <ImageSlider images={gallery_images} title={title} overlayClassName="bg-black/0" showArrows />
+                <ImageSlider
+                  images={gallery_images}
+                  title={title}
+                  overlayClassName="bg-black/0"
+                  showArrows
+                />
               </div>
             )}
 
@@ -67,18 +76,10 @@ export default function RoomPage({ pkg }: { pkg: any }) {
             >
               {title}
             </h1>
-            <div className="luxury-divider mb-8" />
-            {sub_title && (
-              <p
-                className="text-xl md:text-2xl font-light leading-relaxed mb-8"
-                style={{ color: "var(--luxury-charcoal)" }}
-              >
-                {sub_title}
-              </p>
-            )}
+            <div className="luxury-divider  mb-8" />
             {description && (
               <div
-                className="cms-content luxury-subtitle"
+                className="cms-content luxury-subtitle !leading-[1.8]"
                 style={{ color: "var(--luxury-muted)" }}
                 dangerouslySetInnerHTML={{ __html: description }}
               />
@@ -120,101 +121,96 @@ export default function RoomPage({ pkg }: { pkg: any }) {
       )}
 
       {/* ── INCLUDES / EXCLUDES ──────────────────────────────────── */}
-      {(includes.length > 0 || excludes.length > 0) && (
-        <section
-          className="relative overflow-hidden max-w-[1400px] mx-auto py-20 px-6 md:px-12 lg:px-24"
-        >
+      {/* {(includes.length > 0 || excludes.length > 0) && (
+        <section className="relative overflow-hidden max-w-[1400px] mx-auto py-20 px-6 md:px-12 lg:px-24">
           <DecorativeGlow variant="gold-dark" />
           <div className="relative">
-          <h3
-            className="text-2xl font-light tracking-wide uppercase mb-2"
-            style={{ color: "var(--luxury-charcoal)" }}
-          >
-            What&apos;s Included
-          </h3>
-          <div
-            className="w-12 h-px mb-10"
-            style={{ background: "var(--luxury-gold)" }}
-          />
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {includes.length > 0 && (
-              <div
-                className="rounded-2xl p-8"
-                style={{
-                  background: "var(--luxury-cream)",
-                  border: "1px solid var(--luxury-border)",
-                }}
-              >
-                <p className="text-[10px] uppercase tracking-[0.2em] mb-6 text-gold-text">
-                  Included
-                </p>
-                <ul className="space-y-3">
-                  {includes.map((item: string, i: number) => (
-                    <li
-                      key={i}
-                      className="flex items-center gap-3 text-sm"
-                      style={{ color: "var(--luxury-charcoal)" }}
-                    >
-                      <Check
-                        className="w-4 h-4 shrink-0"
-                        style={{ color: "var(--luxury-gold)" }}
-                      />
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
-            {excludes.length > 0 && (
-              <div
-                className="rounded-2xl p-8"
-                style={{
-                  background: "var(--luxury-cream)",
-                  border: "1px solid var(--luxury-border)",
-                }}
-              >
-                <p
-                  className="text-[10px] uppercase tracking-[0.2em] mb-6"
-                  style={{ color: "var(--luxury-muted)" }}
+            <h3
+              className="text-2xl font-light tracking-wide uppercase mb-2"
+              style={{ color: "var(--luxury-charcoal)" }}
+            >
+              What&apos;s Included
+            </h3>
+            <div
+              className="w-12 h-px mb-10"
+              style={{ background: "var(--luxury-gold)" }}
+            />
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {includes.length > 0 && (
+                <div
+                  className="rounded-2xl p-8"
+                  style={{
+                    background: "var(--luxury-cream)",
+                    border: "1px solid var(--luxury-border)",
+                  }}
                 >
-                  Not Included
-                </p>
-                <ul className="space-y-3">
-                  {excludes.map((item: string, i: number) => (
-                    <li
-                      key={i}
-                      className="flex items-center gap-3 text-sm"
-                      style={{ color: "var(--luxury-muted)" }}
-                    >
-                      <X className="w-4 h-4 shrink-0 opacity-40" />
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
-          </div>
+                  <p className="text-[10px] uppercase tracking-[0.2em] mb-6 text-gold-text">
+                    Included
+                  </p>
+                  <ul className="space-y-3">
+                    {includes.map((item: string, i: number) => (
+                      <li
+                        key={i}
+                        className="flex items-center gap-3 text-sm"
+                        style={{ color: "var(--luxury-charcoal)" }}
+                      >
+                        <Check
+                          className="w-4 h-4 shrink-0"
+                          style={{ color: "var(--luxury-gold)" }}
+                        />
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+              {excludes.length > 0 && (
+                <div
+                  className="rounded-2xl p-8"
+                  style={{
+                    background: "var(--luxury-cream)",
+                    border: "1px solid var(--luxury-border)",
+                  }}
+                >
+                  <p
+                    className="text-[10px] uppercase tracking-[0.2em] mb-6"
+                    style={{ color: "var(--luxury-muted)" }}
+                  >
+                    Not Included
+                  </p>
+                  <ul className="space-y-3">
+                    {excludes.map((item: string, i: number) => (
+                      <li
+                        key={i}
+                        className="flex items-center gap-3 text-sm"
+                        style={{ color: "var(--luxury-muted)" }}
+                      >
+                        <X className="w-4 h-4 shrink-0 opacity-40" />
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+            </div>
           </div>
         </section>
-      )}
+      )} */}
 
       {/* ── ROOM POLICIES & ADDITIONAL CONTENT ────────────────────── */}
       {(content_0 || content_1) && (
-      <section className="max-w-[1400px] mx-auto mb-8 py-20 px-6 md:px-12 lg:px-24" style={{ background: "var(--luxury-cream)" }}>
-        {content_0 && (
-          <div
-            dangerouslySetInnerHTML={{ __html: content_0 }}
-          />
-        )}
-        {content_1 && <div dangerouslySetInnerHTML={{ __html: content_1 }} />}
-      </section>
+        <section
+          className="max-w-[1400px] mx-auto mb-8 py-20 px-6 md:px-12 lg:px-24"
+          style={{ background: "var(--luxury-cream)" }}
+        >
+          {content_0 && <div dangerouslySetInnerHTML={{ __html: content_0 }} />}
+          {content_1 && <div dangerouslySetInnerHTML={{ __html: content_1 }} />}
+        </section>
       )}
 
       {/* ── FAQS ─────────────────────────────────────────────────── */}
-      {faqs.length > 0 && (
-        <section
-          className="relative overflow-hidden max-w-[1400px] mx-auto py-20 px-6 md:px-12 lg:px-24"
-        >
+      {/* {faqs.length > 0 && (
+        <section className="relative overflow-hidden max-w-[1400px] mx-auto py-20 px-6 md:px-12 lg:px-24">
           <DecorativeGlow variant="dark-gold" />
           <div className="relative max-w-3xl mx-auto">
             <h3
@@ -230,7 +226,7 @@ export default function RoomPage({ pkg }: { pkg: any }) {
             <FaqAccordion items={faqs} />
           </div>
         </section>
-      )}
+      )} */}
 
       {/* ── CLOSING CTA ──────────────────────────────────────────── */}
       <section
@@ -241,7 +237,10 @@ export default function RoomPage({ pkg }: { pkg: any }) {
       >
         <div className="absolute inset-0 bg-black/40 backdrop-blur-[2px]" />
         <div className="relative z-10 max-w-[1400px] mx-auto w-full px-6 md:px-12 lg:px-24 text-center text-white">
-          <p className="luxury-label mb-4" style={{ color: "var(--luxury-gold)" }}>
+          <p
+            className="luxury-label mb-4"
+            style={{ color: "var(--luxury-gold)" }}
+          >
             Reserve Your Stay
           </p>
           <p className="text-2xl md:text-3xl font-light leading-relaxed max-w-2xl mx-auto mb-10">

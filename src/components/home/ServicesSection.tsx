@@ -1,13 +1,21 @@
-import Image from 'next/image';
-import Link from 'next/link';
-import { ArrowUpRight, BedDouble, PartyPopper, Sparkles, Utensils, Waves } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+import {
+  ArrowUpRight,
+  BedDouble,
+  PartyPopper,
+  Sparkles,
+  Utensils,
+  Waves,
+} from "lucide-react";
 import { SERVICES_HEADER } from "@/data/data";
-import { getServices } from '@/lib/data';
+import { getServices } from "@/lib/data";
 
 function getServiceIcon(item: { slug?: string; title?: string }) {
   const key = `${item.slug || ""} ${item.title || ""}`.toLowerCase();
   if (/dining|restaurant|food|cafe|bar/.test(key)) return Utensils;
-  if (/event|meeting|conference|hall|banquet|wedding/.test(key)) return PartyPopper;
+  if (/event|meeting|conference|hall|banquet|wedding/.test(key))
+    return PartyPopper;
   if (/pool|swim/.test(key)) return Waves;
   if (/room|suite|stay/.test(key)) return BedDouble;
   return Sparkles;
@@ -44,10 +52,13 @@ export default async function ServicesSection() {
       <div
         className="pointer-events-none absolute inset-x-0 top-0 h-[420px] opacity-[0.35]"
         style={{
-          backgroundImage: 'radial-gradient(var(--luxury-gold-dim) 1px, transparent 1px)',
-          backgroundSize: '28px 28px',
-          maskImage: 'radial-gradient(ellipse 60% 100% at 50% 0%, black 0%, transparent 75%)',
-          WebkitMaskImage: 'radial-gradient(ellipse 60% 100% at 50% 0%, black 0%, transparent 75%)',
+          backgroundImage:
+            "radial-gradient(var(--luxury-gold-dim) 1px, transparent 1px)",
+          backgroundSize: "28px 28px",
+          maskImage:
+            "radial-gradient(ellipse 60% 100% at 50% 0%, black 0%, transparent 75%)",
+          WebkitMaskImage:
+            "radial-gradient(ellipse 60% 100% at 50% 0%, black 0%, transparent 75%)",
         }}
         aria-hidden="true"
       />
@@ -58,7 +69,10 @@ export default async function ServicesSection() {
           <div className="luxury-ornament justify-center luxury-label text-gold-text mb-6 animate-fade-in-up">
             {header.label}
           </div>
-          <h2 className="luxury-section-title animate-fade-in-up delay-200" style={{ color: 'var(--luxury-charcoal)' }}>
+          <h2
+            className="luxury-section-title animate-fade-in-up delay-200"
+            style={{ color: "var(--luxury-charcoal)" }}
+          >
             {header.title}
           </h2>
         </div>
@@ -66,20 +80,29 @@ export default async function ServicesSection() {
         {/* Service Rows — full-width, alternating image/content sides */}
         <div className="flex flex-col gap-20 lg:gap-28">
           {services?.map((item: any, idx: number) => {
-            const imgSrc = item.gallery_images?.[0]?.src || (Array.isArray(item.img) ? item.img[0] : item.img) || item.image;
-            const altText = item.gallery_images?.[0]?.title || item.title || "Service";
-            const description = (item.content_0 || item.description || "").replace(/<\/?[^>]+>/g, "").trim();
+            const imgSrc =
+              item.gallery_images?.[0]?.src ||
+              (Array.isArray(item.img) ? item.img[0] : item.img) ||
+              item.image;
+            const altText =
+              item.gallery_images?.[0]?.title || item.title || "Service";
+            const href = item.slug ?? "/";
+            const description = (item.content_0 || item.description || "")
+              .replace(/<\/?[^>]+>/g, "")
+              .trim();
             const features = getFeaturePoints(description);
             const Icon = getServiceIcon(item);
             // const href = `/service/${item.slug || ''}`;
-            const href = "/";
             const reversed = idx % 2 === 1;
 
             return (
               <div
                 key={idx}
-                className={`flex flex-col ${reversed ? 'lg:flex-row-reverse' : 'lg:flex-row'} items-center gap-10 lg:gap-20 animate-fade-in-up ${idx < services.length - 1 ? 'pb-20 lg:pb-28 border-b' : ''}`}
-                style={{ animationDelay: `${0.12 * idx}s`, borderColor: 'var(--luxury-border)' }}
+                className={`flex flex-col ${reversed ? "lg:flex-row-reverse" : "lg:flex-row"} items-center gap-10 lg:gap-20 animate-fade-in-up ${idx < services.length - 1 ? "pb-20 lg:pb-28 border-b" : ""}`}
+                style={{
+                  animationDelay: `${0.12 * idx}s`,
+                  borderColor: "var(--luxury-border)",
+                }}
               >
                 {/* Image */}
                 <div className="w-full lg:w-1/2">
@@ -110,18 +133,24 @@ export default async function ServicesSection() {
                   <div className="inline-flex items-center gap-3 mb-5">
                     <span
                       className="flex items-center justify-center w-11 h-11 rounded-full shrink-0"
-                      style={{ background: 'var(--luxury-gold)' }}
+                      style={{ background: "var(--luxury-gold)" }}
                     >
-                      <Icon className="w-5 h-5" style={{ color: 'var(--luxury-dark)' }} />
+                      <Icon
+                        className="w-5 h-5"
+                        style={{ color: "var(--luxury-dark)" }}
+                      />
                     </span>
                     <span className="luxury-label text-gold-text">
-                      {String(idx + 1).padStart(2, '0')} — {item.sub_title}
+                      {String(idx + 1).padStart(2, "0")} — {item.sub_title}
                     </span>
                   </div>
 
                   <h3
                     className="luxury-section-title mb-6"
-                    style={{ color: 'var(--luxury-charcoal)', fontSize: 'clamp(1.8rem, 3vw, 2.75rem)' }}
+                    style={{
+                      color: "var(--luxury-charcoal)",
+                      fontSize: "clamp(1.8rem, 3vw, 2.75rem)",
+                    }}
                   >
                     {item.title}
                   </h3>
@@ -132,9 +161,12 @@ export default async function ServicesSection() {
                         <li key={i} className="flex items-start gap-3">
                           <span
                             className="mt-2 w-1.5 h-1.5 rounded-full shrink-0"
-                            style={{ background: 'var(--luxury-gold)' }}
+                            style={{ background: "var(--luxury-gold)" }}
                           />
-                          <span className="text-base leading-relaxed" style={{ color: 'var(--luxury-muted)' }}>
+                          <span
+                            className="text-base leading-relaxed"
+                            style={{ color: "var(--luxury-muted)" }}
+                          >
                             {point}
                           </span>
                         </li>

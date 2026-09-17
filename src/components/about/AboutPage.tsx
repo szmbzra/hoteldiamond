@@ -2,47 +2,37 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import {
-  ArrowRight,
-  Award,
-  Leaf,
-  Mountain,
-  Phone,
-  Users,
-} from "lucide-react";
+import { ArrowRight, Phone } from "lucide-react";
 import { BreadcrumbNoBanner } from "@/components/ui/Breadcrumb";
 import { DecorativeGlow, DecorativeAccent } from "@/components/ui/MandalaMotif";
 import placeholderAbout from "@/assets/images/placeholder-about.webp";
 import { links } from "@/config/site";
 
-const PILLARS = [
+const PILLARS: Array<{
+  icon: string;
+  title: string | string[];
+  desc: string;
+}> = [
   {
-    icon: Mountain,
-    title: "Panoramic Views",
-    desc: "Every room and dining space frames the majestic Himalayan horizon — a living canvas that changes with every season.",
+    icon: "📍",
+    title: ["Prime", "Location"],
+    desc: "Just a short walk from the sacred Bageshwori Temple, and close to Banke National Park the perfect base for culture and nature alike.",
   },
   {
-    icon: Leaf,
-    title: "Sustainability",
-    desc: "We operate with deep respect for the natural environment and the sacred cultural heritage of Manakamana.",
+    icon: "🏊",
+    title: "Complete Comfort",
+    desc: "From our swimming pool and gym to sauna and steam facilities, every stay comes with everything you need to relax and unwind.",
   },
   {
-    icon: Award,
+    icon: "🍽️",
     title: "Personalised Service",
-    desc: "From free cable car transfers to complimentary breakfast, every detail is curated for a seamless stay.",
+    desc: "From warm welcomes to attentive room service, every detail is thoughtfully handled for a smooth and memorable stay.",
   },
   {
-    icon: Users,
-    title: "Community",
-    desc: "We proudly employ and empower local talent, keeping the warmth of Nepali hospitality at the heart of everything we do.",
+    icon: "🤝",
+    title: "Nepali Hospitality",
+    desc: "Rooted in genuine Nepali warmth and tradition, our team is dedicated to making every guest feel truly at home and welcomed.",
   },
-];
-
-const STATS = [
-  { value: "50+", label: "Luxury Rooms" },
-  { value: "4.8★", label: "Guest Rating" },
-  { value: "360°", label: "Himalayan View" },
-  { value: "24/7", label: "Guest Support" },
 ];
 
 interface AboutData {
@@ -61,34 +51,13 @@ export default function AboutPage({
   phone: string;
 }) {
   const storyImageUrl = data?.gallery_images?.[0]?.src;
-  const storyImageAlt = data?.gallery_images?.[0]?.title || data?.title || "Hotel Diamond Palace";
+  const storyImageAlt =
+    data?.gallery_images?.[0]?.title || data?.title || "Hotel Diamond Palace";
   const telHref = phone ? `tel:${phone.replace(/\s+/g, "")}` : undefined;
 
   return (
     <div style={{ background: "var(--luxury-ivory)" }}>
       {/* Title */}
-      <BreadcrumbNoBanner title={data?.title || "About Us"} />
-
-      {/* Stats bar */}
-      <div style={{ background: "var(--luxury-dark)" }} className="py-8">
-        <div
-          className="max-w-[1400px] mx-auto grid grid-cols-2 md:grid-cols-4 gap-6 px-6 md:px-12 lg:px-24"
-        >
-          {STATS.map((s, i) => (
-            <div key={i} className="text-center">
-              <div
-                className="text-3xl md:text-4xl font-light mb-1"
-                style={{ color: "var(--luxury-gold)" }}
-              >
-                {s.value}
-              </div>
-              <p className="text-white/40 text-xs tracking-widest uppercase">
-                {s.label}
-              </p>
-            </div>
-          ))}
-        </div>
-      </div>
 
       {/* Our Story */}
       <section
@@ -100,7 +69,10 @@ export default function AboutPage({
           // CMS `article_all` (slug "about-us") ships this already fully
           // composed — image, label, headline, copy, highlights and CTA —
           // styled with our own luxury-* classes, so render it as-is.
-          <div className="relative" dangerouslySetInnerHTML={{ __html: data.content }} />
+          <div
+            className="relative"
+            dangerouslySetInnerHTML={{ __html: data.content }}
+          />
         ) : (
           <div className="relative max-w-[1400px] mx-auto py-20 px-6 md:px-12 lg:px-24">
             <div className="flex flex-col lg:flex-row gap-16 xl:gap-20 items-center">
@@ -135,7 +107,8 @@ export default function AboutPage({
                   className="luxury-section-title mb-8"
                   style={{ color: "var(--luxury-charcoal)" }}
                 >
-                  {data?.subtitle || "Timeless Hospitality in the Heart of Manakamana"}
+                  {data?.subtitle ||
+                    "Timeless Hospitality in the Heart of Manakamana"}
                 </h2>
 
                 <p
@@ -145,9 +118,9 @@ export default function AboutPage({
                   Perched above the sacred hills of Manakamana, Hotel Diamond
                   Palace pairs panoramic Himalayan views with warm Nepali
                   hospitality. Every stay is shaped around genuine comfort —
-                  spacious rooms, thoughtful service, and a setting that
-                  feels worlds away from the everyday, while remaining just
-                  a cable-car ride from home.
+                  spacious rooms, thoughtful service, and a setting that feels
+                  worlds away from the everyday, while remaining just a
+                  cable-car ride from home.
                 </p>
 
                 <div className="flex flex-wrap items-center gap-x-10 gap-y-6">
@@ -161,10 +134,7 @@ export default function AboutPage({
                   </Link>
 
                   {phone && (
-                    <a
-                      href={telHref}
-                      className="flex items-center gap-3 group"
-                    >
+                    <a href={telHref} className="flex items-center gap-3 group">
                       <span
                         className="w-11 h-11 rounded-full flex items-center justify-center shrink-0 transition-colors duration-300 group-hover:bg-(--luxury-gold)"
                         style={{ border: "1px solid var(--luxury-gold)" }}
@@ -218,23 +188,37 @@ export default function AboutPage({
             {PILLARS.map(({ icon: Icon, title, desc }, i) => (
               <div
                 key={i}
-                className="luxury-card-hover bg-white flex flex-col items-center text-center px-6 py-12 shadow-[0_4px_20px_rgba(0,0,0,0.03)] animate-fade-in-up"
+                className="luxury-card-hover bg-white flex flex-col items-center text-center px-6 py-12 shadow-[0_4px_20px_rgba(0,0,0,0.03)] animate-fade-in-up h-full"
                 style={{ animationDelay: `${0.1 * i}s` }}
               >
                 <div
-                  className="mb-6 w-14 h-14 rounded-full flex items-center justify-center"
-                  style={{ border: "1px solid var(--luxury-gold)" }}
+                  className="mb-6 w-14 h-14 rounded-full flex items-center justify-center text-2xl"
+                  style={{
+                    border: "1px solid var(--luxury-gold)",
+                    color: "var(--luxury-gold-text)",
+                  }}
                 >
-                  <Icon
-                    className="w-6 h-6"
-                    style={{ color: "var(--luxury-gold-text)" }}
-                  />
+                  {typeof Icon === "string" ? (
+                    <span
+                      aria-label={
+                        typeof title === "string" ? title : "pillar icon"
+                      }
+                    >
+                      {Icon}
+                    </span>
+                  ) : null}
                 </div>
                 <h3
-                  className="luxury-label text-[15px] tracking-wide mb-3"
+                  className="luxury-label text-[15px] tracking-wide mb-3 leading-snug"
                   style={{ color: "var(--luxury-charcoal)" }}
                 >
-                  {title}
+                  {Array.isArray(title)
+                    ? title.map((line) => (
+                        <span key={line} className="block">
+                          {line}
+                        </span>
+                      ))
+                    : title}
                 </h3>
                 <p
                   className="text-sm font-light leading-relaxed"
@@ -249,7 +233,10 @@ export default function AboutPage({
       </section>
 
       {/* CTA band */}
-      <section className="relative overflow-hidden" style={{ background: "var(--luxury-dark)" }}>
+      <section
+        className="relative overflow-hidden"
+        style={{ background: "var(--luxury-dark)" }}
+      >
         <DecorativeAccent color="gold" corner="top-right" size={260} />
         <div className="relative max-w-[1400px] mx-auto px-6 md:px-12 lg:px-24 py-16 flex flex-col md:flex-row items-center justify-between gap-8 text-center md:text-left">
           <div>
@@ -260,8 +247,8 @@ export default function AboutPage({
               Experience Hotel Diamond Palace
             </h3>
             <p className="luxury-subtitle text-white/60 max-w-xl">
-              Reserve your stay and let us take care of the rest — from
-              complimentary cable-car transfers to Himalayan sunrises.
+              Reserve your stay and let us take care of the rest — comfort,
+              hospitality, and everything in between.
             </p>
           </div>
           <div className="flex flex-col sm:flex-row items-center gap-4 shrink-0">
@@ -273,12 +260,6 @@ export default function AboutPage({
               Book Now
               <ArrowRight className="w-4 h-4" />
             </Link>
-            {phone && (
-              <a href={telHref} className="luxury-btn luxury-btn-light">
-                <Phone className="w-4 h-4" />
-                {phone}
-              </a>
-            )}
           </div>
         </div>
       </section>

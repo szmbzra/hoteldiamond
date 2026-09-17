@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { useState } from "react";
 import Link from "next/link";
@@ -52,9 +52,14 @@ export default function NewsGrid({ news }: { news: NewsData[] }) {
               </div>
 
               {/* Title */}
-              <h4 className="text-xl md:text-2xl font-light tracking-tight mb-3 transition-colors duration-300"
-                  style={{ color: 'var(--luxury-charcoal)' }}>
-                <Link href={`/blog/${item.slug}`} className="group-hover:opacity-70 transition-opacity">
+              <h4
+                className="text-xl mb-3 transition-colors duration-300"
+                style={{ color: "var(--luxury-charcoal)" }}
+              >
+                <Link
+                  href={`/blog/${item.slug}`}
+                  className="group-hover:opacity-70 transition-opacity"
+                >
                   {item.title}
                 </Link>
               </h4>
@@ -62,7 +67,7 @@ export default function NewsGrid({ news }: { news: NewsData[] }) {
               {/* Description */}
               <div
                 className="line-clamp-3 text-sm font-light leading-relaxed mb-6"
-                style={{ color: 'var(--luxury-muted)' }}
+                style={{ color: "var(--luxury-muted)" }}
                 dangerouslySetInnerHTML={{ __html: item.content }}
               />
 
@@ -72,7 +77,10 @@ export default function NewsGrid({ news }: { news: NewsData[] }) {
                 className="inline-flex items-center gap-2 text-xs tracking-[0.2em] uppercase font-medium transition-all duration-300 text-gold-text"
               >
                 Read More
-                <ArrowRight size={16} className="transition-transform duration-300 group-hover:translate-x-2" />
+                <ArrowRight
+                  size={16}
+                  className="transition-transform duration-300 group-hover:translate-x-2"
+                />
               </Link>
             </div>
           </div>

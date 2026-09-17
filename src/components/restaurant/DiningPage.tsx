@@ -13,18 +13,19 @@ import {
 } from "lucide-react";
 import { BreadcrumbNoBanner } from "@/components/ui/Breadcrumb";
 import ImageSlider from "@/components/ui/ImageSlider";
-import { DecorativeGlow, DecorativeAccent } from "@/components/ui/DecorativeBlobs";
+import { DecorativeGlow } from "@/components/ui/DecorativeBlobs";
 
 // Shown whenever the CMS hasn't filled in a real `amenities` list yet — swapped
 // out automatically the moment `pkg.amenities[0].items` has entries.
-const DEFAULT_AMENITIES: { title: string; icon: typeof Wifi; img?: string }[] = [
-  { title: "Free Wi-Fi", icon: Wifi },
-  { title: "All-Day Dining", icon: UtensilsCrossed },
-  { title: "Bar & Lounge", icon: Wine },
-  { title: "Buffet & À la Carte", icon: ChefHat },
-  { title: "Private Dining", icon: Users },
-  { title: "Air Conditioned", icon: Wind },
-];
+const DEFAULT_AMENITIES: { title: string; icon: typeof Wifi; img?: string }[] =
+  [
+    { title: "Free Wi-Fi", icon: Wifi },
+    { title: "All-Day Dining", icon: UtensilsCrossed },
+    { title: "Bar & Lounge", icon: Wine },
+    { title: "Buffet & À la Carte", icon: ChefHat },
+    { title: "Private Dining", icon: Users },
+    { title: "Air Conditioned", icon: Wind },
+  ];
 
 function getAmenityIcon(title: string = "") {
   const t = title.toLowerCase();
@@ -55,9 +56,11 @@ interface DiningData {
 export default function DiningPage({
   pkg,
   phone,
+  whatsapp,
 }: {
   pkg: DiningData | null;
   phone: string;
+  whatsapp?: string;
 }) {
   const images = (pkg?.banner_img ?? [])
     .filter((b) => b?.url)
@@ -74,10 +77,16 @@ export default function DiningPage({
       : DEFAULT_AMENITIES;
 
   const telHref = phone ? `tel:${phone.replace(/\s+/g, "")}` : undefined;
+  const whatsappHref = whatsapp
+    ? `https://wa.me/${whatsapp.replace(/[^0-9]/g, "")}`
+    : undefined;
 
   return (
     <div style={{ background: "var(--luxury-ivory)" }}>
-      <BreadcrumbNoBanner title={pkg?.title || "Dining"} />
+      <BreadcrumbNoBanner
+        title={pkg?.title || "Dining"}
+        sub_title={pkg?.sub_title || "Dining"}
+      />
 
       {/* Gallery + intro */}
       <section className="max-w-[1400px] mx-auto pt-14 pb-20 px-6 md:px-12 lg:px-24">
@@ -113,7 +122,10 @@ export default function DiningPage({
               dangerouslySetInnerHTML={{ __html: pkg.description }}
             />
           ) : (
-            <p className="luxury-subtitle" style={{ color: "var(--luxury-muted)" }}>
+            <p
+              className="luxury-subtitle"
+              style={{ color: "var(--luxury-muted)" }}
+            >
               Discover a dining experience crafted with care — from relaxed
               breakfasts to memorable evenings.
             </p>
@@ -122,7 +134,10 @@ export default function DiningPage({
       </section>
 
       {/* Amenities */}
-      <section className="relative overflow-hidden" style={{ background: "var(--luxury-cream)" }}>
+      <section
+        className="relative overflow-hidden"
+        style={{ background: "var(--luxury-cream)" }}
+      >
         <DecorativeGlow variant="gold-dark" />
         <div className="relative max-w-[1400px] mx-auto py-20 px-6 md:px-12 lg:px-24">
           <div className="text-center mb-14">
@@ -161,7 +176,10 @@ export default function DiningPage({
                         className="w-6 h-6 object-contain opacity-80"
                       />
                     ) : (
-                      <Icon className="w-6 h-6" style={{ color: "var(--luxury-gold-text)" }} />
+                      <Icon
+                        className="w-6 h-6"
+                        style={{ color: "var(--luxury-gold-text)" }}
+                      />
                     )}
                   </div>
                   <span
@@ -178,36 +196,41 @@ export default function DiningPage({
       </section>
 
       {/* Reservation CTA */}
-      <section className="relative overflow-hidden py-20">
-        <DecorativeAccent color="gold" corner="top-right" size={420} />
-        <div className="relative max-w-[1400px] mx-auto text-center px-6 md:px-12 lg:px-24">
-          <p className="luxury-label text-gold-text mb-4 flex justify-center">
+      <section
+        className="relative min-h-[420px] flex items-center py-20 bg-fixed bg-cover bg-center"
+        style={{ backgroundImage: "url(/bgimg.jpg)" }}
+      >
+        <div className="absolute inset-0 bg-black/40 backdrop-blur-[2px]" />
+        <div className="relative z-10 max-w-[1400px] mx-auto w-full px-6 md:px-12 lg:px-24 text-center text-white">
+          <p
+            className="luxury-label mb-4"
+            style={{ color: "var(--luxury-gold)" }}
+          >
             Reserve a Table
           </p>
-          <div className="flex justify-center mb-8">
-            <div className="luxury-divider" />
-          </div>
-          <h2
-            className="luxury-section-title mb-6"
-            style={{ color: "var(--luxury-charcoal)" }}
-          >
-            We&apos;d Love to Host You
-          </h2>
-          <p
-            className="luxury-subtitle max-w-xl mx-auto mb-10"
-            style={{ color: "var(--luxury-muted)" }}
-          >
-            Book a table and let us prepare a dining experience worth
-            returning for.
+          <p className="text-2xl md:text-3xl font-light leading-relaxed max-w-2xl mx-auto mb-10">
+            We&apos;d love to host you — let us prepare a dining experience
+            worth returning for.
           </p>
-          {phone && (
-            <div className="flex flex-wrap justify-center gap-4">
+          <div className="flex flex-wrap justify-center gap-4">
+            {phone && (
               <a href={telHref} className="luxury-btn luxury-btn-solid">
                 <Phone className="w-4 h-4" />
                 Call to Reserve
               </a>
-            </div>
-          )}
+            )}
+            {whatsappHref && (
+              <a
+                href={whatsappHref}
+                target="_blank"
+                rel="noreferrer"
+                className="luxury-btn luxury-btn-light"
+              >
+                <i className="fa-brands fa-whatsapp text-base" />
+                WhatsApp Us
+              </a>
+            )}
+          </div>
         </div>
       </section>
     </div>

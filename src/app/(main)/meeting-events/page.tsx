@@ -44,9 +44,12 @@ export default async function EventsRoute() {
       {schemas.map((schema, i) => (
         <JsonLd key={i} schema={schema} />
       ))}
-      <BreadcrumbNoBanner title={pkg?.title || "Meeting & Events"} />
+      <BreadcrumbNoBanner
+        title={pkg?.title || "Meeting & Events"}
+        sub_title={pkg?.sub_title || "Meeting & Events"}
+      />
 
-      <section className="relative overflow-hidden py-24 px-6 md:px-12 bg-[#f9f7f2]">
+      <section className="relative overflow-hidden pb-24 px-6 md:px-12 bg-[#f9f7f2]">
         <GeometricAccent side="left" color="dark" opacity={0.5} />
         <GeometricAccent side="right" color="dark" opacity={0.5} />
         <div className="relative max-w-7xl mx-auto">

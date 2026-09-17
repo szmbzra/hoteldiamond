@@ -80,7 +80,7 @@ export default function RoomsList({ rooms }: { rooms: any[] }) {
             <div className="p-6 md:p-7 flex flex-col flex-grow">
               <h3
                 className="text-2xl md:text-[1.75rem] tracking-wide mb-1.5 transition-colors duration-300 group-hover:text-gold-text"
-                style={{ fontFamily: "var(--font-cinzel), 'Cormorant Garamond', Georgia, serif", color: "var(--luxury-charcoal)" }}
+                style={{ fontFamily: "var(--font-heading), 'Playfair Display', Georgia, serif", color: "var(--luxury-charcoal)" }}
               >
                 {room.title}
               </h3>

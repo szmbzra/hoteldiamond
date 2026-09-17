@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, Poppins } from "next/font/google";
+import { Playfair_Display, Poppins } from "next/font/google";
 import "./globals.css";
 import Analytics from "@/components/ui/Analytics";
 import JsonLd from "@/components/seo/JsonLd";
@@ -8,10 +8,11 @@ import SiteScripts from "@/components/seo/SiteScripts";
 import { getSiteRegulars, getCustomCss } from "@/lib/data";
 import { site } from "@/config/site";
 
-const cinzel = Cormorant_Garamond({
-  variable: "--font-cinzel",
+const heading = Playfair_Display({
+  variable: "--font-heading",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
+  style: ["normal", "italic"],
   display: "swap",
 });
 
@@ -49,7 +50,7 @@ export default async function RootLayout({
   ]);
 
   return (
-    <html lang={site.locale} className={`${cinzel.variable} ${productSans.variable} h-full antialiased`} suppressHydrationWarning={true}>
+    <html lang={site.locale} className={`${heading.variable} ${productSans.variable} h-full antialiased`} suppressHydrationWarning={true}>
       <head>
         {/* Preconnect to all external origins — eliminates DNS + TCP + TLS round-trips */}
         <link rel="preconnect" href="https://mayurstay.com" crossOrigin="anonymous" />

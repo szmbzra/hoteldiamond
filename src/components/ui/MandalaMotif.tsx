@@ -33,8 +33,8 @@ const COLOR_CLASS: Record<MandalaColor, string> = {
 };
 
 const OPACITY: Record<MandalaColor, number> = {
-  gold: 0.16,
-  dark: 0.08,
+  gold: 0.4,
+  dark: 0.22,
 };
 
 // A hand-built line-art mandala: concentric rings + a ring of radiating

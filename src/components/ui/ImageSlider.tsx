@@ -12,6 +12,14 @@ import 'swiper/css/pagination';
 import 'swiper/css/effect-fade';
 import Image from 'next/image';
 
+// Dummy fallback images (images.unsplash.com) aren't in next/image's
+// configured remotePatterns, so render those with a plain <img> — real CMS
+// images (mayurstay.com) still go through next/image below. Same workaround
+// as src/components/restaurant/RestaurantList.tsx.
+function isUnoptimisedSrc(src: string) {
+  return src.startsWith('https://images.unsplash.com/');
+}
+
 interface ImageSliderProps {
   images?: (string | { src?: string; title?: string; url?: string; gallery_images?: string })[];
   title?: string;
@@ -62,14 +70,23 @@ export default function ImageSlider({
           return (
             <SwiperSlide key={i} className="h-full w-full overflow-hidden">
               <div className="h-full w-full relative">
-                <Image
-                  src={imgSrc}
-                  alt={imgTitle}
-                  fill
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1920px"
-                  priority={i === 0}
-                  className="object-cover swiper-image-zoom"
-                />
+                {isUnoptimisedSrc(imgSrc) ? (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img
+                    src={imgSrc}
+                    alt={imgTitle}
+                    className="absolute inset-0 w-full h-full object-cover swiper-image-zoom"
+                  />
+                ) : (
+                  <Image
+                    src={imgSrc}
+                    alt={imgTitle}
+                    fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1920px"
+                    priority={i === 0}
+                    className="object-cover swiper-image-zoom"
+                  />
+                )}
                 <div className={`absolute inset-0 ${overlayClassName}`} />
               </div>
             </SwiperSlide>

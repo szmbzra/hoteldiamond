@@ -5,6 +5,13 @@ export default function AmenitiesGrid({
 }) {
   if (amenities.length === 0) return null;
 
+  // The CMS returns amenities as a flat list of items (`[{title, img}, ...]`),
+  // while local fallback data groups them (`[{group_title, items: [...]}]`).
+  // Support both shapes.
+  const isGrouped = Array.isArray(amenities[0]?.items);
+  const groupTitle = isGrouped ? amenities[0]?.group_title : undefined;
+  const items = isGrouped ? amenities[0]?.items : amenities;
+
   return (
     <section style={{ background: "var(--luxury-cream)" }}>
       <div className="max-w-[1400px] mx-auto py-20 px-6 md:px-12 lg:px-24">
@@ -13,14 +20,14 @@ export default function AmenitiesGrid({
             className="luxury-section-title"
             style={{ color: "var(--luxury-charcoal)" }}
           >
-            {amenities?.[0]?.group_title || "Amenities"}
+            {groupTitle || "Amenities"}
           </h2>
           <div className="flex justify-center mt-4">
             <div className="luxury-divider" />
           </div>
         </div>
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-          {amenities?.[0]?.items?.map((f: any, i: number) => (
+          {items?.map((f: any, i: number) => (
             <div
               key={i}
               className="flex items-center gap-3 p-4 rounded-xl bg-white"

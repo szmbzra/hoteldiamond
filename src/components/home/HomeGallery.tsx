@@ -40,14 +40,12 @@ export default async function HomeGallery() {
             </h2>
             <p
               className="luxury-subtitle mb-8 text-base! font-normal!"
-                  style={{ color: "var(--luxury-muted)" }}>
-              From candlelit dining to sunset views over the pool, every
-              corner of the property has its own story. Step through the
-              gallery for a closer look at the spaces that make each stay
-              memorable.
+              style={{ color: "var(--luxury-muted)" }}
+            >
+              Discover the spaces, experiences, and subtle details that make our property special. Take a tour through our gallery to explore our rooms, dining options, and event facilities.
             </p>
             <Link
-              href="#"
+              href="gallery"
               className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.25em] luxury-btn group/btn w-fit hover:text-gold-text transition-colors group"
             >
               View Full Gallery

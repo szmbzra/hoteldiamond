@@ -2,6 +2,8 @@ import { Maximize, Phone, Users } from "lucide-react";
 import BookingWidget from "@/components/ui/BookingWidget";
 import { contact } from "@/config/site";
 import { formatCurrencyAmount } from "@/lib/format";
+import { getSiteRegulars } from "@/lib/data";
+const siteRegulars = await getSiteRegulars();
 
 interface RoomBookingCardProps {
   price?: string | number;
@@ -22,21 +24,36 @@ export default function RoomBookingCard({
   const facts = [
     occupancy ? { icon: Users, label: "Occupancy", value: occupancy } : null,
     roomSize ? { icon: Maximize, label: "Room Size", value: roomSize } : null,
-  ].filter((f): f is { icon: typeof Users; label: string; value: string } => f !== null);
+  ].filter(
+    (f): f is { icon: typeof Users; label: string; value: string } =>
+      f !== null,
+  );
 
   return (
     <div
       className="p-8 md:p-10 rounded-2xl shadow-xl"
-      style={{ background: "var(--luxury-ivory)", border: "1px solid var(--luxury-border)" }}
+      style={{
+        background: "var(--luxury-ivory)",
+        border: "1px solid var(--luxury-border)",
+      }}
     >
       {formattedPrice && (
         <div className="mb-8 text-center">
-          <p className="luxury-label mb-2" style={{ color: "var(--luxury-gold-text)" }}>
+          <p
+            className="luxury-label mb-2"
+            style={{ color: "var(--luxury-gold-text)" }}
+          >
             Starting From
           </p>
-          <p className="text-3xl font-light" style={{ color: "var(--luxury-charcoal)" }}>
+          <p
+            className="text-3xl font-light"
+            style={{ color: "var(--luxury-charcoal)" }}
+          >
             {formattedPrice}
-            <span className="text-sm ml-2" style={{ color: "var(--luxury-muted)" }}>
+            <span
+              className="text-sm ml-2"
+              style={{ color: "var(--luxury-muted)" }}
+            >
               / night
             </span>
           </p>
@@ -44,21 +61,29 @@ export default function RoomBookingCard({
       )}
 
       {facts.length > 0 && (
-        <div className={`grid gap-4 mb-8 ${facts.length > 1 ? "grid-cols-2" : "grid-cols-1"}`}>
+        <div
+          className={`grid gap-4 mb-8 ${facts.length > 1 ? "grid-cols-2" : "grid-cols-1"}`}
+        >
           {facts.map(({ icon: Icon, label, value }) => (
             <div
               key={label}
               className="flex flex-col items-center text-center gap-2 py-4 px-2 rounded-xl"
               style={{ background: "var(--luxury-cream)" }}
             >
-              <Icon className="w-4 h-4" style={{ color: "var(--luxury-gold)" }} />
+              <Icon
+                className="w-4 h-4"
+                style={{ color: "var(--luxury-gold)" }}
+              />
               <span
                 className="text-[10px] uppercase tracking-[0.15em]"
                 style={{ color: "var(--luxury-muted)" }}
               >
                 {label}
               </span>
-              <span className="text-sm font-light" style={{ color: "var(--luxury-charcoal)" }}>
+              <span
+                className="text-sm font-light"
+                style={{ color: "var(--luxury-charcoal)" }}
+              >
                 {value}
               </span>
             </div>
@@ -67,10 +92,13 @@ export default function RoomBookingCard({
       )}
 
       {(formattedPrice || facts.length > 0) && (
-        <div className="pt-2 mb-6 border-t" style={{ borderColor: "var(--luxury-border)" }} />
+        <div
+          className="pt-2 mb-6 border-t"
+          style={{ borderColor: "var(--luxury-border)" }}
+        />
       )}
 
-      <BookingWidget bookUrl={bookUrl} />
+      <BookingWidget bookUrl={siteRegulars?.booking_code} />
 
       <a
         href={`tel:${contact.phoneE164}`}

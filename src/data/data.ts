@@ -17,13 +17,7 @@ import footerLogo from "@/assets/light-logo.png";
 import favicon from "@/assets/favicon.png";
 import { site, contact, address, SITE_URL } from "@/config/site";
 
-
-
-
-
-
 export const metaData = {
-
   // ---------------------------------------------------------------------------
   // SITE IDENTITY
   // DB columns: sitetitle, sitename
@@ -179,9 +173,8 @@ export const metaData = {
   booking_code: "",
 };
 
-
 export const HERO_DATA = {
-  headline: "Manakamana Hillcrest",
+  headline: "Hotel Diamond Pvt. Ltd",
   subheadline: "A Sanctuary in the Himalayas",
   tagline: "Where serenity meets luxury",
   videoSrc: "/video/hero.webm",
@@ -194,9 +187,9 @@ export const ABOUT_DATA = {
   paragraphs: [
     "Welcome to Hotel Diamond Palace Pvt. Ltd, a premier destination in the heart of Nepalgunj. We combine modern luxury with warm Nepalese hospitality, offering guests an unforgettable stay whether they are here for business, leisure, or celebration.",
 
-"Our property features 95 elegantly designed rooms, versatile event facilities, and exceptional dining outlets that showcase both authentic Nepalese flavours and international cuisine. With amenities like a swimming pool, fitness center, spa, and 24‑hour front desk, we ensure comfort and convenience at every step.",
+    "Our property features 95 elegantly designed rooms, versatile event facilities, and exceptional dining outlets that showcase both authentic Nepalese flavours and international cuisine. With amenities like a swimming pool, fitness center, spa, and 24‑hour front desk, we ensure comfort and convenience at every step.",
 
-"Located near the revered Bageshwori Temple and close to Banke National Park, Hotel Diamond Palace is perfectly positioned for cultural exploration and natural adventures. Our dedicated team strives to deliver personalized service, making every guest feel at home.",
+    "Located near the revered Bageshwori Temple and close to Banke National Park, Hotel Diamond Palace is perfectly positioned for cultural exploration and natural adventures. Our dedicated team strives to deliver personalized service, making every guest feel at home.",
   ],
   phone: contact.phoneE164,
   phoneLabel: "Reserve Now",
@@ -331,50 +324,49 @@ export const LANDMARKS: Landmark[] = [
 ];
 
 export const TESTIMONIALS: Testimonial[] = [
-{
-title: "Great stay with friends!",
-content:
-"Visited Hotel Diamond Palace with friends and had a great time. The rooms were clean and comfortable, the atmosphere was peaceful, and the hospitality was excellent. The staff were friendly and helpful throughout our stay, and the food was delicious too. Overall, it was a wonderful experience and a great place to stay with friends. Would definitely recommend!",
-author: "James G",
-source: "Tripadvisor",
-},
-{
-title: "Hotel Diamond Palace - Nepalgunj, Nepal",
-content:
-"This is definitely one of the best hotels we have stayed in Nepal. The location of Hotel Diamond Palace in Nepalgunj is excellent, making it convenient for exploring the city and nearby attractions. The customer service was excellent, the rooms were clean and comfortable, and the overall atmosphere was relaxing. The staff were welcoming and attentive throughout our stay, making the experience truly enjoyable.",
-author: "Falcha",
-source: "Tripadvisor",
-},
-{
-title: "Holiday ❘ Family",
-content:
-"The stay was amazing and the hospitality was excellent. The hotel has a comfortable and welcoming atmosphere, making it a great choice for a family holiday. The staff were friendly and attentive, and everything was well taken care of during our stay. Would recommend 10/10.",
-author: "Aditya maharjan",
-source: "Google",
-},
-{
-title: "Holiday ❘ Friends",
-content:
-"This is one of the best hotels to stay at in Nepalgunj. The staff are very friendly and welcoming, and the service was excellent throughout our stay. We were a group of friends and had a very comfortable and enjoyable experience. Everything was well managed and the atmosphere was perfect. You must visit and stay here.",
-author: "Prakash Dhakhwa",
-source: "Google",
-},
-{
-title: "Holiday ❘ Family",
-content:
-"We had a lovely stay with our family. The staff were very kind and welcoming, and the room was clean, comfortable, and spacious. Everything felt easy and family-friendly throughout our stay. Thank you for making our visit so special. We would definitely come back again!",
-author: "Sunil Thapa",
-source: "Google",
-},
-{
-title: "Holiday ❘ Couple",
-content:
-"Hotel Diamond Palace is one of the best hotels to stay at in Nepalgunj. We had a wonderful experience at this beautiful property. The staff were welcoming, attentive, and provided excellent hospitality throughout our stay. The comfortable rooms, pleasant atmosphere, and quality service made our visit truly enjoyable.",
-author: "Krishna Shrestha",
-source: "Google",
-},
+  {
+    title: "Great stay with friends!",
+    content:
+      "Visited Hotel Diamond Palace with friends and had a great time. The rooms were clean and comfortable, the atmosphere was peaceful, and the hospitality was excellent. The staff were friendly and helpful throughout our stay, and the food was delicious too. Overall, it was a wonderful experience and a great place to stay with friends. Would definitely recommend!",
+    author: "James G",
+    source: "Tripadvisor",
+  },
+  {
+    title: "Hotel Diamond Palace - Nepalgunj, Nepal",
+    content:
+      "This is definitely one of the best hotels we have stayed in Nepal. The location of Hotel Diamond Palace in Nepalgunj is excellent, making it convenient for exploring the city and nearby attractions. The customer service was excellent, the rooms were clean and comfortable, and the overall atmosphere was relaxing. The staff were welcoming and attentive throughout our stay, making the experience truly enjoyable.",
+    author: "Falcha",
+    source: "Tripadvisor",
+  },
+  {
+    title: "Holiday ❘ Family",
+    content:
+      "The stay was amazing and the hospitality was excellent. The hotel has a comfortable and welcoming atmosphere, making it a great choice for a family holiday. The staff were friendly and attentive, and everything was well taken care of during our stay. Would recommend 10/10.",
+    author: "Aditya maharjan",
+    source: "Google",
+  },
+  {
+    title: "Holiday ❘ Friends",
+    content:
+      "This is one of the best hotels to stay at in Nepalgunj. The staff are very friendly and welcoming, and the service was excellent throughout our stay. We were a group of friends and had a very comfortable and enjoyable experience. Everything was well managed and the atmosphere was perfect. You must visit and stay here.",
+    author: "Prakash Dhakhwa",
+    source: "Google",
+  },
+  {
+    title: "Holiday ❘ Family",
+    content:
+      "We had a lovely stay with our family. The staff were very kind and welcoming, and the room was clean, comfortable, and spacious. Everything felt easy and family-friendly throughout our stay. Thank you for making our visit so special. We would definitely come back again!",
+    author: "Sunil Thapa",
+    source: "Google",
+  },
+  {
+    title: "Holiday ❘ Couple",
+    content:
+      "Hotel Diamond Palace is one of the best hotels to stay at in Nepalgunj. We had a wonderful experience at this beautiful property. The staff were welcoming, attentive, and provided excellent hospitality throughout our stay. The comfortable rooms, pleasant atmosphere, and quality service made our visit truly enjoyable.",
+    author: "Krishna Shrestha",
+    source: "Google",
+  },
 ];
-
 
 export const NEWS: NewsItem[] = [
   {
@@ -539,7 +531,8 @@ export const DUMMY_DINING_OUTLETS = [
     id: "dummy-diamond-restaurant",
     slug: "diamond-restaurant",
     title: "The Diamond Restaurant",
-    sub_title: "All-day multi-cuisine dining with sweeping views over the Manakamana hills.",
+    sub_title:
+      "All-day multi-cuisine dining with sweeping views over the Manakamana hills.",
     description:
       "<p>Our signature restaurant serves a thoughtfully curated menu of Nepali, Indian and continental favourites, from a leisurely breakfast spread to a candlelit dinner. Floor-to-ceiling windows frame the surrounding hills, making every table a room with a view.</p>",
     gallery_images: [
@@ -571,7 +564,8 @@ export const DUMMY_DINING_OUTLETS = [
     id: "dummy-garden-cafe",
     slug: "garden-cafe",
     title: "Garden Café",
-    sub_title: "A relaxed all-day café for coffee, light bites, and afternoon tea.",
+    sub_title:
+      "A relaxed all-day café for coffee, light bites, and afternoon tea.",
     description:
       "<p>Set among the gardens, our café is the easy-going spot for a slow coffee, fresh pastries, or afternoon tea between activities. Open all day, with plenty of shaded outdoor seating.</p>",
     gallery_images: [
@@ -590,7 +584,8 @@ export const DUMMY_EVENT_VENUES = [
     id: "dummy-grand-ballroom",
     slug: "grand-ballroom",
     title: "The Grand Ballroom",
-    sub_title: "An elegant pillar-free hall for weddings, galas, and large conferences.",
+    sub_title:
+      "An elegant pillar-free hall for weddings, galas, and large conferences.",
     description:
       "<p>Our largest event space comfortably hosts weddings, galas and large-scale conferences, with a pillar-free floor plan, a dedicated event team, and full audio-visual support.</p>",
     gallery_images: [
@@ -611,7 +606,8 @@ export const DUMMY_EVENT_VENUES = [
     id: "dummy-manakamana-conference-hall",
     slug: "manakamana-conference-hall",
     title: "Manakamana Conference Hall",
-    sub_title: "A refined boardroom-style space for meetings and corporate retreats.",
+    sub_title:
+      "A refined boardroom-style space for meetings and corporate retreats.",
     description:
       "<p>A quieter, boardroom-style venue suited to meetings, workshops and corporate retreats, equipped with natural daylight and modern AV equipment.</p>",
     gallery_images: [
@@ -651,48 +647,66 @@ export const DUMMY_EVENT_VENUES = [
   },
 ];
 
-
 export const ROOM_POLICIES = [
   { label: "Check-in", value: "2:00 PM" },
   { label: "Check-out", value: "12:00 PM (noon)" },
-  { label: "Cancellation", value: "Free up to 48 hrs before arrival. 1-night charge applies for late cancellations." },
-  { label: "Children", value: "All ages welcome. Children under 12 stay free sharing parents' room." },
-  { label: "Smoking", value: "Non-smoking property. Designated outdoor smoking areas available." },
+  {
+    label: "Cancellation",
+    value:
+      "Free up to 48 hrs before arrival. 1-night charge applies for late cancellations.",
+  },
+  {
+    label: "Children",
+    value:
+      "All ages welcome. Children under 12 stay free sharing parents' room.",
+  },
+  {
+    label: "Smoking",
+    value: "Non-smoking property. Designated outdoor smoking areas available.",
+  },
   { label: "Payment", value: "Visa, MasterCard and cash (NPR) accepted." },
 ];
 
 export const ROOM_FAQS = [
   {
     question: "What time is check-in and check-out?",
-    answer: "Check-in is at 2:00 PM and check-out is at 12:00 PM. Early check-in and late check-out can be arranged subject to availability — please contact us in advance.",
+    answer:
+      "Check-in is at 2:00 PM and check-out is at 12:00 PM. Early check-in and late check-out can be arranged subject to availability — please contact us in advance.",
   },
   {
     question: "Is breakfast included in the room rate?",
-    answer: "Yes, complimentary breakfast for two is included with every room. Breakfast is served 7:00 AM – 10:00 AM at Basera Restaurant.",
+    answer:
+      "Yes, complimentary breakfast for two is included with every room. Breakfast is served 7:00 AM – 10:00 AM at Basera Restaurant.",
   },
   {
     question: "Are cable car tickets complimentary?",
-    answer: "Yes, all staying guests receive complimentary cable car tickets, allowing easy access between the valley station and Manakamana Temple.",
+    answer:
+      "Yes, all staying guests receive complimentary cable car tickets, allowing easy access between the valley station and Manakamana Temple.",
   },
   {
     question: "Is the swimming pool open year-round?",
-    answer: "The outdoor swimming pool is open seasonally (March – November). Sauna and steam facilities are available year-round.",
+    answer:
+      "The outdoor swimming pool is open seasonally (March – November). Sauna and steam facilities are available year-round.",
   },
   {
     question: "Do you offer airport transfers?",
-    answer: "Airport transfers can be arranged on request at an additional charge. Please contact us at least 24 hours before your arrival.",
+    answer:
+      "Airport transfers can be arranged on request at an additional charge. Please contact us at least 24 hours before your arrival.",
   },
   {
     question: "Can I request a room with a Himalayan view?",
-    answer: "Most of our rooms offer panoramic Himalayan views. Please mention your preference at the time of booking and we will do our best to accommodate you.",
+    answer:
+      "Most of our rooms offer panoramic Himalayan views. Please mention your preference at the time of booking and we will do our best to accommodate you.",
   },
   {
     question: "Is there parking at the resort?",
-    answer: "Yes, complimentary parking is available on the resort premises for all guests.",
+    answer:
+      "Yes, complimentary parking is available on the resort premises for all guests.",
   },
   {
     question: "What is the cancellation policy?",
-    answer: "Free cancellation is available up to 48 hours before check-in. A one-night charge applies for cancellations made within 48 hours of arrival.",
+    answer:
+      "Free cancellation is available up to 48 hours before check-in. A one-night charge applies for cancellations made within 48 hours of arrival.",
   },
 ];
 
@@ -794,7 +808,6 @@ export const menuData = [
     link: "/contact-us",
   },
 ];
-
 
 /** Site-wide CSS scoped to `.cms-content`, injected once in <head> (see layout.tsx).
  *  DB column: custom_css (not live yet — API should expose it next to `headers`

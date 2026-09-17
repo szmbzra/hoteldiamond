@@ -9,7 +9,11 @@ import { buildMetadata } from "@/lib/metadata";
 import JsonLd from "@/components/seo/JsonLd";
 import { SITE_URL, site } from "@/config/site";
 
-export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
   const { slug } = await params;
   const post: any = await findBlogBySlug(slug);
 
@@ -33,7 +37,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
         ...(post?.updated_at && { modifiedTime: post.updated_at }),
       },
     },
-    `/blog/${slug}`
+    `/blog/${slug}`,
   );
 }
 
@@ -75,7 +79,9 @@ export default async function BlogSlugPage({
     },
     url: `${SITE_URL}/blog/${slug}`,
     mainEntityOfPage: { "@type": "WebPage", "@id": `${SITE_URL}/blog/${slug}` },
-    ...((blog as any).created_at && { datePublished: (blog as any).created_at }),
+    ...((blog as any).created_at && {
+      datePublished: (blog as any).created_at,
+    }),
     ...((blog as any).updated_at
       ? { dateModified: (blog as any).updated_at }
       : (blog as any).created_at
@@ -85,97 +91,95 @@ export default async function BlogSlugPage({
 
   return (
     <>
-    <JsonLd schema={blogPostingSchema} />
-    <main className="min-h-screen bg-white">
-
-
-      {/* 2. Content Grid */}
-      <section className="max-w-7xl mx-auto px-6 md:px-12 pt-20 pb-20 md:pb-32">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-20">
-          {/* Main Content (8 cols) */}
-          <div className="lg:col-span-8">
-                        <h1 className="text-4xl md:text-6xl lg:text-7xl font-light tracking-tight mb-12 leading-[1.1] animate-fade-in">
-              {blog.title}
-            </h1>
-            {/* Hero Image */}
-            <div className="relative aspect-[16/10] overflow-hidden bg-gray-100 group">
-              {blog.image && (
-                <Image
-                  src={blog.image}
-                  alt={blog.title}
-                  height={1080}
-                  width={1920}
-                  className="object-cover h-full w-full transition-transform duration-1000 group-hover:scale-105"
-                  priority
-                />
-              )}
-            </div>
-             <div className="flex flex-wrap items-center gap-10 justify-between  mt-6 mb-9 border-b-1 pb-8 text-stone-400">
-              <div className="flex">
-                <span >Author :</span>
-                <span>
-                  {blog.author || `${site.shortName} Team`}
-                </span>
+      <JsonLd schema={blogPostingSchema} />
+      <main className="min-h-screen bg-white">
+        {/* 2. Content Grid */}
+        <section className="max-w-7xl mx-auto px-6 md:px-12 pt-20 pb-20 md:pb-32">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-20">
+            {/* Main Content (8 cols) */}
+            <div className="lg:col-span-8">
+              <h1 className=" md:text-3xl  tracking-tight mb-12 leading-[1.1] animate-fade-in">
+                {blog.title}
+              </h1>
+              {/* Hero Image */}
+              <div className="relative aspect-[16/10] leading-snug overflow-hidden bg-gray-100 group">
+                {blog.image && (
+                  <Image
+                    src={blog.image}
+                    alt={blog.title}
+                    height={1080}
+                    width={1920}
+                    className="object-cover h-full w-full transition-transform duration-1000 group-hover:scale-105"
+                    priority
+                  />
+                )}
               </div>
-              <div className="w-px h-4 bg-white/10 hidden md:block"></div>
-              <div className="flex items-center gap-4">
-                <span>Date:</span>
-                <span>{blog.date}</span>
+              <div className="flex flex-wrap items-center gap-10 justify-between  mt-6 mb-9 border-b-1 pb-8 text-stone-400">
+                <div className="flex">
+                  <span>Author :</span>
+                  <span>{blog.author || `${site.shortName} Team`}</span>
+                </div>
+                <div className="w-px h-4 bg-white/10 hidden md:block"></div>
+                <div className="flex items-center gap-4">
+                  <span>Date:</span>
+                  <span>{blog.date}</span>
+                </div>
               </div>
+
+              {/* Article Text Body */}
+              <div
+                className="leading-[1.8] mb-15"
+                dangerouslySetInnerHTML={{ __html: blog.content }}
+              />
+
+              {/* Social & Sharing Bar */}
+              <ShareBar title={blog.title} image={blog.image} />
             </div>
 
-            {/* Article Text Body */}
-            <div className="leading-[1.8] mb-15" dangerouslySetInnerHTML={{ __html: blog.content }} />
-
-            {/* Social & Sharing Bar */}
-            <ShareBar title={blog.title} image={blog.image} />
-
+            {/* Sidebar (4 cols) */}
+            <aside className="lg:col-span-4 lg:sticky lg:top-32 h-fit space-y-24">
+              {/* Recent Posts Widget */}
+              <div className="space-y-12">
+                <div className="relative">
+                  <h3 className="text-xs uppercase tracking-[0.3em] text-gold-text font-semibold mb-8">
+                    Recent Stories
+                  </h3>
+                  <div className="absolute -bottom-2 left-0 w-12 h-0.5 bg-gold"></div>
+                </div>
+                <div className="space-y-10">
+                  {recentPosts.map((post, i) => (
+                    <Link
+                      key={i}
+                      href={`/blog/${post.slug}`}
+                      className="group flex gap-6 items-center"
+                    >
+                      <div className="relative w-20 h-20 flex-shrink-0 overflow-hidden bg-gray-100">
+                        {post.image && (
+                          <Image
+                            src={post.image}
+                            alt={post.title}
+                            height={1080}
+                            width={1920}
+                            className="object-cover h-full w-full transition-transform duration-700 group-hover:scale-110"
+                          />
+                        )}
+                      </div>
+                      <div className="space-y-1">
+                        <span className="text-[9px] uppercase tracking-widest text-gray-400">
+                          {post.date}
+                        </span>
+                        <h4 className="text-[15px] font-light leading-tight group-hover:text-gold transition-colors line-clamp-2">
+                          {post.title}
+                        </h4>
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            </aside>
           </div>
-
-          {/* Sidebar (4 cols) */}
-          <aside className="lg:col-span-4 lg:sticky lg:top-32 h-fit space-y-24">
-            {/* Recent Posts Widget */}
-            <div className="space-y-12">
-              <div className="relative">
-                <h3 className="text-xs uppercase tracking-[0.3em] text-gold-text font-semibold mb-8">
-                  Recent Stories
-                </h3>
-                <div className="absolute -bottom-2 left-0 w-12 h-0.5 bg-gold"></div>
-              </div>
-              <div className="space-y-10">
-                {recentPosts.map((post, i) => (
-                  <Link
-                    key={i}
-                    href={`/blog/${post.slug}`}
-                    className="group flex gap-6 items-center"
-                  >
-                    <div className="relative w-20 h-20 flex-shrink-0 overflow-hidden bg-gray-100">
-                      {post.image && (
-                        <Image
-                          src={post.image}
-                          alt={post.title}
-                          height={1080}
-                          width={1920}
-                          className="object-cover h-full w-full transition-transform duration-700 group-hover:scale-110"
-                        />
-                      )}
-                    </div>
-                    <div className="space-y-1">
-                      <span className="text-[9px] uppercase tracking-widest text-gray-400">
-                        {post.date}
-                      </span>
-                      <h4 className="text-[15px] font-light leading-tight group-hover:text-gold transition-colors line-clamp-2">
-                        {post.title}
-                      </h4>
-                    </div>
-                  </Link>
-                ))}
-              </div>
-            </div>
-          </aside>
-        </div>
-      </section>
-    </main>
+        </section>
+      </main>
     </>
   );
 }

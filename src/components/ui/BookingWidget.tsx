@@ -1,5 +1,6 @@
-'use client';
+"use client";
 
+import { useEffect } from "react";
 import { useForm, type UseFormRegisterReturn } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -17,11 +18,19 @@ interface BookingWidgetProps {
   bookUrl?: string;
 }
 
+function addDays(dateString: string, days: number) {
+  const date = new Date(dateString);
+  date.setHours(12, 0, 0, 0);
+  date.setDate(date.getDate() + days);
+  return date.toISOString().slice(0, 10);
+}
+
 export default function BookingWidget({ bookUrl }: BookingWidgetProps) {
   const {
     register,
     handleSubmit,
     watch,
+    setValue,
     formState: { errors },
   } = useForm<BookingFormData>({
     resolver: zodResolver(bookingSchema),
@@ -30,19 +39,40 @@ export default function BookingWidget({ bookUrl }: BookingWidgetProps) {
   const checkIn = watch("checkIn");
   const checkOut = watch("checkOut");
 
-  const onSubmit = (data: BookingFormData) => {
-    // You can append checkIn and checkOut to the URL if needed, e.g.:
-    // const url = new URL(bookUrl || window.location.href);
-    // url.searchParams.set("checkin", data.checkIn);
-    // url.searchParams.set("checkout", data.checkOut);
-    // window.open(url.toString(), '_blank', 'noopener,noreferrer');
+  useEffect(() => {
+    if (!checkIn) {
+      if (checkOut) {
+        setValue("checkOut", "", { shouldValidate: true });
+      }
+      return;
+    }
 
-    window.open(bookUrl || '#', '_blank', 'noopener,noreferrer');
+    if (!checkOut) {
+      setValue("checkOut", addDays(checkIn, 1), { shouldValidate: true });
+      return;
+    }
+
+    const checkInDate = new Date(checkIn);
+    const checkOutDate = new Date(checkOut);
+
+    if (checkOutDate <= checkInDate) {
+      setValue("checkOut", addDays(checkIn, 1), { shouldValidate: true });
+    }
+  }, [checkIn, checkOut, setValue]);
+
+  const onSubmit = (data: BookingFormData) => {
+    const url = new URL(bookUrl || window.location.href);
+    url.searchParams.set("checkin", data.checkIn);
+    url.searchParams.set("checkout", data.checkOut);
+    window.open(url.toString(), "_blank", "noopener,noreferrer");
   };
 
   return (
     <div className="space-y-6">
-      <p className="luxury-label text-center" style={{ color: "var(--luxury-gold-text)" }}>
+      <p
+        className="luxury-label text-center "
+        style={{ color: "var(--luxury-gold-text)" }}
+      >
         Check Availability
       </p>
 
@@ -66,7 +96,7 @@ export default function BookingWidget({ bookUrl }: BookingWidgetProps) {
 
         <button
           type="submit"
-          className="luxury-btn luxury-btn-solid w-full justify-center mt-2"
+          className="luxury-btn luxury-btn-solid w-full justify-center mt-2 hover:cursor-pointer"
         >
           Check Availability
         </button>
@@ -111,7 +141,9 @@ function DateField({ id, label, min, value, error, register }: DateFieldProps) {
         />
         <div
           className="absolute inset-y-0 left-4 right-11 flex items-center pointer-events-none text-sm font-light"
-          style={{ color: value ? "var(--luxury-charcoal)" : "var(--luxury-muted)" }}
+          style={{
+            color: value ? "var(--luxury-charcoal)" : "var(--luxury-muted)",
+          }}
         >
           {value || "yyyy-mm-dd"}
         </div>

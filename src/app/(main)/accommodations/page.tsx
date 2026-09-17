@@ -37,11 +37,11 @@ export default async function RoomsPage() {
       {schemas.map((schema, i) => (
         <JsonLd key={i} schema={schema} />
       ))}
-      <BreadcrumbNoBanner title="Accommodations" />
+      <BreadcrumbNoBanner title={pkg?.title} sub_title={pkg?.sub_title} />
       <section className="relative overflow-hidden">
         <GeometricAccent side="left" color="gold" opacity={0.5} />
         <GeometricAccent side="right" color="gold" opacity={0.5} />
-        <div className="relative max-w-[1400px] mx-auto py-20 px-6 md:px-12 lg:px-24">
+        <div className="relative max-w-[1400px] mx-auto pt-10 pb-20 px-6 md:px-12 lg:px-24">
           {pkg?.description && (
             <div
               className="luxury-subtitle max-w-3xl mx-auto text-center mb-16"

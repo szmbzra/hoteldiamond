@@ -4,6 +4,7 @@ import { getServices } from "@/lib/data";
 import { buildMetadata } from "@/lib/metadata";
 import { Metadata } from "next";
 import Image from "next/image";
+import { DecorativeAccent } from "@/components/ui/MandalaMotif";
 
 export async function generateMetadata(): Promise<Metadata> {
   return buildMetadata("services", {}, "/facilities");
@@ -20,19 +21,19 @@ export default async function FacilitiesPage() {
       <PageSchemas slug="facilities" />
       <BreadcrumbNoBanner title="Facilities" />
 
-      <section className="py-24 px-6 md:px-12 bg-[#f9f7f2]">
-        <div className="max-w-7xl mx-auto">
+      <section className="relative overflow-hidden pb-24 px-6 md:px-12 bg-[#f9f7f2]">
+        <DecorativeAccent color="gold" corner="top-right" size={260} />
+        <div className="relative max-w-7xl mx-auto">
           <p
             className="luxury-subtitle max-w-2xl mx-auto text-center mb-16"
             style={{ color: "var(--luxury-muted)" }}
           >
-            From wellness and recreation to seamless business amenities, every
-            facility at Hotel Diamond Palace is thoughtfully curated to make
-            your stay effortless and memorable.
+            From comfort and convenience to business essentials, every facility
+            at Hotel Diamond Palace is designed to make your stay easy and
+            enjoyable.
           </p>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {facilitiesData?.items?.map((item: any, idx: number) => (
-
               <div
                 key={item.id}
                 className="group bg-white p-8 shadow-[0_4px_15px_rgba(0,0,0,0.02)] hover:shadow-[0_15px_40px_rgba(0,0,0,0.06)] transition-all duration-700 relative overflow-hidden border border-gray-100 flex flex-col items-center text-center animate-fade-in-up"

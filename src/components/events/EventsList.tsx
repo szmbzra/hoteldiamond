@@ -7,9 +7,14 @@ import { ArrowUpRight, Users } from "lucide-react";
 function getFirstImage(item: any): string {
   const gallery = item.gallery_images;
   const img = item.img;
-  const src = Array.isArray(gallery) && gallery.length > 0 ? gallery[0] : Array.isArray(img) && img.length > 0 ? img[0] : null;
+  const src =
+    Array.isArray(gallery) && gallery.length > 0
+      ? gallery[0]
+      : Array.isArray(img) && img.length > 0
+        ? img[0]
+        : null;
   if (!src) return "";
-  return typeof src === "string" ? src : src?.src ?? src?.url ?? "";
+  return typeof src === "string" ? src : (src?.src ?? src?.url ?? "");
 }
 
 // Dummy fallback images (images.unsplash.com) aren't in next/image's
@@ -34,19 +39,22 @@ export default function EventsList({ events }: { events: any[] }) {
         const image = getFirstImage(event);
 
         const capacityFields = [
-          { label: "Theatre", value: event.theater },
-          { label: "Round Table", value: event.round_table },
+          { value: event.theater },
+          { value: event.round_table },
         ].filter((f) => f.value && f.value !== "—");
 
         return (
           <Link
             key={event.slug ?? idx}
-            href={`/events/${event.slug}`}
+            href={`/meeting-events/${event.slug}`}
             className="luxury-card-hover group bg-white rounded-2xl overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.04)] flex flex-col animate-fade-in-up"
             style={{ animationDelay: `${idx * 0.08}s` }}
           >
             {/* Image */}
-            <div className="relative h-64 overflow-hidden" style={{ background: "var(--luxury-cream)" }}>
+            <div
+              className="relative h-64 overflow-hidden"
+              style={{ background: "var(--luxury-cream)" }}
+            >
               {image ? (
                 isUnoptimisedSrc(image) ? (
                   // eslint-disable-next-line @next/next/no-img-element
@@ -101,12 +109,19 @@ export default function EventsList({ events }: { events: any[] }) {
               )}
 
               {capacityFields.length > 0 && (
-                <div className="flex items-center flex-wrap gap-x-4 gap-y-1 mb-6 text-xs" style={{ color: "var(--luxury-muted)" }}>
+                <div
+                  className="flex items-center flex-wrap gap-x-4 gap-y-1 mb-6 text-xs"
+                  style={{ color: "var(--luxury-muted)" }}
+                >
                   <Users className="w-3.5 h-3.5 text-gold-text" />
-                  {capacityFields.map((f, i) => (
+                  {capacityFields.slice(0, 1).map((f, i) => (
                     <span key={i}>
-                      <span className="font-medium" style={{ color: "var(--luxury-charcoal)" }}>{f.value}</span>{" "}
-                      <span className="uppercase tracking-wider">{f.label}</span>
+                      <span
+                        className="font-medium"
+                        style={{ color: "var(--luxury-charcoal)" }}
+                      >
+                        {f.value}
+                      </span>{" "}
                     </span>
                   ))}
                 </div>

@@ -74,7 +74,7 @@ export default async function UnderConstruction({
 
       {/* Headline */}
       <h1
-        className="font-cinzel text-4xl md:text-6xl font-light tracking-widest uppercase mb-8"
+        className="font-display text-4xl md:text-6xl font-light tracking-widest uppercase mb-8"
         style={{ color: "var(--luxury-gold-light)" }}
       >
         Manakamana Hillcrest
