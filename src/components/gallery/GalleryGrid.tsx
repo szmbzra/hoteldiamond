@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import Image from "next/image";
 import { X, Maximize2, ChevronLeft, ChevronRight } from "lucide-react";
 
@@ -14,6 +14,15 @@ interface GalleryGridProps {
   items: GalleryItem[];
 }
 
+function shuffle<T>(arr: T[]): T[] {
+  const result = [...arr];
+  for (let i = result.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [result[i], result[j]] = [result[j], result[i]];
+  }
+  return result;
+}
+
 export default function GalleryGrid({ items: rawItems }: GalleryGridProps) {
   const [activeCategory, setActiveCategory] = useState("All");
   const [selectedImageIndex, setSelectedImageIndex] = useState<number | null>(null);
@@ -22,25 +31,37 @@ export default function GalleryGrid({ items: rawItems }: GalleryGridProps) {
   // to render — drop them rather than passing an empty string to next/image.
   const items = useMemo(() => rawItems.filter((item) => item.image), [rawItems]);
 
+  // Starts in server order (so the first client render matches the SSR'd
+  // HTML and React doesn't flag a hydration mismatch), then reshuffles once
+  // mounted so every page load/refresh shows a different arrangement.
+  const [shuffledItems, setShuffledItems] = useState(items);
+  useEffect(() => {
+    // Math.random() can only run post-mount without desyncing from the
+    // server-rendered HTML; this is the client-only-randomization case the
+    // rule's own docs call out as legitimate.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setShuffledItems(shuffle(items));
+  }, [items]);
+
   // Extract unique categories
   const categories = useMemo(() => {
     const cats = new Set<string>();
     cats.add("All");
-    items.forEach((item) => {
+    shuffledItems.forEach((item) => {
       if (item.category) cats.add(item.category);
     });
     return Array.from(cats);
-  }, [items]);
+  }, [shuffledItems]);
 
   // Filter items
   const filteredItems = useMemo(() => {
-    if (activeCategory === "All") return items;
-    return items.filter((item) => item.category === activeCategory);
-  }, [items, activeCategory]);
+    if (activeCategory === "All") return shuffledItems;
+    return shuffledItems.filter((item) => item.category === activeCategory);
+  }, [shuffledItems, activeCategory]);
 
   const openLightbox = (index: number) => {
-    // Find the index in the original items array to ensure correct navigation
-    const originalIndex = items.findIndex(item => item.image === filteredItems[index].image);
+    // Find the index in the shuffled items array to ensure correct navigation
+    const originalIndex = shuffledItems.findIndex(item => item.image === filteredItems[index].image);
     setSelectedImageIndex(originalIndex);
   };
 
@@ -49,13 +70,13 @@ export default function GalleryGrid({ items: rawItems }: GalleryGridProps) {
   const nextImage = (e?: React.MouseEvent) => {
     e?.stopPropagation();
     if (selectedImageIndex === null) return;
-    setSelectedImageIndex((selectedImageIndex + 1) % items.length);
+    setSelectedImageIndex((selectedImageIndex + 1) % shuffledItems.length);
   };
 
   const prevImage = (e?: React.MouseEvent) => {
     e?.stopPropagation();
     if (selectedImageIndex === null) return;
-    setSelectedImageIndex((selectedImageIndex - 1 + items.length) % items.length);
+    setSelectedImageIndex((selectedImageIndex - 1 + shuffledItems.length) % shuffledItems.length);
   };
 
   return (
@@ -142,8 +163,8 @@ export default function GalleryGrid({ items: rawItems }: GalleryGridProps) {
           <div className="relative w-full h-full max-w-6xl max-h-[80vh] flex flex-col items-center justify-center">
             <div className="relative w-full h-full" onClick={(e) => e.stopPropagation()}>
               <Image
-                src={items[selectedImageIndex].image}
-                alt={items[selectedImageIndex].title || "Gallery Large"}
+                src={shuffledItems[selectedImageIndex].image}
+                alt={shuffledItems[selectedImageIndex].title || "Gallery Large"}
                 height={1080}
                 width={1920}
                 className="object-contain h-full w-full"
@@ -154,13 +175,13 @@ export default function GalleryGrid({ items: rawItems }: GalleryGridProps) {
             {/* Lightbox Caption */}
             <div className="mt-8 text-center" onClick={(e) => e.stopPropagation()}>
               <p className="text-[var(--luxury-gold, #e3c9a1)] text-[0.65rem] uppercase tracking-[0.4em] mb-2">
-                {items[selectedImageIndex].category || "Gallery"}
+                {shuffledItems[selectedImageIndex].category || "Gallery"}
               </p>
               <h2 className="text-white text-xl md:text-2xl font-light tracking-[0.15em] uppercase">
-                {items[selectedImageIndex].title}
+                {shuffledItems[selectedImageIndex].title}
               </h2>
               <p className="text-white/40 text-[0.7rem] mt-4 tracking-[0.2em]">
-                {selectedImageIndex + 1} / {items.length}
+                {selectedImageIndex + 1} / {shuffledItems.length}
               </p>
             </div>
           </div>

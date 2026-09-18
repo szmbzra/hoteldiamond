@@ -49,7 +49,7 @@ export default async function ContactDetail() {
   const siteRegulars = await getSiteRegulars();
 
   return (
-    <section className="relative overflow-hidden py-14 md:py-16 bg-[#042f48] p-12  text-white">
+    <section className="relative overflow-hidden py-14 md:py-16 bg-[#042f48] p-12  text-white mt-10">
       {/* Contact Info Grid */}
       <div className="relative flex flex-col sm:flex-row justify-between gap-12 sm:gap-8 max-w-[1100px] mx-auto px-6 md:px-12">
         {/* Landline */}

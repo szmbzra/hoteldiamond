@@ -29,7 +29,7 @@ export default function HallParallax() {
       style={{ backgroundImage: "url('/hall.jpg')" }}
     >
       {/* Dark overlay for text legibility */}
-      <div className="absolute inset-0 bg-black/60" aria-hidden="true" />
+      <div className="absolute inset-0 bg-black/70" aria-hidden="true" />
 
       <div className="relative px-6 md:px-12 lg:px-24 py-24 md:py-32">
         <div className="max-w-4xl  mx-auto animate-fade-in-up">
@@ -43,7 +43,7 @@ export default function HallParallax() {
           <h2 className="luxury-section-title text-white mb-8">
             Spaces Made for Every Occasion
           </h2>
-          <p className="luxury-subtitle text-white/80 mb-12">
+          <p className="luxury-subtitle text-white mb-12 leading-[1.8]">
             At Diamond Palace Lords Plaza, we understand that every gathering
             deserves the perfect setting. Whether you&apos;re hosting a
             corporate seminar, a grand wedding, or an intimate celebration, our
@@ -53,19 +53,16 @@ export default function HallParallax() {
             memorable experiences.
           </p>
 
-          <div className="grid sm:grid-cols-3 gap-6 mb-12 pb-12 border-b border-white/20">
+          <div className="grid sm:grid-cols-3 gap-6 mb-12 pb-12 border-b border-white">
             {CHAMBERS.map((chamber) => (
               <div key={chamber.name}>
-                <h3 className="text-white font-light tracking-wide text-lg mb-1">
+                <h3 className="text-white font-semibold mb-4 text-lg mb-1">
                   {chamber.name}
                 </h3>
-                <div
-                  className="text-xs uppercase tracking-[0.2em] mb-3"
-                  style={{ color: "var(--luxury-gold)" }}
-                >
+                <div className="text-sm text-white uppercase  mb-3">
                   {chamber.size}
                 </div>
-                <p className="text-sm text-white/70 font-light leading-relaxed">
+                <p className=" text-white leading-relaxed font-light">
                   {chamber.detail}
                 </p>
               </div>

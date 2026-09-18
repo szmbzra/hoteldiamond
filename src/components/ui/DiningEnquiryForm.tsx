@@ -6,44 +6,38 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import Recaptcha from "./Recaptcha";
 
-const scheduleSlots = [
-  "Morning (6 AM – 12 PM)",
-  "Day (12 PM – 6 PM)",
-  "Evening (6 PM – 10 PM)",
-];
+const scheduleSlots = ["Breakfast (7 AM – 10 AM)", "Lunch (12 PM – 3 PM)", "Dinner (7 PM – 10 PM)"];
 
 const PHONE_ALLOWED_CHARS = /[^0-9+-]/g;
 const PHONE_MAX_LENGTH = 14;
 
-const eventEnquirySchema = z.object({
+const diningEnquirySchema = z.object({
   full_name: z.string().min(2, "Full name must be at least 2 characters"),
-  event_name: z.string().min(2, "Event name must be at least 2 characters"),
   email: z.string().email("Invalid email address"),
   phone: z
     .string()
     .min(7, "Phone number must be at least 7 characters")
     .max(PHONE_MAX_LENGTH, `Phone number cannot exceed ${PHONE_MAX_LENGTH} characters`)
     .regex(/^[0-9+-]+$/, "Phone number can only contain digits, + and -"),
-  schedule_slot: z.string().min(1, "Schedule slot is required"),
-  event_date: z.string().min(1, "Event date is required"),
-  address: z.string().optional(),
+  schedule_slot: z.string().min(1, "Please select a time slot"),
+  reservation_date: z.string().min(1, "Reservation date is required"),
   pax: z.string().min(1, "Number of guests is required"),
   special_request: z.string().optional(),
 });
 
-type EventEnquiryFormData = z.infer<typeof eventEnquirySchema>;
+type DiningEnquiryFormData = z.infer<typeof diningEnquirySchema>;
 
-interface EventEnquiryFormProps {
-  hallName?: string;
+interface DiningEnquiryFormProps {
+  venueName?: string;
   /** Renders bare form fields with no heading/section chrome, for embedding
    * inside a container that already supplies its own title (e.g. a modal). */
   compact?: boolean;
 }
 
-export default function EventEnquiryForm({
-  hallName,
+export default function DiningEnquiryForm({
+  venueName,
   compact = false,
-}: EventEnquiryFormProps = {}) {
+}: DiningEnquiryFormProps = {}) {
   const [captchaToken, setCaptchaToken] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
@@ -54,8 +48,8 @@ export default function EventEnquiryForm({
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm<EventEnquiryFormData>({
-    resolver: zodResolver(eventEnquirySchema),
+  } = useForm<DiningEnquiryFormData>({
+    resolver: zodResolver(diningEnquirySchema),
     defaultValues: {
       schedule_slot: "",
     },
@@ -63,9 +57,9 @@ export default function EventEnquiryForm({
 
   const { onChange: onPhoneChange, ...phoneField } = register("phone");
 
-  const endpoint = process.env.NEXT_PUBLIC_SITE_URL + "/enquery_mail_hall.php";
+  const endpoint = process.env.NEXT_PUBLIC_SITE_URL + "/enquery_mail_dining.php";
 
-  const onSubmit = async (formData: EventEnquiryFormData) => {
+  const onSubmit = async (formData: DiningEnquiryFormData) => {
     if (!captchaToken) {
       setSubmitError("Please complete the reCAPTCHA");
       return;
@@ -77,7 +71,7 @@ export default function EventEnquiryForm({
     try {
       const submissionData = {
         ...formData,
-        package_name: hallName || "General Enquiry",
+        venue_name: venueName || "General Enquiry",
         "g-recaptcha-response": captchaToken,
       };
 
@@ -115,7 +109,7 @@ export default function EventEnquiryForm({
               Get In Touch
             </p>
             <h2 className="text-3xl font-light text-gray-900 mb-4">
-              Event Enquiry
+              Dining Enquiry
             </h2>
             <div className="w-16 h-px bg-gold mx-auto mt-4" />
           </div>
@@ -141,8 +135,8 @@ export default function EventEnquiryForm({
             </svg>
             <h4 className="text-xl font-medium mb-3">Thank you!</h4>
             <p className="text-green-700 mb-6">
-              Your event enquiry has been sent successfully. We will get back to
-              you soon.
+              Your dining enquiry has been sent successfully. We will get back
+              to you soon.
             </p>
             <button
               onClick={() => setSubmitSuccess(false)}
@@ -156,13 +150,13 @@ export default function EventEnquiryForm({
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <label
-                  htmlFor="ee-full-name"
+                  htmlFor="de-full-name"
                   className="block text-sm text-gray-600 mb-2"
                 >
                   Full Name *
                 </label>
                 <input
-                  id="ee-full-name"
+                  id="de-full-name"
                   type="text"
                   {...register("full_name")}
                   className="w-full border border-gray-200 px-4 py-3 rounded-sm text-sm"
@@ -176,36 +170,13 @@ export default function EventEnquiryForm({
               </div>
               <div>
                 <label
-                  htmlFor="ee-event-name"
-                  className="block text-sm text-gray-600 mb-2"
-                >
-                  Event Name *
-                </label>
-                <input
-                  id="ee-event-name"
-                  type="text"
-                  {...register("event_name")}
-                  className="w-full border border-gray-200 px-4 py-3 rounded-sm text-sm"
-                  placeholder="Wedding Reception"
-                />
-                {errors.event_name && (
-                  <p className="text-red-500 text-sm mt-1">
-                    {errors.event_name.message}
-                  </p>
-                )}
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div>
-                <label
-                  htmlFor="ee-email"
+                  htmlFor="de-email"
                   className="block text-sm text-gray-600 mb-2"
                 >
                   Email Address *
                 </label>
                 <input
-                  id="ee-email"
+                  id="de-email"
                   type="email"
                   {...register("email")}
                   className="w-full border border-gray-200 px-4 py-3 rounded-sm text-sm"
@@ -217,15 +188,18 @@ export default function EventEnquiryForm({
                   </p>
                 )}
               </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <label
-                  htmlFor="ee-phone"
+                  htmlFor="de-phone"
                   className="block text-sm text-gray-600 mb-2"
                 >
                   Phone Number *
                 </label>
                 <input
-                  id="ee-phone"
+                  id="de-phone"
                   type="tel"
                   inputMode="tel"
                   maxLength={PHONE_MAX_LENGTH}
@@ -243,18 +217,15 @@ export default function EventEnquiryForm({
                   </p>
                 )}
               </div>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <label
-                  htmlFor="ee-schedule-slot"
+                  htmlFor="de-schedule-slot"
                   className="block text-sm text-gray-600 mb-2"
                 >
-                  Schedule Slot *
+                  Time Slot *
                 </label>
                 <select
-                  id="ee-schedule-slot"
+                  id="de-schedule-slot"
                   {...register("schedule_slot")}
                   className="w-full border border-gray-200 px-4 py-3 rounded-sm text-sm"
                 >
@@ -273,63 +244,43 @@ export default function EventEnquiryForm({
                   </p>
                 )}
               </div>
-              <div>
-                <label
-                  htmlFor="ee-event-date"
-                  className="block text-sm text-gray-600 mb-2"
-                >
-                  Event Date *
-                </label>
-                <input
-                  id="ee-event-date"
-                  type="date"
-                  {...register("event_date")}
-                  min={new Date().toISOString().split("T")[0]}
-                  className="w-full border border-gray-200 px-4 py-3 rounded-sm text-sm"
-                />
-                {errors.event_date && (
-                  <p className="text-red-500 text-sm mt-1">
-                    {errors.event_date.message}
-                  </p>
-                )}
-              </div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <label
-                  htmlFor="ee-address"
+                  htmlFor="de-reservation-date"
                   className="block text-sm text-gray-600 mb-2"
                 >
-                  Address
+                  Reservation Date *
                 </label>
                 <input
-                  id="ee-address"
-                  type="text"
-                  {...register("address")}
+                  id="de-reservation-date"
+                  type="date"
+                  {...register("reservation_date")}
+                  min={new Date().toISOString().split("T")[0]}
                   className="w-full border border-gray-200 px-4 py-3 rounded-sm text-sm"
-                  placeholder="Kathmandu, Nepal"
                 />
-                {errors.address && (
+                {errors.reservation_date && (
                   <p className="text-red-500 text-sm mt-1">
-                    {errors.address.message}
+                    {errors.reservation_date.message}
                   </p>
                 )}
               </div>
               <div>
                 <label
-                  htmlFor="ee-pax"
+                  htmlFor="de-pax"
                   className="block text-sm text-gray-600 mb-2"
                 >
                   Number of Guests (Pax) *
                 </label>
                 <input
-                  id="ee-pax"
+                  id="de-pax"
                   type="number"
                   {...register("pax")}
                   min={1}
                   className="w-full border border-gray-200 px-4 py-3 rounded-sm text-sm"
-                  placeholder="50"
+                  placeholder="2"
                 />
                 {errors.pax && (
                   <p className="text-red-500 text-sm mt-1">
@@ -341,17 +292,17 @@ export default function EventEnquiryForm({
 
             <div>
               <label
-                htmlFor="ee-special-request"
+                htmlFor="de-special-request"
                 className="block text-sm text-gray-600 mb-2"
               >
                 Special Requests
               </label>
               <textarea
-                id="ee-special-request"
+                id="de-special-request"
                 {...register("special_request")}
                 rows={4}
                 className="w-full border border-gray-200 px-4 py-3 rounded-sm text-sm resize-none"
-                placeholder="Any special requirements, dietary needs, or setup preferences…"
+                placeholder="Any dietary needs, seating preferences, or occasion details…"
               />
               {errors.special_request && (
                 <p className="text-red-500 text-sm mt-1">

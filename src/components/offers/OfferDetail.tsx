@@ -15,10 +15,12 @@ const todayISO = () => new Date().toISOString().split("T")[0];
 const offerSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
   email: z.string().email("Invalid email address"),
-  phone: z.string()
+  phone: z
+    .string()
     .min(7, "Phone number must be at least 7 characters")
-    .regex(/^[0-9+-\s]+$/, "Phone number can only contain digits, spaces, +, or -"),
-  checkin_date: z.string()
+    .regex(/^[0-9+-]+$/, "Phone number can only contain digits, +, or -"),
+  checkin_date: z
+    .string()
     .min(1, "Check-in date is required")
     .refine((val) => val >= todayISO(), "Check-in date cannot be in the past"),
   message: z.string().min(10, "Message must be at least 10 characters"),
@@ -31,7 +33,13 @@ const inputClass =
 const errorInputClass = "border-red-300 bg-red-50";
 const labelClass = "block text-sm font-medium text-luxury-dark mb-1";
 
-export default function OfferDetail({ offer, otherOffers }: { offer: any, otherOffers?: any[] }) {
+export default function OfferDetail({
+  offer,
+  otherOffers,
+}: {
+  offer: any;
+  otherOffers?: any[];
+}) {
   const plainTitle = offer.title?.replace(/<[^>]+>/g, "") || "";
   const imageSrc = offer.image || (offer.img && offer.img[0]);
 
@@ -57,7 +65,9 @@ export default function OfferDetail({ offer, otherOffers }: { offer: any, otherO
 
   useEffect(() => {
     if (!paymentFormHtml) return;
-    const form = paymentFormRef.current?.querySelector<HTMLFormElement>('form[name="hblform"]');
+    const form = paymentFormRef.current?.querySelector<HTMLFormElement>(
+      'form[name="hblform"]',
+    );
     form?.submit();
   }, [paymentFormHtml]);
 
@@ -160,9 +170,9 @@ export default function OfferDetail({ offer, otherOffers }: { offer: any, otherO
       <section className="max-w-[1400px] mx-auto py-16 md:py-20 px-6 md:px-12 lg:px-24">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
           {/* Left: image + dates + content */}
-          <div>
+          <div className="lg:sticky lg:top-24">
             {imageSrc && (
-              <div className="relative w-full rounded-xl overflow-hidden mb-8 lg:sticky lg:top-24">
+              <div className="relative w-full rounded-xl overflow-hidden mb-8">
                 <Image
                   src={imageSrc}
                   alt={plainTitle}
@@ -175,11 +185,22 @@ export default function OfferDetail({ offer, otherOffers }: { offer: any, otherO
 
             {(offer.start_date || offer.end_date) && (
               <div className="inline-flex items-center gap-2 px-4 py-2 mb-6 rounded-full text-sm font-medium text-gold-text border border-gold/30 bg-gold/5">
-                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                <svg
+                  className="w-4 h-4"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                  />
                 </svg>
                 <span>
-                  {offer.start_date} {offer.end_date ? `to ${offer.end_date}` : ""}
+                  {offer.start_date}{" "}
+                  {offer.end_date ? `to ${offer.end_date}` : ""}
                 </span>
               </div>
             )}
@@ -194,8 +215,12 @@ export default function OfferDetail({ offer, otherOffers }: { offer: any, otherO
           {/* Right: booking calculator + enquiry form */}
           <div className="lg:sticky lg:top-24 bg-white rounded-xl shadow-sm border border-gold/15 p-6 md:p-10">
             <div className="mb-8">
-              <p className="luxury-label text-gold-text mb-3">Reserve Your Stay</p>
-              <h3 className="text-2xl font-light text-luxury-dark mb-4">Interested in this offer?</h3>
+              <p className="luxury-label text-gold-text mb-3">
+                Reserve Your Stay
+              </p>
+              <h3 className="text-2xl font-light text-luxury-dark mb-4">
+                Interested in this offer?
+              </h3>
               <div className="luxury-divider mb-4" />
               <p className="text-sm" style={{ color: "var(--luxury-muted)" }}>
                 Fill out the form below and we will get back to you shortly.
@@ -205,13 +230,26 @@ export default function OfferDetail({ offer, otherOffers }: { offer: any, otherO
             {submitSuccess ? (
               <div className="bg-luxury-cream border border-gold/25 p-8 rounded-lg text-center">
                 <div className="w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center bg-gold">
-                  <svg className="w-8 h-8 text-luxury-dark" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  <svg
+                    className="w-8 h-8 text-luxury-dark"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                    />
                   </svg>
                 </div>
-                <h4 className="text-xl font-medium text-luxury-dark mb-3">Thank you!</h4>
+                <h4 className="text-xl font-medium text-luxury-dark mb-3">
+                  Thank you!
+                </h4>
                 <p className="mb-6" style={{ color: "var(--luxury-muted)" }}>
-                  Your enquiry has been sent successfully. We will contact you soon.
+                  Your enquiry has been sent successfully. We will contact you
+                  soon.
                 </p>
                 <button
                   onClick={() => setSubmitSuccess(false)}
@@ -221,20 +259,29 @@ export default function OfferDetail({ offer, otherOffers }: { offer: any, otherO
                 </button>
               </div>
             ) : (
-              <form onSubmit={handleSubmit(onProceedToBooking)} className="space-y-5">
+              <form
+                onSubmit={handleSubmit(onProceedToBooking)}
+                className="space-y-5"
+              >
                 {ratePerPerson > 0 && (
                   <div className="space-y-4 p-5 rounded-lg bg-luxury-cream border border-gold/20">
                     <p className="luxury-label text-gold-text">Trip Details</p>
 
                     <div className="grid grid-cols-2 gap-5">
                       <div>
-                        <label htmlFor="offer-people" className={labelClass}>No. of People</label>
+                        <label htmlFor="offer-people" className={labelClass}>
+                          No. of People
+                        </label>
                         <input
                           id="offer-people"
                           type="number"
                           min={1}
                           value={numPeople}
-                          onChange={(e) => setNumPeople(Math.max(1, Number(e.target.value) || 1))}
+                          onChange={(e) =>
+                            setNumPeople(
+                              Math.max(1, Number(e.target.value) || 1),
+                            )
+                          }
                           className={`${inputClass} bg-white`}
                         />
                       </div>
@@ -242,7 +289,12 @@ export default function OfferDetail({ offer, otherOffers }: { offer: any, otherO
                       <div>
                         <label className={labelClass}>Rate per Person</label>
                         <div className="flex items-center border border-gold/25 rounded-md overflow-hidden bg-white">
-                          <span className="px-3 py-3 border-r border-gold/25" style={{ color: "var(--luxury-muted)" }}>$</span>
+                          <span
+                            className="px-3 py-3 border-r border-gold/25"
+                            style={{ color: "var(--luxury-muted)" }}
+                          >
+                            $
+                          </span>
                           <input
                             type="text"
                             readOnly
@@ -254,20 +306,28 @@ export default function OfferDetail({ offer, otherOffers }: { offer: any, otherO
                     </div>
 
                     <div>
-                      <label htmlFor="offer-checkin" className={labelClass}>Check-in Date *</label>
+                      <label htmlFor="offer-checkin" className={labelClass}>
+                        Check-in Date *
+                      </label>
                       <input
                         id="offer-checkin"
                         type="date"
                         min={todayISO()}
                         {...register("checkin_date")}
-                        className={`${inputClass} bg-white ${errors.checkin_date ? errorInputClass : ''}`}
+                        className={`${inputClass} bg-white ${errors.checkin_date ? errorInputClass : ""}`}
                       />
-                      {errors.checkin_date && <p className="text-red-500 text-xs mt-1.5">{errors.checkin_date.message}</p>}
+                      {errors.checkin_date && (
+                        <p className="text-red-500 text-xs mt-1.5">
+                          {errors.checkin_date.message}
+                        </p>
+                      )}
                     </div>
 
                     <div className="flex items-center justify-between pt-4 border-t border-gold/20">
                       <span className="text-luxury-dark">Total Amount</span>
-                      <span className="text-xl font-semibold text-gold-text">USD {totalAmount.toFixed(2)}</span>
+                      <span className="text-xl font-semibold text-gold-text">
+                        USD {totalAmount.toFixed(2)}
+                      </span>
                     </div>
 
                     <div className="grid grid-cols-2 gap-3">
@@ -298,40 +358,65 @@ export default function OfferDetail({ offer, otherOffers }: { offer: any, otherO
                 )}
 
                 <div>
-                  <label htmlFor="offer-name" className={labelClass}>Full Name *</label>
+                  <label htmlFor="offer-name" className={labelClass}>
+                    Full Name *
+                  </label>
                   <input
                     id="offer-name"
                     type="text"
                     {...register("name")}
-                    className={`${inputClass} ${errors.name ? errorInputClass : ''}`}
+                    className={`${inputClass} ${errors.name ? errorInputClass : ""}`}
                     placeholder="Your Name"
                   />
-                  {errors.name && <p className="text-red-500 text-xs mt-1.5">{errors.name.message}</p>}
+                  {errors.name && (
+                    <p className="text-red-500 text-xs mt-1.5">
+                      {errors.name.message}
+                    </p>
+                  )}
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                   <div>
-                    <label htmlFor="offer-email" className={labelClass}>Email Address *</label>
+                    <label htmlFor="offer-email" className={labelClass}>
+                      Email Address *
+                    </label>
                     <input
                       id="offer-email"
                       type="email"
                       {...register("email")}
-                      className={`${inputClass} ${errors.email ? errorInputClass : ''}`}
+                      className={`${inputClass} ${errors.email ? errorInputClass : ""}`}
                       placeholder="your@mail.com"
                     />
-                    {errors.email && <p className="text-red-500 text-xs mt-1.5">{errors.email.message}</p>}
+                    {errors.email && (
+                      <p className="text-red-500 text-xs mt-1.5">
+                        {errors.email.message}
+                      </p>
+                    )}
                   </div>
 
                   <div>
-                    <label htmlFor="offer-phone" className={labelClass}>Phone Number *</label>
+                    <label htmlFor="offer-phone" className={labelClass}>
+                      Phone Number *
+                    </label>
                     <input
                       id="offer-phone"
                       type="tel"
-                      {...register("phone")}
-                      className={`${inputClass} ${errors.phone ? errorInputClass : ''}`}
+                      {...register("phone", {
+                        onChange: (e) => {
+                          e.target.value = e.target.value.replace(
+                            /[^0-9+-]/g,
+                            "",
+                          );
+                        },
+                      })}
+                      className={`${inputClass} ${errors.phone ? errorInputClass : ""}`}
                       placeholder="Your phone number"
                     />
-                    {errors.phone && <p className="text-red-500 text-xs mt-1.5">{errors.phone.message}</p>}
+                    {errors.phone && (
+                      <p className="text-red-500 text-xs mt-1.5">
+                        {errors.phone.message}
+                      </p>
+                    )}
                   </div>
                 </div>
 
@@ -339,28 +424,40 @@ export default function OfferDetail({ offer, otherOffers }: { offer: any, otherO
                     check-in date its own field instead of losing it. */}
                 {ratePerPerson <= 0 && (
                   <div>
-                    <label htmlFor="offer-checkin-plain" className={labelClass}>Check-in Date *</label>
+                    <label htmlFor="offer-checkin-plain" className={labelClass}>
+                      Check-in Date *
+                    </label>
                     <input
                       id="offer-checkin-plain"
                       type="date"
                       min={todayISO()}
                       {...register("checkin_date")}
-                      className={`${inputClass} ${errors.checkin_date ? errorInputClass : ''}`}
+                      className={`${inputClass} ${errors.checkin_date ? errorInputClass : ""}`}
                     />
-                    {errors.checkin_date && <p className="text-red-500 text-xs mt-1.5">{errors.checkin_date.message}</p>}
+                    {errors.checkin_date && (
+                      <p className="text-red-500 text-xs mt-1.5">
+                        {errors.checkin_date.message}
+                      </p>
+                    )}
                   </div>
                 )}
 
                 <div>
-                  <label htmlFor="offer-message" className={labelClass}>Message *</label>
+                  <label htmlFor="offer-message" className={labelClass}>
+                    Message *
+                  </label>
                   <textarea
                     id="offer-message"
                     rows={4}
                     {...register("message")}
-                    className={`${inputClass} resize-none ${errors.message ? errorInputClass : ''}`}
+                    className={`${inputClass} resize-none ${errors.message ? errorInputClass : ""}`}
                     placeholder="I would like to know more about this offer..."
                   />
-                  {errors.message && <p className="text-red-500 text-xs mt-1.5">{errors.message.message}</p>}
+                  {errors.message && (
+                    <p className="text-red-500 text-xs mt-1.5">
+                      {errors.message.message}
+                    </p>
+                  )}
                 </div>
 
                 <div className="pt-2">
@@ -380,13 +477,31 @@ export default function OfferDetail({ offer, otherOffers }: { offer: any, otherO
                 >
                   {isSubmitting ? (
                     <>
-                      <svg className="animate-spin -ml-1 mr-3 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                      <svg
+                        className="animate-spin -ml-1 mr-3 h-5 w-5"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                      >
+                        <circle
+                          className="opacity-25"
+                          cx="12"
+                          cy="12"
+                          r="10"
+                          stroke="currentColor"
+                          strokeWidth="4"
+                        ></circle>
+                        <path
+                          className="opacity-75"
+                          fill="currentColor"
+                          d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                        ></path>
                       </svg>
                       Processing...
                     </>
-                  ) : "Proceed to Booking"}
+                  ) : (
+                    "Proceed to Booking"
+                  )}
                 </button>
               </form>
             )}
@@ -395,15 +510,19 @@ export default function OfferDetail({ offer, otherOffers }: { offer: any, otherO
       </section>
 
       {otherOffers && otherOffers.length > 0 && (
-        <section
-          className="relative overflow-hidden max-w-[1400px] mx-auto pb-20 md:pb-24 px-6 md:px-12 lg:px-24"
-        >
+        <section className="relative overflow-hidden max-w-[1400px] mx-auto pb-20 md:pb-24 px-6 md:px-12 lg:px-24">
           <DecorativeGlow variant="gold-dark" />
           <div className="relative">
-            <h3 className="text-2xl font-light tracking-wide uppercase mb-2" style={{ color: "var(--luxury-charcoal)" }}>
+            <h3
+              className="text-2xl font-light tracking-wide uppercase mb-2"
+              style={{ color: "var(--luxury-charcoal)" }}
+            >
               Other Offers
             </h3>
-            <div className="w-12 h-px mb-10" style={{ background: "var(--luxury-gold)" }} />
+            <div
+              className="w-12 h-px mb-10"
+              style={{ background: "var(--luxury-gold)" }}
+            />
             <OfferList offers={otherOffers} />
           </div>
         </section>
@@ -411,7 +530,10 @@ export default function OfferDetail({ offer, otherOffers }: { offer: any, otherO
 
       {/* Injected + auto-submitted for Pay Now — hands off to the HBL gateway. */}
       {paymentFormHtml && (
-        <div ref={paymentFormRef} dangerouslySetInnerHTML={{ __html: paymentFormHtml }} />
+        <div
+          ref={paymentFormRef}
+          dangerouslySetInnerHTML={{ __html: paymentFormHtml }}
+        />
       )}
     </div>
   );

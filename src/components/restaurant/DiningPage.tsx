@@ -14,6 +14,7 @@ import {
 import { BreadcrumbNoBanner } from "@/components/ui/Breadcrumb";
 import ImageSlider from "@/components/ui/ImageSlider";
 import { DecorativeGlow } from "@/components/ui/DecorativeBlobs";
+import DiningEnquireButton from "@/components/restaurant/DiningEnquireButton";
 
 // Shown whenever the CMS hasn't filled in a real `amenities` list yet — swapped
 // out automatically the moment `pkg.amenities[0].items` has entries.
@@ -219,6 +220,7 @@ export default function DiningPage({
                 Call to Reserve
               </a>
             )}
+            <DiningEnquireButton venueName={pkg?.title} />
             {whatsappHref && (
               <a
                 href="#"

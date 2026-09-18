@@ -21,8 +21,31 @@ function getServiceIcon(item: { slug?: string; title?: string }) {
   return Sparkles;
 }
 
+const HTML_ENTITIES: Record<string, string> = {
+  amp: "&",
+  lt: "<",
+  gt: ">",
+  quot: '"',
+  "#39": "'",
+  apos: "'",
+  nbsp: " ",
+};
+
+function decodeHtmlEntities(text: string): string {
+  return text.replace(/&(#\d+|#x[0-9a-f]+|[a-z]+);/gi, (match, entity) => {
+    if (entity[0] === "#") {
+      const code =
+        entity[1]?.toLowerCase() === "x"
+          ? parseInt(entity.slice(2), 16)
+          : parseInt(entity.slice(1), 10);
+      return Number.isNaN(code) ? match : String.fromCodePoint(code);
+    }
+    return HTML_ENTITIES[entity.toLowerCase()] ?? match;
+  });
+}
+
 function getFeaturePoints(text: string): string[] {
-  return text
+  return decodeHtmlEntities(text)
     .split(/(?<=[.!?])\s+/)
     .map((s) => s.trim())
     .filter(Boolean)
@@ -86,7 +109,7 @@ export default async function ServicesSection() {
               item.image;
             const altText =
               item.gallery_images?.[0]?.title || item.title || "Service";
-            const href = item.slug ?? "/";
+            const href = item.linksrc ?? "/";
             const description = (item.content_0 || item.description || "")
               .replace(/<\/?[^>]+>/g, "")
               .trim();

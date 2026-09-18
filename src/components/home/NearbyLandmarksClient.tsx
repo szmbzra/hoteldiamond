@@ -17,9 +17,14 @@ function extractMapSrc(mapUrl?: string): string | null {
   return match ? match[1] : mapUrl;
 }
 
-export default function NearbyLandmarksClient({ landmarks }: NearbyLandmarksClientProps) {
+export default function NearbyLandmarksClient({
+  landmarks,
+}: NearbyLandmarksClientProps) {
   const [activeTab, setActiveTab] = useState(landmarks[0]?.id || "");
-  const activeIndex = Math.max(landmarks.findIndex((l) => l.id === activeTab), 0);
+  const activeIndex = Math.max(
+    landmarks.findIndex((l) => l.id === activeTab),
+    0,
+  );
   const activeLandmark = landmarks[activeIndex];
 
   if (!activeLandmark) return null;
@@ -27,7 +32,10 @@ export default function NearbyLandmarksClient({ landmarks }: NearbyLandmarksClie
   const mapSrc = extractMapSrc(activeLandmark.map_url);
 
   return (
-    <section className="relative overflow-hidden" style={{ background: "var(--luxury-dark)" }}>
+    <section
+      className="relative overflow-hidden"
+      style={{ background: "var(--luxury-dark)" }}
+    >
       {/* Decorative background — a huge, faint map glyph instead of a photo */}
       <MapIcon
         className="pointer-events-none absolute -right-16 -top-20 w-[420px] h-[420px] md:w-[600px] md:h-[600px] text-gold/[0.06] rotate-[8deg]"
@@ -45,49 +53,63 @@ export default function NearbyLandmarksClient({ landmarks }: NearbyLandmarksClie
           <div>
             <div className="luxury-label text-white mb-4">Explore The Area</div>
             <div className="luxury-divider mb-6"></div>
-            <h2 className="luxury-section-title text-white">Nearby Landmarks</h2>
+            <h2 className="luxury-section-title text-white">
+              Nearby Landmarks
+            </h2>
           </div>
           <p className="max-w-xs text-sm text-white/90 font-light leading-relaxed">
-            Everything worth seeing is only a short ride away — here&apos;s how close you really are.
+            Everything worth seeing is only a short ride away — here&apos;s how
+            close you really are.
           </p>
         </div>
 
         {/* Numbered pill tabs */}
-        <div className="flex flex-wrap gap-3 mb-4">
-          {landmarks.map((landmark, idx) => {
-            const active = landmark.id === activeLandmark.id;
-            return (
-              <button
-                key={landmark.id}
-                onClick={() => setActiveTab(landmark.id)}
-                className="group flex items-center gap-3 rounded-full px-5 py-3 transition-all duration-500"
-                style={{
-                  border: `1px solid ${active ? "var(--luxury-gold)" : "var(--luxury-border)"}`,
-                  background: active ? "rgba(227, 201, 161, 0.08)" : "transparent",
-                }}
-              >
-                <span
-                  className="text-[0.65rem] tracking-widest"
-                  style={{ color: active ? "var(--luxury-gold)" : "rgba(255,255,255,0.3)" }}
+        <div className="scrollbar-thin overflow-auto scrollbar-thumb-slate-900/60 scrollbar-thumb-white">
+          <div className="flex gap-3 mb-4">
+            {landmarks.map((landmark, idx) => {
+              const active = landmark.id === activeLandmark.id;
+              return (
+                <button
+                  key={landmark.id}
+                  onClick={() => setActiveTab(landmark.id)}
+                  className="group flex items-center gap-3  shrink-0 grow rounded-full px-5 py-3 transition-all duration-500"
+                  style={{
+                    border: `1px solid ${active ? "var(--luxury-gold)" : "var(--luxury-border)"}`,
+                    background: active
+                      ? "rgba(227, 201, 161, 0.08)"
+                      : "transparent",
+                  }}
                 >
-                  {String(idx + 1).padStart(2, "0")}
-                </span>
-                <span
-                  className={`text-xs uppercase tracking-[0.15em] transition-colors ${
-                    active ? "text-white" : "text-white/40 group-hover:text-white/70"
-                  }`}
-                >
-                  {landmark.title}
-                </span>
-              </button>
-            );
-          })}
+                  <span
+                    className="text-[0.65rem] tracking-widest"
+                    style={{
+                      color: active
+                        ? "var(--luxury-gold)"
+                        : "rgba(255,255,255,0.3)",
+                    }}
+                  >
+                    {String(idx + 1).padStart(2, "0")}
+                  </span>
+                  <span
+                    className={`text-xs uppercase tracking-[0.15em] transition-colors ${
+                      active
+                        ? "text-white"
+                        : "text-white/40 group-hover:text-white/70"
+                    }`}
+                  >
+                    {landmark.title}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
         </div>
 
         {/* Content panel */}
         <div
           key={activeLandmark.id}
-          className="animate-fade-in-up grid md:grid-cols-12 border-white">
+          className="animate-fade-in-up grid md:grid-cols-12 border-white"
+        >
           {/* Text */}
           <div className="relative flex flex-col justify-center p-8 md:col-span-5 md:p-12">
             <span className="luxury-big-numeral  pointer-events-none absolute top-6 right-8 select-none">
@@ -108,10 +130,15 @@ export default function NearbyLandmarksClient({ landmarks }: NearbyLandmarksClie
               {activeLandmark.distance && (
                 <div
                   className="inline-flex items-center gap-3 px-5 py-3"
-                  style={{ border: "1px solid var(--luxury-gold)", color: "var(--luxury-gold)" }}
+                  style={{
+                    border: "1px solid var(--luxury-gold)",
+                    color: "var(--luxury-gold)",
+                  }}
                 >
                   <MapPin className="h-4 w-4" strokeWidth={1.5} />
-                  <span className="text-sm font-light tracking-wider">{activeLandmark.distance}</span>
+                  <span className="text-sm font-light tracking-wider">
+                    {activeLandmark.distance}
+                  </span>
                 </div>
               )}
               {mapSrc && (

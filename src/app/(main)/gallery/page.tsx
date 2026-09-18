@@ -18,17 +18,14 @@ export default async function GalleryPage() {
     <main className="min-h-screen">
       <PageSchemas slug="Gallery" />
       <BreadcrumbNoBanner title="Gallery" />
-
       {/* Intro Section */}
       <section className="relative overflow-hidden pb-20 px-6 text-center max-w-4xl mx-auto">
-        <DecorativeGlow variant="gold-dark" />
         <p className="relative text-sm md:text-base leading-relaxed tracking-wide font-light max-w-2xl mx-auto">
           Discover Diamond Palace Lords Plaza through our photo collection.
           Explore our modern rooms, fine dining, versatile event halls, and
           relaxing pool and spa amenities.
         </p>
       </section>
-
       {/* Gallery Section */}
       <section className="relative overflow-hidden pb-32">
         {galleryImages?.length > 0 ? (
