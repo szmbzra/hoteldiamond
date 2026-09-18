@@ -40,7 +40,10 @@ export default async function HomeGallery() {
               property special. Take a tour through our gallery to explore our
               rooms, dining options, and event facilities.
             </p>
-            <Link href="gallery" className=" ">
+            <Link
+              href="gallery"
+              className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.25em] luxury-btn group/btn w-fit hover:text-gold-text transition-colors group "
+            >
               View Full Gallery
               <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </Link>
