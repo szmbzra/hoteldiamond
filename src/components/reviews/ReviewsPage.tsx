@@ -73,7 +73,7 @@ export default function ReviewsPage({
       <BreadcrumbNoBanner title="Guest Reviews" />
 
       {/* ── Filter tabs + cards ────────────────────────────────────────── */}
-      <section className="py-16">
+      <section className="pb-24">
         <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-24">
           {/* Cards */}
           {filtered.length === 0 ? (

@@ -10,19 +10,23 @@ import {
 } from "lucide-react";
 import { BreadcrumbNoBanner } from "@/components/ui/Breadcrumb";
 import ImageSlider from "@/components/ui/ImageSlider";
-import { DecorativeGlow, DecorativeAccent } from "@/components/ui/DecorativeBlobs";
+import {
+  DecorativeGlow,
+  DecorativeAccent,
+} from "@/components/ui/DecorativeBlobs";
 import EventEnquireButton from "@/components/events/EventEnquireButton";
 
 // Shown whenever the CMS hasn't filled in a real `amenities` list yet — swapped
 // out automatically the moment `pkg.amenities[0].items` has entries.
-const DEFAULT_AMENITIES: { title: string; icon: typeof Wifi; img?: string }[] = [
-  { title: "Free Wi-Fi", icon: Wifi },
-  { title: "AV Equipment", icon: MonitorPlay },
-  { title: "Natural Daylight", icon: Sun },
-  { title: "Catering Available", icon: UtensilsCrossed },
-  { title: "Dedicated Event Manager", icon: Users },
-  { title: "Flexible Layouts", icon: LayoutGrid },
-];
+const DEFAULT_AMENITIES: { title: string; icon: typeof Wifi; img?: string }[] =
+  [
+    { title: "Free Wi-Fi", icon: Wifi },
+    { title: "AV Equipment", icon: MonitorPlay },
+    { title: "Natural Daylight", icon: Sun },
+    { title: "Catering Available", icon: UtensilsCrossed },
+    { title: "Dedicated Event Manager", icon: Users },
+    { title: "Flexible Layouts", icon: LayoutGrid },
+  ];
 
 function getAmenityIcon(title: string = "") {
   const t = title.toLowerCase();
@@ -56,24 +60,27 @@ interface EventsData {
   description?: string;
   banner_img?: { id?: number; url?: string; alt?: string }[];
   amenities?: { group_title?: string; items?: EventAmenityItem[] }[];
+  amenities_name?: string | string[];
   size?: string;
   u_shape?: string;
-  class_room_style?: string;
+  classroom?: string;
   theater?: string;
   round_table?: string;
   cover?: string;
 }
 
-export default function EventsPage({
-  pkg,
-}: {
-  pkg: EventsData | null;
-}) {
+export default function EventsPage({ pkg }: { pkg: EventsData | null }) {
   const images = (pkg?.banner_img ?? [])
     .filter((b) => b?.url)
     .map((b) => ({ src: b.url as string, title: b.alt }));
 
   const cmsAmenities = pkg?.amenities?.[0]?.items ?? [];
+  // `amenities_name` from the CMS `subpackage` API comes back as an array,
+  // e.g. `["Venue Amenities"]`.
+  const amenitiesTitle =
+    (Array.isArray(pkg?.amenities_name)
+      ? pkg?.amenities_name[0]
+      : pkg?.amenities_name) || "Venue Amenities";
   const amenities =
     cmsAmenities.length > 0
       ? cmsAmenities.map((a) => ({
@@ -86,13 +93,14 @@ export default function EventsPage({
   const cmsSetupStyles = [
     { label: "Hall Size", value: pkg?.size },
     { label: "U Shape", value: pkg?.u_shape },
-    { label: "Classroom", value: pkg?.class_room_style },
+    { label: "Classroom", value: pkg?.classroom },
     { label: "Theatre", value: pkg?.theater },
     { label: "Round Table", value: pkg?.round_table },
     { label: "Cover", value: pkg?.cover },
   ].filter((s): s is { label: string; value: string } => Boolean(s.value));
 
-  const setupStyles = cmsSetupStyles.length > 0 ? cmsSetupStyles : DEFAULT_SETUP_STYLES;
+  const setupStyles =
+    cmsSetupStyles.length > 0 ? cmsSetupStyles : DEFAULT_SETUP_STYLES;
 
   return (
     <div style={{ background: "var(--luxury-ivory)" }}>
@@ -113,7 +121,9 @@ export default function EventsPage({
         )}
 
         <div className="max-w-3xl mx-auto text-center">
-          <p className="luxury-label text-gold-text mb-4">Events &amp; Venues</p>
+          <p className="luxury-label text-gold-text mb-4">
+            Events &amp; Venues
+          </p>
           <div className="flex justify-center mb-8">
             <div className="luxury-divider" />
           </div>
@@ -132,7 +142,10 @@ export default function EventsPage({
               dangerouslySetInnerHTML={{ __html: pkg.description }}
             />
           ) : (
-            <p className="luxury-subtitle" style={{ color: "var(--luxury-muted)" }}>
+            <p
+              className="luxury-subtitle"
+              style={{ color: "var(--luxury-muted)" }}
+            >
               From boardroom strategy sessions to garden celebrations, our
               function spaces bring together attentive service and elegant
               surroundings.
@@ -142,21 +155,18 @@ export default function EventsPage({
       </section>
 
       {/* Amenities */}
-      <section className="relative overflow-hidden" style={{ background: "var(--luxury-cream)" }}>
+      <section
+        className="relative overflow-hidden"
+        style={{ background: "var(--luxury-cream)" }}
+      >
         <DecorativeGlow variant="dark-gold" />
         <div className="relative max-w-[1400px] mx-auto py-20 px-6 md:px-12 lg:px-24">
           <div className="text-center mb-14">
-            <p className="luxury-label text-gold-text mb-4 flex justify-center">
-              What to Expect
-            </p>
-            <div className="flex justify-center mb-8">
-              <div className="luxury-divider" />
-            </div>
             <h2
-              className="luxury-section-title"
+              className="luxury-section-title text-3xl!"
               style={{ color: "var(--luxury-charcoal)" }}
             >
-              Venue Amenities
+              {amenitiesTitle}
             </h2>
           </div>
 
@@ -181,7 +191,10 @@ export default function EventsPage({
                         className="w-6 h-6 object-contain opacity-80"
                       />
                     ) : (
-                      <Icon className="w-6 h-6" style={{ color: "var(--luxury-gold-text)" }} />
+                      <Icon
+                        className="w-6 h-6"
+                        style={{ color: "var(--luxury-gold-text)" }}
+                      />
                     )}
                   </div>
                   <span
@@ -201,50 +214,56 @@ export default function EventsPage({
       <section className="relative overflow-hidden max-w-[1400px] mx-auto py-20 px-6 md:px-12 lg:px-24">
         <DecorativeAccent color="gold" corner="bottom-right" size={420} />
         <div className="relative">
-        <h3
-          className="text-2xl font-light tracking-wide uppercase mb-2"
-          style={{ color: "var(--luxury-charcoal)" }}
-        >
-          Occupancy &amp; Setup Style
-        </h3>
-        <div className="w-12 h-px mb-10" style={{ background: "var(--luxury-gold)" }} />
+          <h3
+            className="text-2xl font-light tracking-wide uppercase mb-2"
+            style={{ color: "var(--luxury-charcoal)" }}
+          >
+            Occupancy &amp; Setup Style
+          </h3>
+          <div
+            className="w-12 h-px mb-10"
+            style={{ background: "var(--luxury-gold)" }}
+          />
 
-        <div
-          className="overflow-x-auto rounded-2xl border"
-          style={{ borderColor: "var(--luxury-border)" }}
-        >
-          <table className="w-full border-collapse">
-            <thead>
-              <tr style={{ background: "var(--luxury-cream)" }}>
-                {setupStyles.map((s) => (
-                  <th
-                    key={s.label}
-                    scope="col"
-                    className="px-5 py-4 text-left text-[10px] uppercase tracking-[0.15em] font-medium whitespace-nowrap border-b"
-                    style={{ color: "var(--luxury-muted)", borderColor: "var(--luxury-border)" }}
-                  >
-                    {s.label}
-                  </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                {setupStyles.map((s) => (
-                  <td
-                    key={s.label}
-                    className="px-5 py-5 text-base font-light whitespace-nowrap"
-                    style={{ color: "var(--luxury-charcoal)" }}
-                  >
-                    {s.value}
-                  </td>
-                ))}
-              </tr>
-            </tbody>
-          </table>
-        </div>
+          <div
+            className="overflow-x-auto rounded-2xl border"
+            style={{ borderColor: "var(--luxury-border)" }}
+          >
+            <table className="w-full border-collapse">
+              <thead>
+                <tr style={{ background: "var(--luxury-cream)" }}>
+                  {setupStyles.map((s) => (
+                    <th
+                      key={s.label}
+                      scope="col"
+                      className="px-5 py-4 text-left text-[10px] uppercase tracking-[0.15em] font-medium whitespace-nowrap border-b"
+                      style={{
+                        color: "var(--luxury-muted)",
+                        borderColor: "var(--luxury-border)",
+                      }}
+                    >
+                      {s.label}
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  {setupStyles.map((s) => (
+                    <td
+                      key={s.label}
+                      className="px-5 py-5 text-base font-light whitespace-nowrap"
+                      style={{ color: "var(--luxury-charcoal)" }}
+                    >
+                      {s.value}
+                    </td>
+                  ))}
+                </tr>
+              </tbody>
+            </table>
+          </div>
 
-        <EventEnquireButton hallName={pkg?.title} />
+          <EventEnquireButton hallName={pkg?.title} />
         </div>
       </section>
     </div>

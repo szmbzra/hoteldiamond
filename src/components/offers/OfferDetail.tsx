@@ -167,7 +167,7 @@ export default function OfferDetail({
     <div style={{ background: "var(--luxury-ivory)" }}>
       <BreadcrumbNoBanner title={plainTitle} />
 
-      <section className="max-w-[1400px] mx-auto py-16 md:py-20 px-6 md:px-12 lg:px-24">
+      <section className="max-w-[1400px] mx-auto md:pb-20 px-6 md:px-12 lg:px-24">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
           {/* Left: image + dates + content */}
           <div className="lg:sticky lg:top-24">
@@ -514,7 +514,7 @@ export default function OfferDetail({
           <DecorativeGlow variant="gold-dark" />
           <div className="relative">
             <h3
-              className="text-2xl font-light tracking-wide uppercase mb-2"
+              className="text-3xl mb-2"
               style={{ color: "var(--luxury-charcoal)" }}
             >
               Other Offers

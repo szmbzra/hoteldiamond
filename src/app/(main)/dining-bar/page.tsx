@@ -55,13 +55,12 @@ export default async function DiningRoute() {
         <div className="relative max-w-7xl mx-auto mt-5">
           {pkg?.description ? (
             <div
-              className="luxury-subtitle max-w-2xl mx-auto text-center mb-16"
-              style={{ color: "var(--luxury-muted)" }}
+              className="luxury-subtitle max-w-5xl mx-auto text-center mb-16"
               dangerouslySetInnerHTML={{ __html: pkg.description }}
             />
           ) : (
             <p
-              className="luxury-subtitle max-w-2xl mx-auto text-center mb-16"
+              className="luxury-subtitle max-w-5xl mx-auto text-center mb-16"
               style={{ color: "var(--luxury-muted)" }}
             >
               From an elegant multi-cuisine restaurant to a rooftop lounge and a

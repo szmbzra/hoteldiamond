@@ -18,7 +18,7 @@ export default async function OffersPage() {
       <PageSchemas slug="offers" />
       <BreadcrumbNoBanner title="Offers" />
 
-      <section className="relative overflow-hidden pb-24 px-6 md:px-12 bg-[#f9f7f2]">
+      <section className="relative overflow-hidden pb-24 px-6 md:px-12 bg-[#f9f7f2] mt-10">
         <DecorativeGlow variant="gold-dark" />
         <div className="relative max-w-9xl mx-auto">
           <OfferList offers={offers || []} />

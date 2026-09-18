@@ -1,4 +1,4 @@
-import {BreadcrumbNoBanner}  from "@/components/ui/Breadcrumb";
+import { BreadcrumbNoBanner } from "@/components/ui/Breadcrumb";
 import NewsGrid from "@/components/ui/NewsGrid";
 import PageSchemas from "@/components/seo/PageSchemas";
 import { getBlogs, getPageHeroImage } from "@/lib/data";
@@ -15,8 +15,8 @@ export default async function BlogPage() {
   return (
     <>
       <PageSchemas slug="blog" />
-  <BreadcrumbNoBanner title="Blog"/>
-      <div className="max-w-[1400px] mx-auto py-20 px-6 md:px-12 lg:px-24">
+      <BreadcrumbNoBanner title="Blog" />
+      <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-24">
         <NewsGrid news={data} />
       </div>
     </>

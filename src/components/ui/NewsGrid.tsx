@@ -66,8 +66,7 @@ export default function NewsGrid({ news }: { news: NewsData[] }) {
 
               {/* Description */}
               <div
-                className="line-clamp-3 text-sm font-light leading-relaxed mb-6"
-                style={{ color: "var(--luxury-muted)" }}
+                className="line-clamp-3 text-sm leading-[1.8] mb-6 text-black/80"
                 dangerouslySetInnerHTML={{ __html: item.content }}
               />
 

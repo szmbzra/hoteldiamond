@@ -92,13 +92,13 @@ export default async function BlogSlugPage({
   return (
     <>
       <JsonLd schema={blogPostingSchema} />
-      <main className="min-h-screen bg-white">
+      <main className="min-h-screen">
         {/* 2. Content Grid */}
         <section className="max-w-7xl mx-auto px-6 md:px-12 pt-20 pb-20 md:pb-32">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-20">
             {/* Main Content (8 cols) */}
             <div className="lg:col-span-8">
-              <h1 className=" md:text-3xl  tracking-tight mb-12 leading-[1.1] animate-fade-in">
+              <h1 className=" md:text-3xl mb-12 leading-[1.5] font-semibold animate-fade-in">
                 {blog.title}
               </h1>
               {/* Hero Image */}
@@ -114,21 +114,21 @@ export default async function BlogSlugPage({
                   />
                 )}
               </div>
-              <div className="flex flex-wrap items-center gap-10 justify-between  mt-6 mb-9 border-b-1 pb-8 text-stone-400">
-                <div className="flex">
+              <div className="flex flex-wrap items-center gap-10 justify-between  mt-6 mb-9 border-b-1 pb-5">
+                <div className="flex text-sm">
                   <span>Author :</span>
                   <span>{blog.author || `${site.shortName} Team`}</span>
                 </div>
-                <div className="w-px h-4 bg-white/10 hidden md:block"></div>
-                <div className="flex items-center gap-4">
-                  <span>Date:</span>
+                <div className="w-px h-4 hidden md:block"></div>
+                <div className="flex items-center text-sm">
+                  <span>Date: &nbsp; </span>
                   <span>{blog.date}</span>
                 </div>
               </div>
 
               {/* Article Text Body */}
               <div
-                className="leading-[1.8] mb-15"
+                className="leading-[2.5] mb-15"
                 dangerouslySetInnerHTML={{ __html: blog.content }}
               />
 
@@ -164,11 +164,9 @@ export default async function BlogSlugPage({
                           />
                         )}
                       </div>
-                      <div className="space-y-1">
-                        <span className="text-[9px] uppercase tracking-widest text-gray-400">
-                          {post.date}
-                        </span>
-                        <h4 className="text-[15px] font-light leading-tight group-hover:text-gold transition-colors line-clamp-2">
+                      <div className="space-y-1 items-start">
+                        <span className="text-sm pb-4">{post.date}</span>
+                        <h4 className="text-[15px] font-light leading-tight group-hover:text-gold transition-colors line-clamp-2 mt-1.5">
                           {post.title}
                         </h4>
                       </div>

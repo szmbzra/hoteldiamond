@@ -6,14 +6,15 @@ import { ArrowRight, Maximize2, Users } from "lucide-react";
 
 function getImageSrc(image: any): string {
   if (!image) return "";
-  return typeof image === "string" ? image : image?.src ?? image?.url ?? "";
+  return typeof image === "string" ? image : (image?.src ?? image?.url ?? "");
 }
 
 function getFirstImage(item: any): string {
   const img = item.img;
   const gallery = item.gallery_images;
   const primary = Array.isArray(img) && img.length > 0 ? img[0] : null;
-  const fallback = Array.isArray(gallery) && gallery.length > 0 ? gallery[0] : null;
+  const fallback =
+    Array.isArray(gallery) && gallery.length > 0 ? gallery[0] : null;
   return getImageSrc(primary) || getImageSrc(fallback);
 }
 
@@ -39,7 +40,9 @@ export default function RoomsList({ rooms }: { rooms: any[] }) {
       {rooms.map((room: any, idx: number) => {
         const image = getFirstImage(room);
         const amenities = getAmenities(room);
-        const currency = String(room.currency || "").replace(/[`'"]/g, "").trim();
+        const currency = String(room.currency || "")
+          .replace(/[`'"]/g, "")
+          .trim();
         const priceValue = room.price ? Number(room.price) : null;
 
         return (
@@ -80,7 +83,11 @@ export default function RoomsList({ rooms }: { rooms: any[] }) {
             <div className="p-6 md:p-7 flex flex-col flex-grow">
               <h3
                 className="text-2xl md:text-[1.75rem] tracking-wide mb-1.5 transition-colors duration-300 group-hover:text-gold-text"
-                style={{ fontFamily: "var(--font-heading), 'Playfair Display', Georgia, serif", color: "var(--luxury-charcoal)" }}
+                style={{
+                  fontFamily:
+                    "var(--font-heading), 'Playfair Display', Georgia, serif",
+                  color: "var(--luxury-charcoal)",
+                }}
               >
                 {room.title}
               </h3>
@@ -90,15 +97,20 @@ export default function RoomsList({ rooms }: { rooms: any[] }) {
                   <span className="text-[10px] uppercase tracking-[0.15em] text-gray-400">
                     From
                   </span>
-                  <span className="text-sm font-medium" style={{ color: "var(--luxury-gold-text)" }}>
+                  <span
+                    className="text-sm font-medium"
+                    style={{ color: "var(--luxury-gold-text)" }}
+                  >
                     {currency} {priceValue.toLocaleString()}
                   </span>
-                  <span className="text-[11px] text-gray-400 font-light">/ night</span>
+                  <span className="text-[11px] text-gray-400 font-light">
+                    / night
+                  </span>
                 </div>
               ) : null}
 
               {room.sub_title && (
-                <p className="text-sm text-gray-500 font-light leading-relaxed mb-5 line-clamp-2">
+                <p className="text-sm text-black/50  leading-relaxed mb-5 line-clamp-3">
                   {room.sub_title}
                 </p>
               )}
@@ -111,13 +123,19 @@ export default function RoomsList({ rooms }: { rooms: any[] }) {
                 >
                   {room.occupancy && (
                     <div className="flex items-center gap-2 text-xs text-gray-500">
-                      <Users className="w-4 h-4" style={{ color: "var(--luxury-gold-text)" }} />
+                      <Users
+                        className="w-4 h-4"
+                        style={{ color: "var(--luxury-gold-text)" }}
+                      />
                       {room.occupancy}
                     </div>
                   )}
                   {room.rooms_Size && (
                     <div className="flex items-center gap-2 text-xs text-gray-500">
-                      <Maximize2 className="w-4 h-4" style={{ color: "var(--luxury-gold-text)" }} />
+                      <Maximize2
+                        className="w-4 h-4"
+                        style={{ color: "var(--luxury-gold-text)" }}
+                      />
                       {room.rooms_Size}
                     </div>
                   )}

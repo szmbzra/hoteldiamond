@@ -52,18 +52,14 @@ export default async function EventsRoute() {
       <section className="relative overflow-hidden pb-24 px-6 md:px-12 bg-[#f9f7f2]">
         <GeometricAccent side="left" color="dark" opacity={0.5} />
         <GeometricAccent side="right" color="dark" opacity={0.5} />
-        <div className="relative max-w-7xl mx-auto">
+        <div className="relative max-w-7xl mx-auto mt-5">
           {pkg?.description ? (
             <div
-              className="luxury-subtitle max-w-2xl mx-auto text-center mb-16"
-              style={{ color: "var(--luxury-muted)" }}
+              className="luxury-subtitle max-w-5xl mx-auto text-center mb-16"
               dangerouslySetInnerHTML={{ __html: pkg.description }}
             />
           ) : (
-            <p
-              className="luxury-subtitle max-w-2xl mx-auto text-center mb-16"
-              style={{ color: "var(--luxury-muted)" }}
-            >
+            <p className="luxury-subtitle max-w-4xl mx-auto text-center mb-16">
               From an intimate boardroom to a pillar-free ballroom and an
               open-air lawn — find the right setting for your meeting,
               conference or celebration.

@@ -41,6 +41,7 @@ export default function EventsList({ events }: { events: any[] }) {
         const capacityFields = [
           { value: event.theater },
           { value: event.round_table },
+          { value: event.classroom },
         ].filter((f) => f.value && f.value !== "—");
 
         return (

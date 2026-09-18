@@ -22,6 +22,7 @@ export default function RoomPage({ pkg }: { pkg: any }) {
     gallery_images = [],
     description,
     content_0,
+    amenities_name,
     content_1,
     amenities: cmsAmenities = [],
     includes = [],
@@ -71,16 +72,15 @@ export default function RoomPage({ pkg }: { pkg: any }) {
             )}
 
             <h1
-              className="luxury-section-title mb-6"
+              className="luxury-section-title mb-6 text-4xl!"
               style={{ color: "var(--luxury-charcoal)" }}
             >
               {title}
             </h1>
-            <div className="luxury-divider  mb-8" />
+            <div className="luxury-divider  mb-3" />
             {description && (
               <div
-                className="cms-content luxury-subtitle !leading-[1.8]"
-                style={{ color: "var(--luxury-muted)" }}
+                className="cms-content luxury-subtitle !leading-[1.8] text-base! text-dark/60"
                 dangerouslySetInnerHTML={{ __html: description }}
               />
             )}
@@ -88,7 +88,7 @@ export default function RoomPage({ pkg }: { pkg: any }) {
         </div>
       </section>
 
-      <AmenitiesGrid amenities={amenities} />
+      <AmenitiesGrid amenities={amenities} title={amenities_name} />
 
       {/* ── VIRTUAL TOUR ─────────────────────────────────────────── */}
       {tourUrl && (

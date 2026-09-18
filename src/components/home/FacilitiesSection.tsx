@@ -20,7 +20,7 @@ export default async function FacilitiesSection() {
       <div className="relative max-w-[1400px] mx-auto py-20 px-6 md:px-12 lg:px-24">
         {/* Header */}
         <div className="flex flex-col lg:flex-row gap-12 lg:gap-20 mb-16">
-          <div className="w-full lg:w-5/12 animate-slide-in-left">
+          <div className="w-full animate-slide-in-left">
             <div className="luxury-label text-gold-text mb-4">
               {header.label}
             </div>
@@ -29,7 +29,7 @@ export default async function FacilitiesSection() {
               className="luxury-section-title"
               style={{ color: "var(--luxury-charcoal)" }}
             >
-              {header.title}
+              Hospitality Highlights
             </h2>
           </div>
         </div>
@@ -46,22 +46,22 @@ export default async function FacilitiesSection() {
                 style={{ animationDelay: `${0.1 * idx}s` }}
               >
                 {/* Icon / Image */}
-              <div className="mb-6 w-12 h-12 flex items-center justify-center">
-                {facility.icon ? (
-                  <i
-                    className={`${facility.icon} text-4xl`}
-                    style={{ color: "var(--luxury-charcoal)" }}
-                  />
-                ) : image?.src ? (
-                  <Image
-                    src={image.src}
-                    alt={image.title || facility.title || ""}
-                    width={48}
-                    height={48}
-                    className="w-12 h-12 object-contain"
-                  />
-                ) : null}
-              </div>
+                <div className="mb-6 w-12 h-12 flex items-center justify-center">
+                  {facility.icon ? (
+                    <i
+                      className={`${facility.icon} text-4xl`}
+                      style={{ color: "var(--luxury-charcoal)" }}
+                    />
+                  ) : image?.src ? (
+                    <Image
+                      src={image.src}
+                      alt={image.title || facility.title || ""}
+                      width={48}
+                      height={48}
+                      className="w-12 h-12 object-contain"
+                    />
+                  ) : null}
+                </div>
 
                 {/* Title */}
                 <div

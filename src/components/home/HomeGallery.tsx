@@ -42,7 +42,7 @@ export default async function HomeGallery() {
             </p>
             <Link
               href="gallery"
-              className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.25em] luxury-btn group/btn w-fit hover:text-gold-text transition-colors group "
+              className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.25em] text-black/50! border-black/50! luxury-btn group/btn w-fit hover:text-luxury-dark)! transition-colors group "
             >
               View Full Gallery
               <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />

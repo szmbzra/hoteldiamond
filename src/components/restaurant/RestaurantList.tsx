@@ -94,24 +94,24 @@ export default function RestaurantList({ outlets }: { outlets: any[] }) {
               <h3
                 className="text-3xl md:text-4xl lg:text-[2.75rem] mb-5 transition-colors duration-300 group-hover:text-gold-text"
                 style={{
-                  fontFamily: "var(--font-heading), 'Playfair Display', Georgia, serif",
+                  fontFamily:
+                    "var(--font-heading), 'Playfair Display', Georgia, serif",
                   color: "var(--luxury-charcoal)",
                 }}
               >
                 {outlet.title}
               </h3>
 
-              {outlet.sub_title && (
+              {outlet.description && (
                 <p
                   className="text-base font-light leading-relaxed mb-8 max-w-md"
                   style={{ color: "var(--luxury-muted)" }}
-                >
-                  {outlet.sub_title}
-                </p>
+                  dangerouslySetInnerHTML={{ __html: outlet.description }}
+                />
               )}
 
               <div className="inline-flex items-center gap-3 text-xs uppercase tracking-[0.2em] text-gold-text pb-1 border-b border-transparent group-hover:border-current transition-colors">
-                Explore Menu
+                Explore More
                 <ArrowUpRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
               </div>
             </div>
