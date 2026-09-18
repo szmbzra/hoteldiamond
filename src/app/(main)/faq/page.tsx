@@ -1,4 +1,4 @@
-import {BreadcrumbNoBanner}  from "@/components/ui/Breadcrumb";
+import { BreadcrumbNoBanner } from "@/components/ui/Breadcrumb";
 import FaqAccordion from "@/components/faq/FaqAccordion";
 import JsonLd from "@/components/seo/JsonLd";
 import PageSchemas from "@/components/seo/PageSchemas";
@@ -20,17 +20,18 @@ export default async function Page() {
   const siteRegulars = await getSiteRegulars();
   const faqs: FaqItem[] = await getFaqs();
 
-  const faqSchema = faqs.length > 0
-    ? {
-        "@context": "https://schema.org",
-        "@type": "FAQPage",
-        mainEntity: faqs.map((item) => ({
-          "@type": "Question",
-          name: item.question,
-          acceptedAnswer: { "@type": "Answer", text: item.answer },
-        })),
-      }
-    : null;
+  const faqSchema =
+    faqs.length > 0
+      ? {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: faqs.map((item) => ({
+            "@type": "Question",
+            name: item.question,
+            acceptedAnswer: { "@type": "Answer", text: item.answer },
+          })),
+        }
+      : null;
 
   return (
     <>
@@ -47,7 +48,7 @@ export default async function Page() {
             Frequently Asked Questions
           </h2>
           <div className="w-12 h-[1.5px] bg-gold mx-auto mb-6" />
-          <p className="text-sm text-gray-400 font-light max-w-lg mx-auto leading-relaxed">
+          <p className="text-sm font-light max-w-lg mx-auto leading-relaxed">
             Everything you need to know before your stay at {site.name}.
           </p>
         </div>

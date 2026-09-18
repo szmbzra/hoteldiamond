@@ -11,6 +11,7 @@ import {
 import { BreadcrumbNoBanner } from "@/components/ui/Breadcrumb";
 import ImageSlider from "@/components/ui/ImageSlider";
 import { DecorativeGlow, DecorativeAccent } from "@/components/ui/DecorativeBlobs";
+import EventEnquireButton from "@/components/events/EventEnquireButton";
 
 // Shown whenever the CMS hasn't filled in a real `amenities` list yet — swapped
 // out automatically the moment `pkg.amenities[0].items` has entries.
@@ -65,10 +66,8 @@ interface EventsData {
 
 export default function EventsPage({
   pkg,
-  whatsapp,
 }: {
   pkg: EventsData | null;
-  whatsapp: string;
 }) {
   const images = (pkg?.banner_img ?? [])
     .filter((b) => b?.url)
@@ -94,8 +93,6 @@ export default function EventsPage({
   ].filter((s): s is { label: string; value: string } => Boolean(s.value));
 
   const setupStyles = cmsSetupStyles.length > 0 ? cmsSetupStyles : DEFAULT_SETUP_STYLES;
-
-  const whatsappHref = whatsapp ? `https://wa.me/${whatsapp.replace(/[^0-9]/g, "")}` : undefined;
 
   return (
     <div style={{ background: "var(--luxury-ivory)" }}>
@@ -247,21 +244,7 @@ export default function EventsPage({
           </table>
         </div>
 
-        {whatsapp && (
-          <a
-            href={whatsappHref}
-            target="_blank"
-            rel="noreferrer"
-            className="inline-flex items-center gap-3 mt-8 px-8 py-4 text-xs uppercase tracking-[0.2em] transition-colors duration-300 hover:opacity-90"
-            style={{
-              background: "var(--luxury-dark)",
-              color: "var(--luxury-gold)",
-              border: "1px solid var(--luxury-dark)",
-            }}
-          >
-            WhatsApp for Enquiry
-          </a>
-        )}
+        <EventEnquireButton hallName={pkg?.title} />
         </div>
       </section>
     </div>

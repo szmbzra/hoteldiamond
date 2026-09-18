@@ -5,7 +5,7 @@ import { buildMetadata } from "@/lib/metadata";
 import { resolveHeroImages } from "@/lib/images";
 import EventsPage from "@/components/events/EventsPage";
 import JsonLd from "@/components/seo/JsonLd";
-import { CATEGORY_IDS, SITE_URL, site, contact } from "@/config/site";
+import { CATEGORY_IDS, SITE_URL, site } from "@/config/site";
 import { DUMMY_EVENT_VENUES } from "@/data/data";
 
 interface PageProps {
@@ -59,8 +59,6 @@ export default async function EventDetailPage({ params }: PageProps) {
     item,
     item.fb_img ?? siteRegulars?.default ?? "",
   );
-  const whatsapp: string =
-    siteRegulars?.whatsapp_a ?? siteRegulars?.contact_info ?? contact.whatsapp;
 
   // EventsPage expects `banner_img: {id,url,alt}[]`, while subpackage items
   // (and the dummy fallback) carry `gallery_images` — adapt here so
@@ -95,7 +93,7 @@ export default async function EventDetailPage({ params }: PageProps) {
   return (
     <>
       <JsonLd schema={breadcrumbSchema} />
-      <EventsPage pkg={pkg} whatsapp={whatsapp} />
+      <EventsPage pkg={pkg} />
     </>
   );
 }

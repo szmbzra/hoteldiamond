@@ -1,10 +1,8 @@
 "use client";
 
 import { ExternalLink, MessageSquare, Quote, Star } from "lucide-react";
-import {BreadcrumbNoBanner}  from "@/components/ui/Breadcrumb";
+import { BreadcrumbNoBanner } from "@/components/ui/Breadcrumb";
 import { useState } from "react";
-
-
 
 /** External "write a review" destinations. Per-property — update per hotel. */
 const REVIEW_LINKS = {
@@ -23,8 +21,13 @@ interface Review {
 
 /** Brand accent per platform — kept as data so the JSX stays declarative. */
 
-
-function StarRow({ value = 5, size = "w-3.5 h-3.5" }: { value?: number; size?: string }) {
+function StarRow({
+  value = 5,
+  size = "w-3.5 h-3.5",
+}: {
+  value?: number;
+  size?: string;
+}) {
   return (
     <div className="flex gap-0.5" aria-hidden="true">
       {[...Array(5)].map((_, i) => (
@@ -46,7 +49,9 @@ export default function ReviewsPage({
   reviews: Review[];
   heroImage: string;
 }) {
-  const [filter, setFilter] = useState<"All" | keyof typeof REVIEW_LINKS>("All");
+  const [filter, setFilter] = useState<"All" | keyof typeof REVIEW_LINKS>(
+    "All",
+  );
 
   const filtered =
     filter === "All" ? reviews : reviews.filter((r) => r.via === filter);
@@ -61,74 +66,84 @@ export default function ReviewsPage({
     count: reviews.filter((r) => (r.rating ?? 5) === n).length,
   }));
 
-
-
   return (
     <div>
       {/* ── Hero ───────────────────────────────────────────────────────── */}
 
-      <BreadcrumbNoBanner title="Guest Reviews"/>
-
+      <BreadcrumbNoBanner title="Guest Reviews" />
 
       {/* ── Filter tabs + cards ────────────────────────────────────────── */}
       <section className="py-16">
         <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-24">
-
           {/* Cards */}
           {filtered.length === 0 ? (
             <div className="flex flex-col items-center justify-center text-center py-24 text-luxury-muted">
-              <MessageSquare className="w-10 h-10 mb-4 text-gold/40" aria-hidden="true" />
+              <MessageSquare
+                className="w-10 h-10 mb-4 text-gold/40"
+                aria-hidden="true"
+              />
               <p className="text-sm">No reviews from this platform yet.</p>
             </div>
           ) : (
-            <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <ul className="columns-1 md:columns-2 lg:columns-3 gap-6">
               {filtered.map((r, i) => (
                 <li
                   key={i}
-                  className="luxury-card-hover group relative bg-white rounded-2xl p-7 flex flex-col gap-4 border border-luxury-border animate-fade-in-up"
+                  className="mb-6 break-inside-avoid"
                   style={{ animationDelay: `${Math.min(i, 8) * 0.05}s` }}
                 >
-                  <Quote
-                    className="absolute top-6 right-6 w-8 h-8 text-gold/15 group-hover:text-gold/30 transition-colors"
-                    aria-hidden="true"
-                  />
+                  {/* break-inside: avoid is unreliable on a flex container inside a
+                      CSS-columns layout (Chrome still splits it) — the flex box lives
+                      on this inner div, while the <li> above stays a plain block so
+                      the browser actually keeps the card in one column. */}
+                  <div className="luxury-card-hover group relative bg-white rounded-2xl p-7 flex flex-col gap-4 border border-luxury-border animate-fade-in-up">
+                    <Quote
+                      className="absolute top-6 right-6 w-8 h-8 text-gold/15 group-hover:text-gold/30 transition-colors"
+                      aria-hidden="true"
+                    />
 
-                  <div className="flex items-center gap-2">
-                    <StarRow value={r.rating ?? 5} />
-                    <span className="sr-only">{r.rating ?? 5} out of 5 stars</span>
-                  </div>
-
-                  {r.title && (
-                    <h3 className="font-medium text-luxury-charcoal text-base leading-snug pr-8">
-                      {r.title}
-                    </h3>
-                  )}
-
-                  <p className="text-sm text-gray-500 leading-relaxed line-clamp-4 flex-1">
-                    {r.content?.replace(/<[^>]+>/g, "")}
-                  </p>
-
-                  <div className="flex items-center justify-between pt-4 mt-auto border-t border-luxury-border">
-                    <div className="flex items-center gap-3 min-w-0">
-                      {r.image ? (
-                        // eslint-disable-next-line @next/next/no-img-element -- review avatars come from arbitrary external hosts
-                        <img
-                          src={r.image}
-                          alt=""
-                          width={36}
-                          height={36}
-                          loading="lazy"
-                          decoding="async"
-                          className="w-9 h-9 rounded-full object-cover shrink-0"
-                        />
-                      ) : (
-                        <div className="w-9 h-9 rounded-full flex items-center justify-center text-sm font-medium text-white bg-luxury-dark shrink-0" aria-hidden="true">
-                          {r.name?.[0]?.toUpperCase() ?? "G"}
-                        </div>
-                      )}
-                      <span className="text-sm font-medium text-luxury-charcoal truncate">
-                        {r.name}
+                    <div className="flex items-center gap-2">
+                      <StarRow value={r.rating ?? 5} />
+                      <span className="sr-only">
+                        {r.rating ?? 5} out of 5 stars
                       </span>
+                    </div>
+
+                    {r.title && (
+                      <h3 className="font-medium text-luxury-charcoal text-base leading-snug pr-8">
+                        {r.title}
+                      </h3>
+                    )}
+
+                    <p className="text-sm text-gray-500 leading-relaxed  flex-1">
+                      {r.content?.replace(/<[^>]+>/g, "")}
+                    </p>
+
+                    <div className="flex items-center justify-between pt-4 mt-auto border-t border-luxury-border">
+                      <div className="flex items-center gap-3 min-w-0">
+                        {r.image ? (
+                          // eslint-disable-next-line @next/next/no-img-element -- review avatars come from arbitrary external hosts
+                          <img
+                            src={r.image}
+                            alt=""
+                            width={36}
+                            height={36}
+                            loading="lazy"
+                            decoding="async"
+                            className="w-9 h-9 rounded-full object-cover shrink-0"
+                          />
+                        ) : (
+                          <div
+                            className="w-9 h-9 rounded-full flex items-center justify-center text-sm font-medium text-white bg-luxury-dark shrink-0"
+                            aria-hidden="true"
+                          >
+                            {r.name?.[0]?.toUpperCase() ?? "G"}
+                          </div>
+                        )}
+                        <span className="text-sm font-medium text-luxury-charcoal truncate">
+                          {r.name}
+                        </span>
+                      </div>
                     </div>
                   </div>
                 </li>
@@ -137,7 +152,6 @@ export default function ReviewsPage({
           )}
         </div>
       </section>
-
     </div>
   );
 }

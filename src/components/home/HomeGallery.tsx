@@ -32,22 +32,15 @@ export default async function HomeGallery() {
               Visual Journey
             </div>
             <div className="luxury-divider mb-6"></div>
-            <h2
-              className="luxury-section-title mb-6 text-5xl!"
-              style={{ color: "var(--luxury-charcoal)" }}
-            >
+            <h2 className="luxury-section-title mb-6 text-5xl! leading-[1.2]">
               Moments Captured in <span className="italic">Time</span>
             </h2>
-            <p
-              className="luxury-subtitle mb-8 text-base! font-normal!"
-              style={{ color: "var(--luxury-muted)" }}
-            >
-              Discover the spaces, experiences, and subtle details that make our property special. Take a tour through our gallery to explore our rooms, dining options, and event facilities.
+            <p className="luxury-subtitle mb-8 text-base! font-normal! text-black/60 leading-[1.9]">
+              Discover the spaces, experiences, and subtle details that make our
+              property special. Take a tour through our gallery to explore our
+              rooms, dining options, and event facilities.
             </p>
-            <Link
-              href="gallery"
-              className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.25em] luxury-btn group/btn w-fit hover:text-gold-text transition-colors group"
-            >
+            <Link href="gallery" className=" ">
               View Full Gallery
               <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </Link>

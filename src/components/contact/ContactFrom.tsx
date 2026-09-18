@@ -4,7 +4,10 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import Recaptcha from "../ui/Recaptcha";
+// import Recaptcha from "../ui/Recaptcha";
+
+const PHONE_ALLOWED_CHARS = /[^0-9+-]/g;
+const PHONE_MAX_LENGTH = 14;
 
 const contactSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
@@ -12,10 +15,11 @@ const contactSchema = z.object({
   phone: z
     .string()
     .min(7, "Phone number must be at least 7 characters")
-    .regex(
-      /^[0-9+-\s]+$/,
-      "Phone number can only contain digits, spaces, +, or -",
-    ),
+    .max(
+      PHONE_MAX_LENGTH,
+      `Phone number cannot exceed ${PHONE_MAX_LENGTH} characters`,
+    )
+    .regex(/^[0-9+-]+$/, "Phone number can only contain digits, + and -"),
   address: z.string().min(3, "Address is required"),
   message: z.string().min(10, "Message must be at least 10 characters"),
 });
@@ -37,11 +41,13 @@ export default function ContactFrom() {
     resolver: zodResolver(contactSchema),
   });
 
+  const { onChange: onPhoneChange, ...phoneField } = register("phone");
+
   const onSubmit = async (formData: ContactFormData) => {
-    if (!captchaToken) {
-      setSubmitError("Please complete the reCAPTCHA");
-      return;
-    }
+    // if (!captchaToken) {
+    //   setSubmitError("Please complete the reCAPTCHA");
+    //   return;
+    // }
 
     setIsSubmitting(true);
     setSubmitError(null);
@@ -173,8 +179,16 @@ export default function ContactFrom() {
               <input
                 id="contact-phone"
                 type="tel"
-                {...register("phone")}
-                pattern="[0-9]*"
+                inputMode="tel"
+                maxLength={PHONE_MAX_LENGTH}
+                {...phoneField}
+                onChange={(e) => {
+                  e.target.value = e.target.value.replace(
+                    PHONE_ALLOWED_CHARS,
+                    "",
+                  );
+                  onPhoneChange(e);
+                }}
                 className="w-full border border-gray-200 px-4 py-3 rounded-sm text-sm"
                 placeholder="Your phone number"
               />
