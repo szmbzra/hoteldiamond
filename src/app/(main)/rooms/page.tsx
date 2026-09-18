@@ -55,7 +55,7 @@ export default async function RoomsPage() {
       <div className="max-w-[1400px] mx-auto py-20 px-6 md:px-12 lg:px-24">
         {pkg?.description && (
           <div
-            className="luxury-subtitle max-w-3xl mx-auto text-center mb-16"
+            className="luxury-subtitle max-w-5xl mx-auto text-center mb-16"
             style={{ color: "var(--luxury-muted)" }}
             dangerouslySetInnerHTML={{ __html: pkg.description }}
           />

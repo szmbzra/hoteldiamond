@@ -72,7 +72,7 @@ export default function NearbyLandmarksClient({
                 <button
                   key={landmark.id}
                   onClick={() => setActiveTab(landmark.id)}
-                  className="group flex items-center gap-3  shrink-0 grow rounded-full px-5 py-3 transition-all duration-500"
+                  className="group flex items-center gap-3 hover:cursor-pointer shrink-0 grow rounded-full px-5 py-3 transition-all duration-500"
                   style={{
                     border: `1px solid ${active ? "var(--luxury-gold)" : "var(--luxury-border)"}`,
                     background: active

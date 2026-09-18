@@ -52,6 +52,7 @@ interface DiningData {
   description?: string;
   banner_img?: { id?: number; url?: string; alt?: string }[];
   amenities?: { group_title?: string; items?: DiningAmenityItem[] }[];
+  amenities_name?: string | string[];
 }
 
 export default function DiningPage({
@@ -68,6 +69,12 @@ export default function DiningPage({
     .map((b) => ({ src: b.url as string, title: b.alt }));
 
   const cmsAmenities = pkg?.amenities?.[0]?.items ?? [];
+  // `amenities_name` from the CMS `subpackage` API comes back as an array,
+  // e.g. `["Dining Amenities"]`.
+  const amenitiesTitle =
+    (Array.isArray(pkg?.amenities_name)
+      ? pkg?.amenities_name[0]
+      : pkg?.amenities_name) || "Dining Amenities";
   const amenities =
     cmsAmenities.length > 0
       ? cmsAmenities.map((a) => ({
@@ -86,11 +93,11 @@ export default function DiningPage({
     <div style={{ background: "var(--luxury-ivory)" }}>
       <BreadcrumbNoBanner
         title={pkg?.title || "Dining"}
-        sub_title={pkg?.sub_title || "Dining"}
+        // sub_title={pkg?.sub_title || "Dining"}
       />
 
       {/* Gallery + intro */}
-      <section className="max-w-[1400px] mx-auto pt-14 pb-20 px-6 md:px-12 lg:px-24">
+      <section className="max-w-[1400px] mx-auto  pb-20 px-6 md:px-12 lg:px-24">
         {images.length > 0 && (
           <div className="relative rounded-2xl overflow-hidden shadow-2xl shadow-black/10 mb-14 h-[320px] md:h-[480px]">
             <ImageSlider
@@ -142,17 +149,12 @@ export default function DiningPage({
         <DecorativeGlow variant="gold-dark" />
         <div className="relative max-w-[1400px] mx-auto py-20 px-6 md:px-12 lg:px-24">
           <div className="text-center mb-14">
-            <p className="luxury-label text-gold-text mb-4 flex justify-center">
-              What to Expect
-            </p>
-            <div className="flex justify-center mb-8">
-              <div className="luxury-divider" />
-            </div>
+            <div className="flex justify-center mb-8"></div>
             <h2
-              className="luxury-section-title"
+              className="luxury-section-title text-3xl!"
               style={{ color: "var(--luxury-charcoal)" }}
             >
-              Dining Amenities
+              {amenitiesTitle}
             </h2>
           </div>
 

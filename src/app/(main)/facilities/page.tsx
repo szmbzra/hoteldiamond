@@ -23,11 +23,8 @@ export default async function FacilitiesPage() {
 
       <section className="relative overflow-hidden pb-24 px-6 md:px-12 bg-[#f9f7f2]">
         <DecorativeAccent color="gold" corner="top-right" size={260} />
-        <div className="relative max-w-7xl mx-auto">
-          <p
-            className="luxury-subtitle max-w-2xl mx-auto text-center mb-16"
-            style={{ color: "var(--luxury-muted)" }}
-          >
+        <div className="relative max-w-8xl mx-auto">
+          <p className="luxury-subtitle max-w-3xl mx-auto text-center mb-16">
             From comfort and convenience to business essentials, every facility
             at Hotel Diamond Palace is designed to make your stay easy and
             enjoyable.

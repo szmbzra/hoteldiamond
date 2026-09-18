@@ -197,7 +197,10 @@ export default async function ServicesSection() {
                     </ul>
                   )}
 
-                  <Link href={href} className="luxury-btn group/btn w-fit">
+                  <Link
+                    href={href}
+                    className="text-black/50! border-black/50! luxury-btn"
+                  >
                     Explore {item.title}
                     <ArrowUpRight className="w-4 h-4 transition-transform group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5" />
                   </Link>

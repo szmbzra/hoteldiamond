@@ -39,7 +39,7 @@ export default async function Page() {
       <PageSchemas slug="faq" />
       <BreadcrumbNoBanner title="FAQ" />
 
-      <section className="mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20 grid lg:grid-cols-12 gap-20 justify-center max-w-7xl items-start">
+      <section className="mx-auto px-4 sm:px-6 lg:px-8 pb-16 md:pb-20 grid lg:grid-cols-12 gap-20 justify-center max-w-7xl items-start">
         <div className="text-center mb-12 lg:col-span-4 sticky top-50">
           <span className="text-[10px] md:text-xs font-semibold tracking-[0.3em] uppercase text-gold-text mb-4 block">
             Help Center

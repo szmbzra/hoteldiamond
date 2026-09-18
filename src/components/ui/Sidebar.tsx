@@ -90,7 +90,7 @@ export default function Sidebar({ isOpen, onClose, menu }: SidebarProps) {
                     <div key={item.id} className="mb-1">
                       {/* Split row: the label navigates to the listing page, the arrow toggles the submenu */}
                       <div
-                        className={`group flex items-center justify-between py-3.5 text-sm uppercase tracking-[0.2em] font-medium transition-colors duration-300 ${
+                        className={`group flex items-center justify-between py-2 text-sm uppercase tracking-[0.2em] font-medium transition-colors duration-300 ${
                           isSubmenuActive
                             ? "text-blue"
                             : "text-blue/70 hover:text-blue"

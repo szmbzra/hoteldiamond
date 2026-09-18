@@ -1,7 +1,9 @@
 export default function AmenitiesGrid({
   amenities = [],
+  title,
 }: {
   amenities?: any[];
+  title?: string | string[];
 }) {
   if (amenities.length === 0) return null;
 
@@ -11,16 +13,19 @@ export default function AmenitiesGrid({
   const isGrouped = Array.isArray(amenities[0]?.items);
   const groupTitle = isGrouped ? amenities[0]?.group_title : undefined;
   const items = isGrouped ? amenities[0]?.items : amenities;
+  // `amenities_name` from the CMS `subpackage` API comes back as an array,
+  // e.g. `["Room Amenities"]`.
+  const sectionTitle = (Array.isArray(title) ? title[0] : title) || groupTitle;
 
   return (
     <section style={{ background: "var(--luxury-cream)" }}>
       <div className="max-w-[1400px] mx-auto py-20 px-6 md:px-12 lg:px-24">
         <div className="text-center mb-12">
           <h2
-            className="luxury-section-title"
+            className="luxury-section-title text-3xl!"
             style={{ color: "var(--luxury-charcoal)" }}
           >
-            {groupTitle || "Amenities"}
+            {sectionTitle || "Amenities"}
           </h2>
           <div className="flex justify-center mt-4">
             <div className="luxury-divider" />
