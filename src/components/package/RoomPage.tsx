@@ -232,10 +232,10 @@ export default function RoomPage({ pkg }: { pkg: any }) {
       <section
         className="relative min-h-[420px] flex items-center py-20 bg-fixed bg-cover bg-center"
         style={{
-          backgroundImage: "url(/bgimg.jpg)",
+          backgroundImage: "url(/rooms-bg.jpeg)",
         }}
       >
-        <div className="absolute inset-0 bg-black/40 backdrop-blur-[2px]" />
+        <div className="absolute inset-0 bg-black/40 " />
         <div className="relative z-10 max-w-[1400px] mx-auto w-full px-6 md:px-12 lg:px-24 text-center text-white">
           <p
             className="luxury-label mb-4"
