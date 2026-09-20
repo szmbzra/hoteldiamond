@@ -53,7 +53,10 @@ interface DiningData {
   banner_img?: { id?: number; url?: string; alt?: string }[];
   amenities?: { group_title?: string; items?: DiningAmenityItem[] }[];
   amenities_name?: string | string[];
+  single_image?: string;
 }
+
+const FALLBACK_CTA_IMAGE = "/restor-bar.jpeg";
 
 export default function DiningPage({
   pkg,
@@ -201,7 +204,9 @@ export default function DiningPage({
       {/* Reservation CTA */}
       <section
         className="relative min-h-[420px] flex items-center py-20 bg-fixed bg-cover bg-center"
-        style={{ backgroundImage: "url(/restor-bar.jpeg)" }}
+        style={{
+          backgroundImage: `url(${pkg?.single_image || FALLBACK_CTA_IMAGE})`,
+        }}
       >
         <div className="absolute inset-0 bg-black/40" />
         <div className="relative z-10 max-w-[1400px] mx-auto w-full px-6 md:px-12 lg:px-24 text-center text-white">

@@ -22,6 +22,7 @@ export default function RoomPage({ pkg }: { pkg: any }) {
     gallery_images = [],
     description,
     content_0,
+    single_image,
     amenities_name,
     content_1,
     amenities: cmsAmenities = [],
@@ -232,7 +233,7 @@ export default function RoomPage({ pkg }: { pkg: any }) {
       <section
         className="relative min-h-[420px] flex items-center py-20 bg-fixed bg-cover bg-center"
         style={{
-          backgroundImage: "url(/rooms-bg.jpeg)",
+          backgroundImage: single_image ? `url(${single_image})` : undefined,
         }}
       >
         <div className="absolute inset-0 bg-black/40 " />
