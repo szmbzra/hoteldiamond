@@ -74,7 +74,7 @@ export function GeometricAccent({
   return (
     <div
       aria-hidden="true"
-      className={`pointer-events-none absolute top-0 hidden md:block ${sideClass} ${className}`}
+      className={`pointer-events-none absolute top-0 hidden xl:block ${sideClass} ${className}`}
       style={{ width: height * 0.48, height, color: COLOR_VAR[color], opacity }}
     >
       <GeometricClusterSVG className="w-full h-full" />

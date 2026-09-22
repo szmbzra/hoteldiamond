@@ -48,7 +48,7 @@ export default async function OfferSection() {
                 style={{ animationDelay: `${idx * 0.1}s` }}
               >
                 {/* Image */}
-                <div className="relative h-[500px] overflow-hidden">
+                <div className="relative h-[450px] md:h-[300px] lg:h-[500px] overflow-hidden">
                   {imageSrc ? (
                     <Image
                       src={imageSrc}

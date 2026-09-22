@@ -65,7 +65,7 @@ export default function NearbyLandmarksClient({
 
         {/* Numbered pill tabs */}
         <div className="scrollbar-thin overflow-auto scrollbar-thumb-slate-900/60 scrollbar-thumb-white">
-          <div className="flex gap-3 mb-4">
+          <div className="flex gap-3 mb-10">
             {landmarks.map((landmark, idx) => {
               const active = landmark.id === activeLandmark.id;
               return (
@@ -111,8 +111,8 @@ export default function NearbyLandmarksClient({
           className="animate-fade-in-up grid md:grid-cols-12 border-white"
         >
           {/* Text */}
-          <div className="relative flex flex-col justify-center p-8 md:col-span-5 md:p-12">
-            <span className="luxury-big-numeral  pointer-events-none absolute top-6 right-8 select-none">
+          <div className="relative flex flex-col justify-center md:col-span-5 lg:p-12 mt-5">
+            <span className="luxury-big-numeral  pointer-events-none absolute top-6 right-8 hidden md:inline select-none">
               {String(activeIndex + 1).padStart(2, "0")}
             </span>
 
@@ -156,7 +156,7 @@ export default function NearbyLandmarksClient({
           </div>
 
           {/* Map, framed with gold corner accents */}
-          <div className="relative min-h-[320px] p-4 md:col-span-7 md:min-h-[420px] md:p-6">
+          <div className="relative min-h-[320px] p-4 md:col-span-7 md:min-h-[420px] md:p-6 mt-5 lg:mt-0">
             <div className="relative h-full min-h-[280px] w-full md:min-h-[380px]">
               {mapSrc ? (
                 <iframe

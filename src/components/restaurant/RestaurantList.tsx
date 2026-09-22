@@ -103,7 +103,7 @@ export default function RestaurantList({ outlets }: { outlets: any[] }) {
               </h3>
 
               {outlet.description && (
-                <p
+                <div
                   className="text-base font-light leading-relaxed mb-8 max-w-md"
                   style={{ color: "var(--luxury-muted)" }}
                   dangerouslySetInnerHTML={{ __html: outlet.description }}

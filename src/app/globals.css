@@ -32,7 +32,7 @@
   /* Black (same as dark for text) */
   --luxury-charcoal: #231f20;
   /* Taupe: PANTONE 170-6 C */
-  --luxury-muted: #8e8684;
+  --luxury-muted: #020202;
   --luxury-border: rgba(227, 201, 161, 0.25);
   /* Sage: PANTONE 178-8 C */
   --brand-sage: #868a79;
@@ -718,4 +718,14 @@ body {
 
 .room-font {
   font-family: var(--font-heading), 'Playfair Display', Georgia, serif;
+}
+
+/* Keeps an element scrollable without showing the native scrollbar track. */
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
 }

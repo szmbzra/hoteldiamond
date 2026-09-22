@@ -111,7 +111,7 @@ export default function Breadcrumb({
 export function BreadcrumbNoBanner({ title, sub_title }: BreadcrumbNoBanner) {
   // BreadcrumbList rich result — absolute URLs; the final (current) crumb may
   return (
-    <div className="relative w-full  min-h-[120px] max-h-[250px] flex items-center justify-center mb-14">
+    <div className="relative w-full  min-h-[120px] max-h-[250px] flex items-center justify-center md:mb-14">
       {/* Background Media */}
       {/* Content */}
       <div className="relative z-10 text-center px-6">

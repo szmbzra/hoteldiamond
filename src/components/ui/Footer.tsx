@@ -3,6 +3,7 @@ import {
   getSiteRegulars,
   getSocialGroup,
   getBlogs,
+  getVirtualTour,
 } from "@/lib/data";
 import Image from "next/image";
 import Link from "next/link";
@@ -25,12 +26,19 @@ interface SocialLink {
 }
 
 export default async function Footer() {
-  const [menuItems, siteRegulars, socialLinks, blogs] = await Promise.all([
+  const [menuItems, siteRegulars, socialLinks, blogs, virtualTour] = await Promise.all([
     getMenuItems(2),
     getSiteRegulars(),
     getSocialGroup(1),
     getBlogs(),
+    getVirtualTour<any>(),
   ]);
+
+  // The virtual tour endpoint returns [] (or an object with no scenes) until
+  // the CMS has a tour configured — hide the floating 360° button in that case.
+  const hasVirtualTour = Array.isArray(virtualTour)
+    ? virtualTour.length > 0
+    : !!virtualTour && Object.keys(virtualTour?.scenes || {}).length > 0;
 
   const brandName = siteRegulars?.sitetitle || site.name;
   const logoUrl = siteRegulars?.footer_logo_upload || "";
@@ -306,7 +314,7 @@ export default async function Footer() {
       </footer>
 
       {/* ── Floating Buttons ── */}
-      <FloatingButtons whatsappNumber={siteRegulars?.whatsapp_a} />
+      <FloatingButtons whatsappNumber={siteRegulars?.whatsapp_a} hasVirtualTour={hasVirtualTour} />
     </>
   );
 }

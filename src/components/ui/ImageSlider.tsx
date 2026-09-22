@@ -94,7 +94,7 @@ export default function ImageSlider({
         })}
 
         {/* Custom Pagination Dots - Bottom Right */}
-        <div className="custom-pagination absolute bottom-10 right-10 flex pr-20 pb-5 justify-end gap-3 z-30 pointer-events-auto"></div>
+        {/* <div className="custom-pagination absolute bottom-10 right-10 flex pr-20 pb-5 justify-end gap-3 z-30 pointer-events-auto"></div> */}
       </Swiper>
 
       {showArrows && images.length > 1 && (

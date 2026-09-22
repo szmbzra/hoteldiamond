@@ -72,7 +72,7 @@ export default function Testimonials({ testimonials }: { testimonials: Testimoni
                 <div className="luxury-card-hover h-full flex flex-col bg-white rounded-2xl border border-luxury-border p-8">
 
                   {/* Author row */}
-                  <div className="flex items-start justify-between gap-4 mb-6">
+                  <div className="flex items-start justify-between gap-4 mb-6 flex-wrap">
                     <div className="flex items-center gap-3 min-w-0">
                       <div className="w-12 h-12 rounded-full overflow-hidden shrink-0 flex items-center justify-center bg-luxury-dark text-white text-sm font-medium">
                         {t.image ? (
@@ -101,14 +101,14 @@ export default function Testimonials({ testimonials }: { testimonials: Testimoni
                               target="_blank"
                               rel="noreferrer"
                               aria-label={`Read ${t.name}'s review${t.via ? ` on ${t.via}` : ""}`}
-                              className="shrink-0 text-luxury-muted hover:text-gold-text transition-colors"
+                              className="shrink-0 hover:text-gold-text transition-colors"
                             >
                               <ExternalLink className="w-3.5 h-3.5" />
                             </a>
                           )}
                         </div>
                         {t.title && (
-                          <span className="text-xs tracking-wider uppercase text-luxury-muted">
+                          <span className="text-xs tracking-wider uppercase">
                             {t.title}
                           </span>
                         )}
@@ -128,7 +128,7 @@ export default function Testimonials({ testimonials }: { testimonials: Testimoni
                   </div>
 
                   {/* Content */}
-                  <p className="leading-relaxed text-luxury-muted flex-1 line-clamp-6">
+                  <p className="leading-relaxed flex-1 line-clamp-6">
                     {t.content?.replace(/<[^>]+>/g, "")}
                   </p>
 

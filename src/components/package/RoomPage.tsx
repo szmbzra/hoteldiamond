@@ -45,22 +45,11 @@ export default function RoomPage({ pkg }: { pkg: any }) {
   return (
     <div style={{ background: "var(--luxury-ivory)" }}>
       {/* ── OVERVIEW + BOOKING ───────────────────────────────────── */}
-      <section className="relative max-w-[1400px] mx-auto pt-14 pb-20 px-6 md:px-12 lg:px-24">
+      <section className="relative max-w-[1400px] mx-auto md:pt-14 pb-20 px-6 md:px-12 lg:px-24">
         <DecorativeAccent color="gold" corner="top-left" size={420} />
-        <div className="relative grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-16">
-          <div className="order-first lg:order-last lg:col-span-1">
-            <div className="lg:sticky lg:top-28">
-              <RoomBookingCard
-                price={price}
-                currency={currency}
-                occupancy={occupancy}
-                roomSize={rooms_Size}
-                bookUrl={book_url}
-              />
-            </div>
-          </div>
+        <div className="relative grid grid-cols-1 xl:grid-cols-3 gap-12 lg:gap-16">
 
-          <div className="order-last lg:order-first lg:col-span-2">
+                <div className=" lg:col-span-2">
             {gallery_images.length > 0 && (
               <div className="relative rounded-2xl overflow-hidden shadow-2xl shadow-black/10 mb-10">
                 <ImageSlider
@@ -86,6 +75,19 @@ export default function RoomPage({ pkg }: { pkg: any }) {
               />
             )}
           </div>
+
+          <div className=" lg:col-span-1">
+            <div className="lg:sticky lg:top-28">
+              <RoomBookingCard
+                price={price}
+                currency={currency}
+                occupancy={occupancy}
+                roomSize={rooms_Size}
+                bookUrl={book_url}
+              />
+            </div>
+          </div>
+
         </div>
       </section>
 

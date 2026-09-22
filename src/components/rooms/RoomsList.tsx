@@ -36,7 +36,7 @@ export default function RoomsList({ rooms }: { rooms: any[] }) {
   }
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
+    <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 lg:gap-10">
       {rooms.map((room: any, idx: number) => {
         const image = getFirstImage(room);
         const amenities = getAmenities(room);
@@ -94,7 +94,7 @@ export default function RoomsList({ rooms }: { rooms: any[] }) {
 
               {priceValue ? (
                 <div className="flex items-baseline gap-1.5 mb-3">
-                  <span className="text-[10px] uppercase tracking-[0.15em] text-gray-400">
+                  <span className="text-[10px] uppercase tracking-[0.15em]">
                     From
                   </span>
                   <span
@@ -103,14 +103,14 @@ export default function RoomsList({ rooms }: { rooms: any[] }) {
                   >
                     {currency} {priceValue.toLocaleString()}
                   </span>
-                  <span className="text-[11px] text-gray-400 font-light">
+                  <span className="text-[11px]">
                     / night
                   </span>
                 </div>
               ) : null}
 
               {room.sub_title && (
-                <p className="text-sm text-black/50  leading-relaxed mb-5 line-clamp-3">
+                <p className="text-sm text-black leading-relaxed mb-5 line-clamp-3">
                   {room.sub_title}
                 </p>
               )}
@@ -122,7 +122,7 @@ export default function RoomsList({ rooms }: { rooms: any[] }) {
                   style={{ borderBottom: "1px solid var(--luxury-border)" }}
                 >
                   {room.occupancy && (
-                    <div className="flex items-center gap-2 text-xs text-gray-500">
+                    <div className="flex items-center gap-2 text-xs">
                       <Users
                         className="w-4 h-4"
                         style={{ color: "var(--luxury-gold-text)" }}
@@ -131,7 +131,7 @@ export default function RoomsList({ rooms }: { rooms: any[] }) {
                     </div>
                   )}
                   {room.rooms_Size && (
-                    <div className="flex items-center gap-2 text-xs text-gray-500">
+                    <div className="flex items-center gap-2 text-xs">
                       <Maximize2
                         className="w-4 h-4"
                         style={{ color: "var(--luxury-gold-text)" }}
@@ -148,7 +148,7 @@ export default function RoomsList({ rooms }: { rooms: any[] }) {
                   {amenities.slice(0, 3).map((a: any, i: number) => (
                     <span
                       key={i}
-                      className="text-[10px] uppercase tracking-[0.15em] text-gray-500 border border-gray-200 rounded-full px-3 py-1"
+                      className="text-[10px] uppercase tracking-[0.15em] border border-gray-200 rounded-full px-3 py-1"
                     >
                       {a.title || a.name}
                     </span>
@@ -161,7 +161,7 @@ export default function RoomsList({ rooms }: { rooms: any[] }) {
                 </div>
               )}
 
-              <div className="mt-auto flex items-center gap-2 text-xs uppercase tracking-[0.2em] font-medium text-gray-400 group-hover:text-gold transition-colors duration-300">
+              <div className="mt-auto flex items-center gap-2 text-xs uppercase tracking-[0.2em] font-medium group-hover:text-gold transition-colors duration-300">
                 View Room
                 <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
               </div>

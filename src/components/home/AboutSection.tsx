@@ -27,7 +27,7 @@ export default async function AboutSection() {
       style={{ background: "var(--luxury-cream)" }}
     >
       <DecorativeGlow variant="dark-gold" />
-      <div className="relative max-w-[1400px] mx-auto py-20 px-6 md:px-12 lg:px-24">
+      <div className="relative max-w-[1400px] mx-auto py-10 px-6 md:px-12 lg:px-24">
         <div className="flex flex-col lg:flex-row gap-16 xl:gap-20 items-center">
           {/* Image Side */}
           <div className="w-full lg:w-1/2 relative animate-slide-in-left">
@@ -72,7 +72,7 @@ export default async function AboutSection() {
 
             {/* Facilities */}
             <div
-              className="grid grid-cols-3 gap-6 mb-10 pb-10"
+              className="grid grid-cols-3 gap-6 md:mb-10 pb-10"
               style={{ borderBottom: "1px solid var(--luxury-border)" }}
             >
               {HIGHLIGHTS.map(({ icon: Icon, label }, i) => (

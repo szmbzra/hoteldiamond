@@ -6,6 +6,7 @@ import { contact } from "@/config/site";
 
 interface FloatingButtonsProps {
   whatsappNumber?: string;
+  hasVirtualTour?: boolean;
 }
 
 function WhatsAppIcon() {
@@ -24,7 +25,7 @@ function PanoramaIcon() {
   );
 }
 
-export default function FloatingButtons({ whatsappNumber }: FloatingButtonsProps) {
+export default function FloatingButtons({ whatsappNumber, hasVirtualTour }: FloatingButtonsProps) {
   const [showScrollTop, setShowScrollTop] = useState(false);
 
   useEffect(() => {
@@ -42,16 +43,18 @@ export default function FloatingButtons({ whatsappNumber }: FloatingButtonsProps
   return (
     <div className="fixed right-4 md:right-6 bottom-6 z-50 flex flex-col items-center gap-3">
       {/* 360° Virtual Tour */}
-      <Link
-        href="/virtual-tour"
-        aria-label="Open 360° Virtual Tour"
-        className="w-12 h-12 rounded-full bg-(--color-blue) backdrop-blur-sm text-white flex items-center justify-center shadow-lg hover:bg-[#2d2d2d] transition-all duration-300 hover:scale-110 group border border-white/10"
-      >
-        <span className="flex flex-col items-center justify-center gap-0">
-          <PanoramaIcon />
-          <span className="text-[0.8rem] font-bold leading-none">360°</span>
-        </span>
-      </Link>
+      {hasVirtualTour && (
+        <Link
+          href="/virtual-tour"
+          aria-label="Open 360° Virtual Tour"
+          className="w-12 h-12 rounded-full bg-(--color-blue) backdrop-blur-sm text-white flex items-center justify-center shadow-lg hover:bg-[#2d2d2d] transition-all duration-300 hover:scale-110 group border border-white/10"
+        >
+          <span className="flex flex-col items-center justify-center gap-0">
+            <PanoramaIcon />
+            <span className="text-[0.8rem] font-bold leading-none">360°</span>
+          </span>
+        </Link>
+      )}
 
       {/* WhatsApp */}
       <a

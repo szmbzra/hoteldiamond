@@ -94,11 +94,11 @@ export default async function BlogSlugPage({
       <JsonLd schema={blogPostingSchema} />
       <main className="min-h-screen">
         {/* 2. Content Grid */}
-        <section className="max-w-7xl mx-auto px-6 md:px-12 pt-20 pb-20 md:pb-32">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-20">
+        <section className="max-w-7xl mx-auto px-6 md:px-12 pt-10 md:pt-20 pb-20 md:pb-32">
+          <div className="grid grid-cols-1 lg:grid-cols-12  gap-10 md:gap-20">
             {/* Main Content (8 cols) */}
             <div className="lg:col-span-8">
-              <h1 className=" md:text-3xl mb-12 leading-[1.5] font-semibold animate-fade-in">
+              <h1 className=" text-2xl md:text-3xl mb-12 leading-[1.5] font-semibold animate-fade-in">
                 {blog.title}
               </h1>
               {/* Hero Image */}
@@ -128,7 +128,7 @@ export default async function BlogSlugPage({
 
               {/* Article Text Body */}
               <div
-                className="leading-[2.5] mb-15"
+                className="leading-[2] md:leading-[2.5] mb-15"
                 dangerouslySetInnerHTML={{ __html: blog.content }}
               />
 

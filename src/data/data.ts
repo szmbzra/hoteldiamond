@@ -139,7 +139,7 @@ export const metaData = {
 
   /** Google Maps embed URL */
   location_map:
-    "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3525.953482981846!2d84.5815912247255!3d27.90340077607072!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39951f0004390a0f%3A0x7c2164964f8c3196!2sManakamana%20Hillcrest%20Resort!5e0!3m2!1sen!2snp",
+    "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3525.953482981846!2d84.5815912247255!3d27.90340077607072!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39951f0004390a0f%3A0x7c2164964f8c3196!2sHotel Diamond%20Hillcrest%20Resort!5e0!3m2!1sen!2snp",
 
   /** Google Maps directions URL */
   location_url: address.mapUrl,
@@ -194,7 +194,7 @@ export const ABOUT_DATA = {
   phone: contact.phoneE164,
   phoneLabel: "Reserve Now",
   image: "/images/placeholder-about.webp",
-  badge: "• Manakamana • Hillcrest • Resort",
+  badge: "• Hotel Diamond • Hillcrest • Resort",
   stats: [
     { value: "50+", label: "Luxury Rooms" },
     { value: "4.8", label: "Guest Rating" },
@@ -206,7 +206,7 @@ export const ROOMS_DATA = {
   label: "Your Comfort, Our Priority",
   title: "Deluxe Room",
   description:
-    "Perched on the hillside, our Manakamana Hill Crest Deluxe Rooms offer breathtaking mountain views and serene surroundings. Thoughtfully designed with modern amenities and elegant interiors.",
+    "Perched on the hillside, our Hotel Diamond Hill Crest Deluxe Rooms offer breathtaking mountain views and serene surroundings. Thoughtfully designed with modern amenities and elegant interiors.",
   link: "/deluxe-room",
   features: ["Mountain View", "King Bed", "Private Balcony", "Free WiFi"],
 };
@@ -256,7 +256,7 @@ export const NEWS_HEADER = {
 
 export const LANDMARKS: Landmark[] = [
   {
-    id: "manakamana-temple",
+    id: "Hotel Diamond-temple",
     tab: "Bageshwori Temple",
     title: "Bageshwori Temple",
     subtitle: "A Sacred Landmark of Nepalgunj",
@@ -389,7 +389,7 @@ export const NEWS: NewsItem[] = [
     category: "Attraction",
     date: "10 Feb, 2024",
     title: "Attractions near our Resort",
-    desc: "Exploring Attractions Near Manakamana Temple",
+    desc: "Exploring Attractions Near Hotel Diamond ",
     image: "/images/placeholder-news-3.webp",
     link: "/blog-details/attractions-near-our-resort",
   },
@@ -404,7 +404,7 @@ export const SERVICES: Service[] = [
   },
   {
     title: "Sauna & Steam",
-    desc: "Unwind in our dedicated Sauna & Steam zone a tranquil retreat nestled in the serene hills of Manakamana. Whether you're seeking warmth, detox, or a moment of quiet, our facilities offer a peaceful escape to soothe your body and mind.",
+    desc: "Unwind in our dedicated Sauna & Steam zone a tranquil retreat nestled in the serene hills of Hotel Diamond. Whether you're seeking warmth, detox, or a moment of quiet, our facilities offer a peaceful escape to soothe your body and mind.",
     link: "/service/sauna-steam",
     image: "/images/placeholder-service-2.webp",
   },
@@ -422,13 +422,13 @@ export const SERVICES: Service[] = [
   },
   {
     title: "Experiences Within Hillcrest",
-    desc: "Our Resort is ideally located for guests eager to explore the rich cultural and natural treasures of the region. Begin your journey with a visit to sacred Manakamana Temple steeped in deep spiritual significance. For nature lovers, scenic hikes lead to hidden caves & ancient Dhunge Dhara.",
+    desc: "Our Resort is ideally located for guests eager to explore the rich cultural and natural treasures of the region. Begin your journey with a visit to sacred Hotel Diamond Temple steeped in deep spiritual significance. For nature lovers, scenic hikes lead to hidden caves & ancient Dhunge Dhara.",
     link: "/service/experiences-within-hillcrest",
     image: "/images/placeholder-service-5.webp",
   },
   {
     title: "Aila Bar",
-    desc: "Relax by the pool at our Poolside Bar, a laid-back spot surrounded by fresh hill air and scenic views of Manakamana. Whether you're cooling off after a swim or enjoying a quiet afternoon, it's the perfect place to unwind.",
+    desc: "Relax by the pool at our Poolside Bar, a laid-back spot surrounded by fresh hill air and scenic views of Hotel Diamond. Whether you're cooling off after a swim or enjoying a quiet afternoon, it's the perfect place to unwind.",
     link: "/service/aila-bar",
     image: "/images/placeholder-service-6.webp",
   },
@@ -532,7 +532,7 @@ export const DUMMY_DINING_OUTLETS = [
     slug: "diamond-restaurant",
     title: "The Diamond Restaurant",
     sub_title:
-      "All-day multi-cuisine dining with sweeping views over the Manakamana hills.",
+      "All-day multi-cuisine dining with sweeping views over the Hotel Diamond hills.",
     description:
       "<p>Our signature restaurant serves a thoughtfully curated menu of Nepali, Indian and continental favourites, from a leisurely breakfast spread to a candlelit dinner. Floor-to-ceiling windows frame the surrounding hills, making every table a room with a view.</p>",
     gallery_images: [
@@ -603,9 +603,9 @@ export const DUMMY_EVENT_VENUES = [
     round_table: "160 Pax",
   },
   {
-    id: "dummy-manakamana-conference-hall",
-    slug: "manakamana-conference-hall",
-    title: "Manakamana Conference Hall",
+    id: "dummy-Hotel Diamond-conference-hall",
+    slug: "Hotel Diamond-conference-hall",
+    title: "Hotel Diamond Conference Hall",
     sub_title:
       "A refined boardroom-style space for meetings and corporate retreats.",
     description:
@@ -614,7 +614,7 @@ export const DUMMY_EVENT_VENUES = [
       {
         id: 1,
         src: "https://images.unsplash.com/photo-1505845753232-f74a87b62db6?q=80&w=1600&auto=format&fit=crop",
-        title: "Manakamana Conference Hall",
+        title: "Hotel Diamond Conference Hall",
       },
     ],
     amenities: [],
@@ -681,7 +681,7 @@ export const ROOM_FAQS = [
   {
     question: "Are cable car tickets complimentary?",
     answer:
-      "Yes, all staying guests receive complimentary cable car tickets, allowing easy access between the valley station and Manakamana Temple.",
+      "Yes, all staying guests receive complimentary cable car tickets, allowing easy access between the valley station and Hotel Diamond Temple.",
   },
   {
     question: "Is the swimming pool open year-round?",

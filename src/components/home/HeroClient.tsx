@@ -102,7 +102,7 @@ export default function HeroClient({
   };
 
   return (
-    <div className="relative w-full h-screen overflow-hidden">
+    <div className={`relative w-full overflow-hidden ${showCarousel ? "h-screen" : "h-[50vh] md:h-screen"}`}>
       {/* Background Media */}
       <div className="absolute inset-0 w-full h-full">
         {showVideo && (
@@ -114,7 +114,7 @@ export default function HeroClient({
               playsInline
               preload="metadata"
               poster={videoPoster}
-              className="object-cover w-full h-full"
+              className="object-cover w-full h-full aspect-video md:aspect-auto"
               aria-label="Hotel Diamond Pvt. Ltd hero video"
             >
               <source src={videoItem.src} type="video/webm" />
@@ -199,7 +199,7 @@ export default function HeroClient({
               loop={!prefersReducedMotion}
               playsInline
               preload="metadata"
-              className="object-cover w-full h-full"
+              className="object-cover w-full h-full aspect-video md:aspect-auto"
               aria-label="Hotel Diamond Pvt. Ltd hero video"
             >
               <source src={fallbackData.videoSrc} type="video/webm" />

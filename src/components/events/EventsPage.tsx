@@ -107,7 +107,7 @@ export default function EventsPage({ pkg }: { pkg: EventsData | null }) {
       <BreadcrumbNoBanner title={pkg?.title || "Meeting & Events"} />
 
       {/* Gallery + intro */}
-      <section className="max-w-[1400px] mx-auto pt-14 pb-20 px-6 md:px-12 lg:px-24">
+      <section className="max-w-[1400px] mx-auto pb-20 px-6 md:px-12 lg:px-24">
         {images.length > 0 && (
           <div className="relative rounded-2xl overflow-hidden shadow-2xl shadow-black/10 mb-14 h-[320px] md:h-[480px]">
             <ImageSlider
@@ -120,7 +120,7 @@ export default function EventsPage({ pkg }: { pkg: EventsData | null }) {
           </div>
         )}
 
-        <div className="max-w-3xl mx-auto text-center">
+        <div className="max-w-5xl mx-auto text-center">
           <p className="luxury-label text-gold-text mb-4">
             Events &amp; Venues
           </p>

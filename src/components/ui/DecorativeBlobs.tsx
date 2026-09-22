@@ -46,7 +46,7 @@ function Blob({
   return (
     <div
       aria-hidden="true"
-      className={`pointer-events-none absolute rounded-full blur-[120px] ${CORNER_CLASS[corner]} ${COLOR_CLASS[color]}`}
+      className={`pointer-events-none absolute hidden xl:inline rounded-full blur-[120px] ${CORNER_CLASS[corner]} ${COLOR_CLASS[color]}`}
       style={{ width: size, height: size }}
     />
   );

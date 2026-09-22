@@ -83,12 +83,12 @@ export default function GalleryGrid({ items: rawItems }: GalleryGridProps) {
     <div className="w-full">
       {/* Category Filter */}
       {categories.length > 1 && (
-        <div className="flex flex-wrap justify-center gap-4 mb-16 px-4">
+        <div className="flex md:justify-center gap-4  mb-15 md:mb-16 px-4 overflow-auto flex-nowrap">
           {categories.map((cat) => (
             <button
               key={cat}
               onClick={() => setActiveCategory(cat)}
-              className={`px-8 py-3.5 text-xs uppercase  hover:cursor-pointer tracking-[0.2em] transition-all duration-300 ${
+              className={`px-4 md:px-8 py-3.5 text-xs uppercase shrink-0 grow hover:cursor-pointer tracking-[0.2em] transition-all duration-300 ${
                 activeCategory === cat
                   ? "bg-(--color-blue)  text-white" : ""}`}
             >

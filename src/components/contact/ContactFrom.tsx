@@ -62,7 +62,7 @@ export default function ContactFrom() {
         phone: formData.phone,
         address: formData.address,
         message: formData.message,
-        "g-recaptcha-response": captchaToken,
+        // "g-recaptcha-response": captchaToken,
       };
 
       const response = await fetch(endpoint, {
@@ -79,7 +79,7 @@ export default function ContactFrom() {
 
       setSubmitSuccess(true);
       reset();
-      setCaptchaToken(null);
+      // setCaptchaToken(null);
     } catch (err) {
       setSubmitError("Something went wrong. Please try again later.");
       console.error("Submission error:", err);

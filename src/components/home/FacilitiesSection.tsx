@@ -42,7 +42,7 @@ export default async function FacilitiesSection() {
             return (
               <div
                 key={idx}
-                className="luxury-card-hover bg-white flex flex-col items-center text-center px-6 py-12 shadow-[0_4px_20px_rgba(0,0,0,0.03)] animate-fade-in-up"
+                className="luxury-card-hover bg-white flex flex-col items-center text-center px-3 md:px-6  py-5 md:py-12 shadow-[0_4px_20px_rgba(0,0,0,0.03)] animate-fade-in-up"
                 style={{ animationDelay: `${0.1 * idx}s` }}
               >
                 {/* Icon / Image */}

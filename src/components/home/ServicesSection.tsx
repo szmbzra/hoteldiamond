@@ -187,9 +187,7 @@ export default async function ServicesSection() {
                             style={{ background: "var(--luxury-gold)" }}
                           />
                           <span
-                            className="text-base leading-relaxed"
-                            style={{ color: "var(--luxury-muted)" }}
-                          >
+                            className="text-base leading-relaxed">
                             {point}
                           </span>
                         </li>

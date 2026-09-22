@@ -35,7 +35,7 @@ export default async function HomeGallery() {
             <h2 className="luxury-section-title mb-6 text-5xl! leading-[1.2]">
               Moments Captured in <span className="italic">Time</span>
             </h2>
-            <p className="luxury-subtitle mb-8 text-base! font-normal! text-black/60 leading-[1.9]">
+            <p className="luxury-subtitle mb-8 text-base! font-normal! text-black leading-[1.9]">
               Discover the spaces, experiences, and subtle details that make our
               property special. Take a tour through our gallery to explore our
               rooms, dining options, and event facilities.

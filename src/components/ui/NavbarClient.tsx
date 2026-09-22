@@ -49,7 +49,7 @@ export default function NavbarClient({ menu, logoUrl }: NavbarClientProps) {
                 loading="eager"
                 height={200}
                 className={`transition-all duration-300 object-contain ${
-                  isScrolled ? "h-20 w-auto" : "h-25 w-auto"
+                  isScrolled ? "h-15 md:h-20 w-auto" : "h-20 md:h-25 w-auto"
                 }`}
               />
             ) : (
@@ -97,6 +97,7 @@ export default function NavbarClient({ menu, logoUrl }: NavbarClientProps) {
         isOpen={isSidebarOpen}
         onClose={() => setIsSidebarOpen(false)}
         menu={menu}
+        bookingHref={siteRegulars?.booking_code ?? links.booking}
       />
     </nav>
   );
