@@ -48,6 +48,8 @@ export interface NavItem {
   /** CMS link type: "0" → internal route, "1" → external URL (opens in a new tab). */
   linktype?: string | number;
   subLinks?: NavItem[];
+  /** Icon shown by the mobile sticky menu (type-3 items only). */
+  image?: string;
 }
 
 export interface MenuContainer {

@@ -13,12 +13,14 @@ import { NavItem } from "@/types";
 interface NavbarClientProps {
   menu: NavItem[];
   logoUrl?: string;
+  children?: React.ReactNode;
 }
 const siteRegulars = await getSiteRegulars();
 
-export default function NavbarClient({ menu, logoUrl }: NavbarClientProps) {
+export default function NavbarClient({ menu, logoUrl, children }: NavbarClientProps) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const pathname = usePathname();
 
   useEffect(() => {
@@ -99,6 +101,8 @@ export default function NavbarClient({ menu, logoUrl }: NavbarClientProps) {
         menu={menu}
         bookingHref={siteRegulars?.booking_code ?? links.booking}
       />
+
+      {children}
     </nav>
   );
 }

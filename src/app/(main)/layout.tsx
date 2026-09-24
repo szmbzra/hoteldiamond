@@ -2,6 +2,7 @@ import Navbar from "@/components/ui/Navbar";
 import Footer from "@/components/ui/Footer";
 import LayoutWrapper from "@/components/ui/LayoutWrapper";
 
+
 export default function MainLayout({
   children,
 }: Readonly<{
@@ -16,8 +17,10 @@ export default function MainLayout({
       >
         Skip to main content
       </a>
+
       <LayoutWrapper navbar={<Navbar />} footer={<Footer />}>
         {children}
+
       </LayoutWrapper>
     </>
   );
