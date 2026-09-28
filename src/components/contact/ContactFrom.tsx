@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-// import Recaptcha from "../ui/Recaptcha";
+import Recaptcha from "../ui/Recaptcha";
 
 const PHONE_ALLOWED_CHARS = /[^0-9+-]/g;
 const PHONE_MAX_LENGTH = 14;
@@ -44,10 +44,10 @@ export default function ContactFrom() {
   const { onChange: onPhoneChange, ...phoneField } = register("phone");
 
   const onSubmit = async (formData: ContactFormData) => {
-    // if (!captchaToken) {
-    //   setSubmitError("Please complete the reCAPTCHA");
-    //   return;
-    // }
+    if (!captchaToken) {
+      setSubmitError("Please complete the reCAPTCHA");
+      return;
+    }
 
     setIsSubmitting(true);
     setSubmitError(null);

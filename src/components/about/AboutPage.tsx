@@ -6,7 +6,9 @@ import { ArrowRight, Phone } from "lucide-react";
 import { BreadcrumbNoBanner } from "@/components/ui/Breadcrumb";
 import { DecorativeGlow, DecorativeAccent } from "@/components/ui/MandalaMotif";
 import placeholderAbout from "@/assets/images/placeholder-about.webp";
+import { getSiteRegulars } from "@/lib/data";
 import { links } from "@/config/site";
+
 
 const PILLARS: Array<{
   icon: string;
@@ -42,6 +44,7 @@ interface AboutData {
   gallery_images?: { id: number; src: string; title?: string }[];
   phoneLabel?: string;
 }
+   const siteRegulars = await getSiteRegulars();
 
 export default function AboutPage({
   data,
@@ -54,6 +57,7 @@ export default function AboutPage({
   const storyImageAlt =
     data?.gallery_images?.[0]?.title || data?.title || "Hotel Diamond Palace";
   const telHref = phone ? `tel:${phone.replace(/\s+/g, "")}` : undefined;
+
 
   return (
     <div style={{ background: "var(--luxury-ivory)" }}>
@@ -253,7 +257,7 @@ export default function AboutPage({
           </div>
           <div className="flex flex-col sm:flex-row items-center gap-4 shrink-0">
             <Link
-              href={links.booking}
+              href={siteRegulars?.booking_code ?? links.booking }
               target="_blank"
               className="luxury-btn luxury-btn-solid"
             >

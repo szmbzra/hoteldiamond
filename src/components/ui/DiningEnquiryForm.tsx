@@ -60,10 +60,10 @@ export default function DiningEnquiryForm({
   const endpoint = process.env.NEXT_PUBLIC_SITE_URL + "/enquery_mail_dining.php";
 
   const onSubmit = async (formData: DiningEnquiryFormData) => {
-    if (!captchaToken) {
-      setSubmitError("Please complete the reCAPTCHA");
-      return;
-    }
+    // if (!captchaToken) {
+    //   setSubmitError("Please complete the reCAPTCHA");
+    //   return;
+    // }
 
     setIsSubmitting(true);
     setSubmitError(null);
@@ -72,7 +72,7 @@ export default function DiningEnquiryForm({
       const submissionData = {
         ...formData,
         venue_name: venueName || "General Enquiry",
-        "g-recaptcha-response": captchaToken,
+        // "g-recaptcha-response": captchaToken,
       };
 
       const response = await fetch(endpoint, {
@@ -311,7 +311,7 @@ export default function DiningEnquiryForm({
               )}
             </div>
 
-            <Recaptcha onChange={(token) => setCaptchaToken(token)} />
+            {/* <Recaptcha onChange={(token) => setCaptchaToken(token)} /> */}
             {submitError && (
               <p className="text-red-500 text-sm font-medium">{submitError}</p>
             )}
