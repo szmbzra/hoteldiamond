@@ -41,7 +41,7 @@ export default function FloatingButtons({ whatsappNumber, hasVirtualTour }: Floa
     : contact.whatsapp;
 
   return (
-    <div className="fixed right-4 md:right-6 bottom-6 z-50 flex flex-col items-center gap-3">
+    <div className="fixed right-4 md:right-6  bottom-20 md:bottom-6 z-50 flex flex-col items-center gap-3">
       {/* 360° Virtual Tour */}
       {hasVirtualTour && (
         <Link

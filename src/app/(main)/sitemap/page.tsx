@@ -2,7 +2,32 @@ import sitemap from "@/app/sitemap";
 import Breadcrumb from "@/components/ui/Breadcrumb";
 import Link from "next/link";
 import { Metadata } from "next";
-import { site } from "@/config/site";
+import { site, SITE_URL } from "@/config/site";
+
+const CORE = { category: "Core Page", color: "bg-emerald-50 text-emerald-700 border-emerald-200" };
+
+const PAGES: Record<string, { title: string; icon: string }> = {
+  "about-us": { title: "About Us", icon: "fa-circle-info" },
+  "contact-us": { title: "Contact Us", icon: "fa-address-book" },
+  gallery: { title: "Gallery", icon: "fa-images" },
+  facilities: { title: "Facilities", icon: "fa-spa" },
+  "virtual-tour": { title: "Virtual Tour", icon: "fa-street-view" },
+  faq: { title: "FAQ", icon: "fa-circle-question" },
+  reviews: { title: "Guest Reviews", icon: "fa-star" },
+  "work-with-us": { title: "Work With Us", icon: "fa-briefcase" },
+};
+
+const SECTIONS: Record<string, { title: string; category: string; icon: string; color: string }> = {
+  accommodations: { title: "Accommodations", category: "Accommodation", icon: "fa-bed", color: "bg-blue-50 text-blue-700 border-blue-200" },
+  "meeting-events": { title: "Meetings & Events", category: "Events", icon: "fa-calendar-days", color: "bg-purple-50 text-purple-700 border-purple-200" },
+  "dining-bar": { title: "Dining & Bar", category: "Dining", icon: "fa-utensils", color: "bg-orange-50 text-orange-700 border-orange-200" },
+  offers: { title: "Offers & Packages", category: "Offers", icon: "fa-tag", color: "bg-rose-50 text-rose-700 border-rose-200" },
+  blog: { title: "Blog", category: "Blog / News", icon: "fa-newspaper", color: "bg-amber-50 text-amber-700 border-amber-200" },
+  service: { title: "Services", category: "Services", icon: "fa-concierge-bell", color: "bg-teal-50 text-teal-700 border-teal-200" },
+};
+
+// Statically prerendered otherwise, so new CMS slugs would never appear.
+export const revalidate = 60;
 
 export const metadata: Metadata = {
   title: `Sitemap | ${site.name}`,
@@ -12,86 +37,38 @@ export const metadata: Metadata = {
 export default async function SitemapPage() {
   const sitemapItems = await sitemap();
 
+  // SITE_URL may carry a sub-path (e.g. https://host/hoteldiamond); strip the
+  // whole thing so paths are relative to the app, not the domain.
+  const toPath = (url: string) => url.replace(SITE_URL, "") || "/";
+
+  const titleFromSlug = (slug: string) =>
+    slug.split("-").filter(Boolean).map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(" ");
+
   const getPageDetails = (url: string) => {
-    const pathname = url.replace(/https?:\/\/[^\/]+/, "");
+    const pathname = toPath(url);
+    const [section, ...rest] = pathname.split("/").filter(Boolean);
+    const isDetail = rest.length > 0;
 
-    if (pathname === "/" || pathname === "") {
-      return { title: "Home", category: "Core Page", icon: "fa-house", color: "bg-emerald-50 text-emerald-700 border-emerald-200" };
-    }
-    if (pathname === "/about") {
-      return { title: "About Us", category: "Core Page", icon: "fa-circle-info", color: "bg-emerald-50 text-emerald-700 border-emerald-200" };
-    }
-    if (pathname === "/contact-us") {
-      return { title: "Contact Us", category: "Core Page", icon: "fa-address-book", color: "bg-emerald-50 text-emerald-700 border-emerald-200" };
-    }
-    if (pathname === "/gallery") {
-      return { title: "Gallery", category: "Core Page", icon: "fa-images", color: "bg-emerald-50 text-emerald-700 border-emerald-200" };
-    }
-    if (pathname === "/facilities") {
-      return { title: "Facilities", category: "Core Page", icon: "fa-spa", color: "bg-emerald-50 text-emerald-700 border-emerald-200" };
-    }
-    if (pathname === "/virtual-tour") {
-      return { title: "Virtual Tour", category: "Core Page", icon: "fa-street-view", color: "bg-emerald-50 text-emerald-700 border-emerald-200" };
-    }
-    if (pathname === "/faq") {
-      return { title: "FAQ", category: "Core Page", icon: "fa-circle-question", color: "bg-emerald-50 text-emerald-700 border-emerald-200" };
-    }
-    if (pathname === "/reviews") {
-      return { title: "Guest Reviews", category: "Core Page", icon: "fa-star", color: "bg-emerald-50 text-emerald-700 border-emerald-200" };
+    if (!section) return { title: "Home", ...CORE, icon: "fa-house" };
+
+    // Sections: one entry per route folder in src/app/(main). Any new
+    // /<section>/[slug] page from the CMS is picked up automatically.
+    const sec = SECTIONS[section];
+    if (sec) {
+      return {
+        title: isDetail ? titleFromSlug(rest[rest.length - 1]) : sec.title,
+        category: sec.category,
+        icon: sec.icon,
+        color: sec.color,
+      };
     }
 
-    if (pathname === "/accommodations") {
-      return { title: "Accommodations", category: "Accommodation", icon: "fa-bed", color: "bg-blue-50 text-blue-700 border-blue-200" };
-    }
-    if (pathname.startsWith("/accommodations/")) {
-      const slug = pathname.replace("/accommodations/", "");
-      const title = slug.split("-").map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(" ");
-      return { title, category: "Accommodation", icon: "fa-bed", color: "bg-blue-50 text-blue-700 border-blue-200" };
-    }
+    // Static top-level pages
+    const page = PAGES[section];
+    if (page) return { title: page.title, ...CORE, icon: page.icon };
 
-    if (pathname === "/events") {
-      return { title: "Events & Venues", category: "Events", icon: "fa-calendar-days", color: "bg-purple-50 text-purple-700 border-purple-200" };
-    }
-    if (pathname.startsWith("/events/")) {
-      const slug = pathname.replace("/events/", "");
-      const title = slug.split("-").map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(" ");
-      return { title, category: "Events", icon: "fa-calendar-days", color: "bg-purple-50 text-purple-700 border-purple-200" };
-    }
-
-    if (pathname === "/dining") {
-      return { title: "Restaurant & Dining", category: "Dining", icon: "fa-utensils", color: "bg-orange-50 text-orange-700 border-orange-200" };
-    }
-    if (pathname.startsWith("/dining/")) {
-      const slug = pathname.replace("/dining/", "");
-      const title = slug.split("-").map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(" ");
-      return { title, category: "Dining", icon: "fa-utensils", color: "bg-orange-50 text-orange-700 border-orange-200" };
-    }
-
-    if (pathname === "/offers") {
-      return { title: "Offers & Packages", category: "Offers", icon: "fa-tag", color: "bg-rose-50 text-rose-700 border-rose-200" };
-    }
-
-    if (pathname === "/blog") {
-      return { title: "Blog", category: "Blog / News", icon: "fa-newspaper", color: "bg-amber-50 text-amber-700 border-amber-200" };
-    }
-    if (pathname.startsWith("/blog/")) {
-      const slug = pathname.replace("/blog/", "");
-      const title = slug.split("-").map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(" ");
-      return { title, category: "Blog / News", icon: "fa-newspaper", color: "bg-amber-50 text-amber-700 border-amber-200" };
-    }
-
-    if (pathname.startsWith("/service/")) {
-      const slug = pathname.replace("/service/", "");
-      const title = slug.split("-").map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(" ");
-      return { title, category: "Services", icon: "fa-concierge-bell", color: "bg-teal-50 text-teal-700 border-teal-200" };
-    }
-
-    const fallbackTitle = pathname
-      .split("/")
-      .filter(Boolean)
-      .map(w => w.charAt(0).toUpperCase() + w.slice(1))
-      .join(" ");
-    return { title: fallbackTitle || "Page", category: "General", icon: "fa-link", color: "bg-slate-50 text-slate-700 border-slate-200" };
+    // Anything else is a CMS article served at /[slug]
+    return { title: titleFromSlug(section), category: "Information", icon: "fa-file-lines", color: "bg-slate-50 text-slate-700 border-slate-200" };
   };
 
   const getPriorityColor = (priority: number) => {
@@ -139,7 +116,7 @@ export default async function SitemapPage() {
               <tbody className="divide-y divide-slate-100 text-sm">
                 {sitemapItems.map((item, index) => {
                   const details = getPageDetails(item.url);
-                  const relativePath = item.url.replace(/https?:\/\/[^\/]+/, "") || "/";
+                  const relativePath = toPath(item.url);
                   const priorityVal = item.priority ?? 0.5;
 
                   return (
